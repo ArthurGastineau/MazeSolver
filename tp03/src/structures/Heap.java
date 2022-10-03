@@ -1,7 +1,5 @@
 package structures;
 
-import java.util.Arrays;
-
 public class Heap {
 	// attributes
 	private final String[] heap;
@@ -29,7 +27,7 @@ public class Heap {
 	
 	private void buildHeap() {
 		int sizeof = heap.length;
-		for (int i = 2; i < sizeof; i++) {
+		for (int i = 2; i <= sizeof; i++) {
 			pullUp(i);
 		}
 	}
@@ -74,4 +72,9 @@ public class Heap {
 		}
 	}
 	
+	public String[] sort() {
+		this.buildHeap();
+		this.sortHeap();
+		return heap.clone();
+	}
 }
