@@ -34,4 +34,44 @@ public class Heap {
 		}
 	}
 	
+	private void pullDown(int i, int k) {
+		int leftIndex = 2 * i + 1;
+		//no left son then he dones'nt have any
+		if (leftIndex >= k) return;
+		
+		int rightIndex = 2 * i + 2;
+		
+		//no right son so only a left one
+		if (rightIndex >= k) {
+			if (heap[i].compareTo(heap[leftIndex]) < 0) {
+				swap(i, leftIndex);
+				return;
+			}
+		}
+		//right son is the larger one
+		if (heap[leftIndex].compareTo(heap[rightIndex]) < 0) {
+			if (heap[i].compareTo(heap[rightIndex]) < 0) {
+				swap(i, rightIndex);
+				pullDown(rightIndex, k);
+				return;
+			}
+		}
+		//left one is
+		else {
+			if (heap[i].compareTo(heap[leftIndex]) < 0) {
+				swap(i, leftIndex);
+				pullDown(leftIndex, k);
+				return;
+			}
+		}
+	}
+	
+	private void sortHeap() {
+		int sizeOf = heap.length;
+		for (int k = sizeOf; k > 1; k--) {
+			swap(0, k-1);
+			pullDown(0, k-1);
+		}
+	}
+	
 }
