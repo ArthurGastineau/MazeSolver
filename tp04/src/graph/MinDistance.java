@@ -6,5 +6,5 @@ public interface MinDistance {
 	// get the shortest path from root to pivot
 	public double getShortestPath (Vertex root, Vertex pivot);
 	// set the shortest path from root to pivot
-	public void setShortestPath (Vertex root, Vertex pivot, int value);
+	public void setShortestPath (Vertex root, Vertex pivot, double value);
 }

@@ -10,7 +10,12 @@ public abstract class MazeBox {
 	public final String arrival = "Arrival";
 	public final String empty = "Empty";
 	public final String wall = "Wall";
-
+	
+	public MazeBox (int x, int y) {
+		this.x = x;
+		this.y = y;
+		boxNumber = 10 * y + x;
+	}
 	public void setHasCrossed (boolean state) {
 		hasCrossed = state;
 	}
@@ -43,6 +48,6 @@ public abstract class MazeBox {
 		this.boxNumber = boxNumber;
 	}
 
-	public abstract String typeOfBox(MazeBox box);
+	public abstract String typeOfBox();
 	
 }
