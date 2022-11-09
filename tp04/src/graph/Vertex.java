@@ -1,22 +1,29 @@
 package graph;
 
-import java.util.Vector;
+import java.util.List;
 
 public interface Vertex {
-	// get the valuation of the smallest circuit 
+	// get the valuation of the smallest circuit
 	public double getValuation();
-	// set the valuation of the smallest circuit 
+
+	// set the valuation of the smallest circuit
 	public void setValuation(double valuation);
+
 	// get his predecessor s
-	public Vector<Vertex> getPredecessor ();
-	// add a predecessor 
-	public void addPredecessor (Vertex from);
+	public List<Vertex> getPredecessors();
+
+	// add a predecessor
+	public void addPredecessor(Vertex from);
+
 	// get his successors
-	public Vector<Vertex> getSuccessor ();
+	public List<Vertex> getSuccessors();
+
 	// add a successor
-	public void addPSuccessor (Vertex to);
+	public void addPSuccessor(Vertex to);
+
 	// get his id
-	public int getId ();
+	public int getId();
+
 	// set his id
-	public void setId (int id);
+	public void setId(int id);
 }
