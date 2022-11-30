@@ -1,5 +1,6 @@
+import graph.Vertex;
 
-public abstract class MazeBox {
+public abstract class MazeBox implements Vertex{
 	
 	private boolean hasCrossed;
 	private int x;
@@ -47,6 +48,12 @@ public abstract class MazeBox {
 	public void setBoxNumberint (int boxNumber) {
 		this.boxNumber = boxNumber;
 	}
+	
+	// get his Label
+	public String getLabel () {
+		return x + " , " + y;
+	}
+	
 
 	public abstract String typeOfBox();
 	

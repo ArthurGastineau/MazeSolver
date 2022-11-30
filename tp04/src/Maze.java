@@ -1,6 +1,9 @@
 import java.util.ArrayList;
+import java.util.List;
 
-public class Maze {
+import graph.*;
+
+public class Maze implements Graph{
 	private MazeBox[][] maze;
 	private int xSize;
 	private int ySize;
@@ -31,10 +34,11 @@ public class Maze {
 		maze[y][x] = new WallBox(x, y);
 	}
 	
-	public ArrayList<MazeBox> getNeighbors (MazeBox Box) {
-		int x = Box.getX();
-		int y = Box.getY();
-		ArrayList<MazeBox> neighbors = new ArrayList<MazeBox>();
+	// get successors of a vertex
+	public List<Vertex> getSuccessor (Vertex vertex){
+		int x = vertex.getX();
+		int y = vertex.getY();
+		List<Vertex> neighbors = new ArrayList<Vertex>();
 		
 		if ((x + 1) < xSize) {
 			neighbors.add(maze[y][x + 1]);
@@ -54,8 +58,24 @@ public class Maze {
 		
 		return neighbors;
 	}
-	
-	
-	
-	
+	//return all the vertexes
+	public List<Vertex> getAllVertexes() {
+		List<Vertex> allVertexes = new ArrayList<Vertex>();
+		for (int x = 0; x < xSize; x++) {
+			for (int y = 0; y < ySize; y++) {
+				if (maze[x][y] != null) {
+					allVertexes.add(maze[x][y]);
+				}
+			}
+		}
+		return allVertexes;
+	}
+	//get the distance between 2 vertexes
+	public int getDistance(Vertex src,Vertex dst) {
+		
+	}
+
+	public void init() {
+		// TODO Auto-generated method stub
+	}
 }
