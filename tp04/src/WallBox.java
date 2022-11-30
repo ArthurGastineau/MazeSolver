@@ -1,8 +1,8 @@
 
 public class WallBox extends MazeBox {
 
-	public WallBox(int x, int y) {
-		super(x, y);
+	public WallBox(Maze maze, int x, int y) {
+		super(maze, x, y);
 	}
 
 	public String typeOfBox() {

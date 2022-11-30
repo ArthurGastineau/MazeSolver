@@ -1,26 +1,22 @@
 import graph.Vertex;
 
-<<<<<<< HEAD
 public abstract class MazeBox implements Vertex{
 	
-=======
-public abstract class MazeBox {
-
->>>>>>> branch 'main' of git@gitlab.enst.fr:2022inf103/groupe6/gastineau-arthur.git
 	private boolean hasCrossed;
 	private int x;
 	private int y;
-	private int boxNumber; // Grid index : 10*x + y
+	private Maze maze;
 
 	public final String departure = "Departure";
 	public final String arrival = "Arrival";
 	public final String empty = "Empty";
 	public final String wall = "Wall";
 
-	public MazeBox(int x, int y) {
+	public MazeBox(Maze maze, int x, int y) {
 		this.x = x;
 		this.y = y;
-		boxNumber = 10 * y + x;
+		hasCrossed = false;
+		this.setMaze(maze);
 	}
 
 	public void setHasCrossed(boolean state) {
@@ -46,21 +42,21 @@ public abstract class MazeBox {
 	public void setY(int y) {
 		this.y = y;
 	}
-
-	public int getBoxNumber() {
-		return boxNumber;
-	}
-
-	public void setBoxNumberint(int boxNumber) {
-		this.boxNumber = boxNumber;
-	}
 	
 	// get his Label
 	public String getLabel () {
-		return x + " , " + y;
+		return x + ":" + y;
 	}
 	
 
 	public abstract String typeOfBox();
+
+	public Maze getMaze() {
+		return maze;
+	}
+
+	public void setMaze(Maze maze) {
+		this.maze = maze;
+	}
 
 }

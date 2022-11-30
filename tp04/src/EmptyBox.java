@@ -1,8 +1,8 @@
 
 public class EmptyBox extends MazeBox {
 
-	public EmptyBox(int x, int y) {
-		super(x, y);
+	public EmptyBox(Maze maze, int x, int y) {
+		super(maze, x, y);
 	}
 
 	public String typeOfBox() {

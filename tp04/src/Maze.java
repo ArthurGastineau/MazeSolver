@@ -16,22 +16,22 @@ public class Maze implements Graph{
 	
 	public void addEmptyBox (int x, int y) {
 		// test if in the maze
-		maze[y][x] = new EmptyBox(x, y);
+		maze[y][x] = new EmptyBox(this, x, y);
 	}
 	
 	public void addArrivalBox (int x, int y) {
 		// test if in the maze
-		maze[y][x] = new ArrivalBox(x, y);
+		maze[y][x] = new ArrivalBox(this, x, y);
 	}
 	
 	public void addDepartureBox (int x, int y) {
 		// test if in the maze
-		maze[y][x] = new DepartureBox(x, y);
+		maze[y][x] = new DepartureBox(this, x, y);
 	}
 	
 	public void addWallBox (int x, int y) {
 		// test if in the maze
-		maze[y][x] = new WallBox(x, y);
+		maze[y][x] = new WallBox(this, x, y);
 	}
 	
 	// get successors of a vertex
@@ -72,7 +72,7 @@ public class Maze implements Graph{
 	}
 	//get the distance between 2 vertexes
 	public int getDistance(Vertex src,Vertex dst) {
-		
+		return 0;
 	}
 
 	public void init() {

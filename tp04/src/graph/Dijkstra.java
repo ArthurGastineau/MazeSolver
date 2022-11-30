@@ -10,13 +10,13 @@ public class Dijkstra {
 		minDistance.setShortestPath(startVertex, pivotVertex, 0);
 
 		for (Vertex vertex : graph.getAllVertexes()) {
-			if (vertex.getId() != startVertex.getId()) {
+			if (vertex.getLabel() != startVertex.getLabel()) {
 				minDistance.setShortestPath(startVertex, vertex, Double.POSITIVE_INFINITY);
 			}
 		}
 
 		while (processedVertexes.present(endVertex)) {
-			for (Vertex succVertex : pivotVertex.getPredecessors()) {
+			for (Vertex succVertex : graph.getSuccessor(pivotVertex)) {
 				if (processedVertexes.present(succVertex) == false) {
 					if ((minDistance.getShortestPath(startVertex, pivotVertex)
 							+ distance.getValuation(pivotVertex, succVertex)) < (minDistance

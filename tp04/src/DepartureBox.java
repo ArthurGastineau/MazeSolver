@@ -1,8 +1,8 @@
 
 public class DepartureBox extends MazeBox {
 
-	public DepartureBox(int x, int y) {
-		super(x, y);
+	public DepartureBox(Maze maze, int x, int y) {
+		super(maze, x, y);
 	}
 
 	public String typeOfBox() {
