@@ -1,3 +1,4 @@
+package maze;
 import graph.Vertex;
 
 public abstract class MazeBox implements Vertex{
