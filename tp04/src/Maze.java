@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.nio.file.*;
 
 import graph.*;
 
@@ -77,5 +80,29 @@ public class Maze implements Graph{
 
 	public void init() {
 		// TODO Auto-generated method stub
+	}
+	
+	public final void initFromTextFile(String fileName) throws IOException{
+		try{
+		
+			Path path = Paths.get(fileName);
+			
+			BufferedReader reader = Files.newBufferedReader(path);
+			
+			String line = null;
+			
+			while ( (line = reader.readLine()) != null) {
+				System.out.println(line);
+			}
+		}
+		catch (Exception ex) {
+			String st = ex.getMessage();
+			if (st.equals(fileName)) {
+				System.out.println("ERROR !! : The path of the file is incorrect");
+			}
+			else {
+				System.out.println(st);
+			}
+		}
 	}
 }
