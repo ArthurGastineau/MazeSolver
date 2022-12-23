@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.*;
 
 import graph.*;
@@ -82,7 +83,7 @@ public class Maze implements Graph{
 		// TODO Auto-generated method stub
 	}
 	
-	public final void initFromTextFile(String fileName) throws IOException{
+	public final void initFromTextFile(String fileName){
 		try{
 		
 			Path path = Paths.get(fileName);
@@ -91,18 +92,68 @@ public class Maze implements Graph{
 			
 			String line = null;
 			
+			int lineNumber = 0;
+			
 			while ( (line = reader.readLine()) != null) {
-				System.out.println(line);
+				lineNumber ++;
+				if (line.length() != this.ySize) {
+	                throw new MazeReadingException(fileName, lineNumber, "Incorrect number of columns");
+	            }
+				for (int i = 0; i < this.ySize; i++) {
+	                char c = line.charAt(i);
+	                if (c != 'A' && c != 'D' && c != 'E' && c != 'W') {
+	                    throw new MazeReadingException(fileName, lineNumber, "Invalid character in maze definition");
+	                }
+	                int x = lineNumber - 1;
+	                int y = i;
+	                switch (c) {
+	                    case 'A':
+	                        this.maze[x][y] = new ArrivalBox(this, x, y);
+	                        break;
+	                    case 'D':
+	                        this.maze[x][y] = new DepartureBox(this, x, y);
+	                        break;
+	                    case 'E':
+	                        this.maze[x][y] = new EmptyBox(this, x, y);
+	                        break;
+	                    case 'W':
+	                        this.maze[x][y] = new WallBox(this, x, y);
+	                        break;
+	                }
+	            }
 			}
+			reader.close();
 		}
-		catch (Exception ex) {
-			String st = ex.getMessage();
-			if (st.equals(fileName)) {
-				System.out.println("ERROR !! : The path of the file is incorrect");
-			}
-			else {
-				System.out.println(st);
-			}
+		
+		catch (MazeReadingException e) {
+			System.out.println("Error reading file " + e.getFileName() + " at line " + e.getLineNumber() + ": " + e.getMessage());
 		}
+		catch (IOException e) {
+	        System.out.println("Error reading file " + fileName + ": " + e.getMessage());
+	    }
+	}
+	
+	public void saveToTextFile(String fileName) {
+	    try {
+	        PrintWriter writer = new PrintWriter(fileName, "UTF-8");
+	        for (int i = 0; i < this.xSize; i++) {
+	            for (int j = 0; j < this.ySize; j++) {
+	                MazeBox box = this.maze[i][j];
+	                if (box instanceof ArrivalBox) {
+	                    writer.print('A');
+	                } else if (box instanceof DepartureBox) {
+	                    writer.print('D');
+	                } else if (box instanceof EmptyBox) {
+	                    writer.print('E');
+	                } else if (box instanceof WallBox) {
+	                    writer.print('W');
+	                }
+	            }
+	            if (i < xSize - 1) writer.println(); // éviter d'avoir un '\n' à la fin du fichier
+	        }
+	        writer.close();
+	    } catch (IOException e) {
+	        System.out.println("Error saving file " + fileName + ": " + e.getMessage());
+	    }
 	}
 }
