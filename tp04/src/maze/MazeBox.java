@@ -4,8 +4,8 @@ import graph.Vertex;
 public abstract class MazeBox implements Vertex{
 	
 	private boolean hasCrossed;
-	private int x;
-	private int y;
+	private int row;
+	private int col;
 	private Maze maze;
 
 	public final String departure = "Departure";
@@ -13,9 +13,9 @@ public abstract class MazeBox implements Vertex{
 	public final String empty = "Empty";
 	public final String wall = "Wall";
 
-	public MazeBox(Maze maze, int x, int y) {
-		this.x = x;
-		this.y = y;
+	public MazeBox(Maze maze, int row, int col) {
+		this.row = row;
+		this.col = col;
 		hasCrossed = false;
 		this.setMaze(maze);
 	}
@@ -28,25 +28,25 @@ public abstract class MazeBox implements Vertex{
 		return hasCrossed;
 	}
 
-	public int getX() {
-		return x;
+	public int getRow() {
+		return row;
 	}
 
-	public void setX(int x) {
-		this.x = x;
+	public void setRow(int row) {
+		this.row = row;
 	}
 
-	public int getY() {
-		return y;
+	public int getCol() {
+		return col;
 	}
 
-	public void setY(int y) {
-		this.y = y;
+	public void setCol(int col) {
+		this.col = col;
 	}
 	
-	// get his Label
-	public String getLabel () {
-		return x + ":" + y;
+	@Override
+	public String toString() {
+	    return "Vertex at (" + row + ", " + col + ")";
 	}
 	
 

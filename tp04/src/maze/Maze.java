@@ -10,55 +10,56 @@ import graph.*;
 
 public class Maze implements Graph{
 	private MazeBox[][] maze;
-	private int xSize;
-	private int ySize;
+	private int length;
+	private int width;
+	private Vertex startVertex;
+	private Vertex endVertex;
 	
-	public Maze (int xSize, int ySize) {
-		this.xSize = xSize;
-		this.ySize = ySize;
-		this.maze = new MazeBox[ySize][xSize];
+	public Maze (int length, int width) {
+		this.length = length;
+		this.width = width;
+		this.maze = new MazeBox[length][width];
 	}
 	
-	public void addEmptyBox (int x, int y) {
+	public void addEmptyBox (int row, int col) {
 		// test if in the maze
-		maze[y][x] = new EmptyBox(this, x, y);
+		maze[row][col] = new EmptyBox(this, row, col);
 	}
 	
-	public void addArrivalBox (int x, int y) {
+	public void addArrivalBox (int row, int col) {
 		// test if in the maze
-		maze[y][x] = new ArrivalBox(this, x, y);
+		maze[row][col] = new ArrivalBox(this, row, col);
 	}
 	
-	public void addDepartureBox (int x, int y) {
+	public void addDepartureBox (int row, int col) {
 		// test if in the maze
-		maze[y][x] = new DepartureBox(this, x, y);
+		maze[row][col] = new DepartureBox(this, row, col);
 	}
 	
-	public void addWallBox (int x, int y) {
+	public void addWallBox (int row, int col) {
 		// test if in the maze
-		maze[y][x] = new WallBox(this, x, y);
+		maze[row][col] = new WallBox(this, row, col);
 	}
 	
 	// get successors of a vertex
 	public List<Vertex> getSuccessor (Vertex vertex){
-		int x = vertex.getX();
-		int y = vertex.getY();
+		int row = vertex.getRow();
+		int col = vertex.getCol();
 		List<Vertex> neighbors = new ArrayList<Vertex>();
 		
-		if ((x + 1) < xSize) {
-			neighbors.add(maze[y][x + 1]);
+		if ((row + 1) < length && (maze[row + 1][col].typeOfBox().compareTo("Wall") != 0 )) {
+			neighbors.add(maze[row + 1][col]);
+		}
+		if ((row - 1) > 0 && (maze[row - 1][col].typeOfBox().compareTo("Wall") != 0)) {
+			neighbors.add(maze[row - 1][col]);
 		}
 		
-		if ((x - 1) > 0) {
-			neighbors.add(maze[y][x - 1]);
+		if ((col + 1) < width && (maze[row][col + 1].typeOfBox().compareTo("Wall") != 0)) {
+			neighbors.add(maze[row][col + 1]);
 		}
 		
-		if ((y + 1) < ySize) {
-			neighbors.add(maze[y + 1][x]);
-		}
-		
-		if ((y - 1) > 0) {
-			neighbors.add(maze[y - 1][x]);
+		if ((col - 1) > 0 && (maze[row ][col - 1].typeOfBox().compareTo("Wall") != 0)) {
+			neighbors.add(maze[row][col - 1]);
 		}
 		
 		return neighbors;
@@ -66,10 +67,10 @@ public class Maze implements Graph{
 	//return all the vertexes
 	public List<Vertex> getAllVertexes() {
 		List<Vertex> allVertexes = new ArrayList<Vertex>();
-		for (int x = 0; x < xSize; x++) {
-			for (int y = 0; y < ySize; y++) {
-				if (maze[x][y] != null) {
-					allVertexes.add(maze[x][y]);
+		for (int row = 0; row < length; row++) {
+			for (int col = 0; col < width; col++) {
+				if (maze[row][col] != null) {
+					allVertexes.add(maze[row][col]);
 				}
 			}
 		}
@@ -82,6 +83,14 @@ public class Maze implements Graph{
 
 	public void init() {
 		// TODO Auto-generated method stub
+	}
+	
+	public Vertex getStartVertex() {
+	    return startVertex;
+	}
+
+	public Vertex getEndVertex() {
+	    return endVertex;
 	}
 	
 	public final void initFromTextFile(String fileName){
@@ -97,28 +106,29 @@ public class Maze implements Graph{
 			
 			while ( (line = reader.readLine()) != null) {
 				lineNumber ++;
-				if (line.length() != this.ySize) {
+				if (line.length() != this.length) {
 	                throw new MazeReadingException(fileName, lineNumber, "Incorrect number of columns");
 	            }
-				for (int i = 0; i < this.ySize; i++) {
-	                char c = line.charAt(i);
+				for (int col = 0; col < this.width; col++) {
+	                char c = line.charAt(col);
 	                if (c != 'A' && c != 'D' && c != 'E' && c != 'W') {
 	                    throw new MazeReadingException(fileName, lineNumber, "Invalid character in maze definition");
 	                }
-	                int x = lineNumber - 1;
-	                int y = i;
+	                int row = lineNumber - 1;
 	                switch (c) {
 	                    case 'A':
-	                        this.maze[x][y] = new ArrivalBox(this, x, y);
+	                    	addArrivalBox(row, col);
+	                    	endVertex = (Vertex) maze[row][col];
 	                        break;
 	                    case 'D':
-	                        this.maze[x][y] = new DepartureBox(this, x, y);
+	                    	addDepartureBox(row, col);
+	                    	startVertex = (Vertex) maze[row][col];
 	                        break;
 	                    case 'E':
-	                        this.maze[x][y] = new EmptyBox(this, x, y);
+	                    	addEmptyBox(row, col);
 	                        break;
 	                    case 'W':
-	                        this.maze[x][y] = new WallBox(this, x, y);
+	                    	addWallBox(row, col);
 	                        break;
 	                }
 	            }
@@ -137,24 +147,70 @@ public class Maze implements Graph{
 	public void saveToTextFile(String fileName) {
 	    try {
 	        PrintWriter writer = new PrintWriter(fileName, "UTF-8");
-	        for (int i = 0; i < this.xSize; i++) {
-	            for (int j = 0; j < this.ySize; j++) {
-	                MazeBox box = this.maze[i][j];
+	        for (int row = 0; row < this.length; row++) {
+	            for (int col = 0; col < this.width; col++) {
+	                MazeBox box = this.maze[row][col];
 	                if (box instanceof ArrivalBox) {
 	                    writer.print('A');
+	                    
 	                } else if (box instanceof DepartureBox) {
 	                    writer.print('D');
+	                    
 	                } else if (box instanceof EmptyBox) {
 	                    writer.print('E');
 	                } else if (box instanceof WallBox) {
 	                    writer.print('W');
 	                }
 	            }
-	            if (i < xSize - 1) writer.println(); // éviter d'avoir un '\n' à la fin du fichier
+	            if (row < length - 1) writer.println(); // éviter d'avoir un '\n' à la fin du fichier
 	        }
 	        writer.close();
 	    } catch (IOException e) {
 	        System.out.println("Error saving file " + fileName + ": " + e.getMessage());
 	    }
+	}
+	public void saveShortestPath(String fileName,List<Vertex> shortestPath) {
+	    try {
+	        PrintWriter writer = new PrintWriter(fileName, "UTF-8");
+	        for (int row = 0; row < this.length; row++) {
+	            for (int col = 0; col < this.width; col++) {
+	                MazeBox box = this.maze[row][col];
+	                if (box instanceof ArrivalBox) {
+	                    writer.print('A');
+	                    
+	                } else if (box instanceof DepartureBox) {
+	                    writer.print('D');
+	                    
+	                } else if (shortestPath.contains((Vertex)box)) {
+	                	writer.print('.');
+	                	
+	                }
+	                else if (box instanceof EmptyBox) {
+	                    writer.print('E');
+	                } else if (box instanceof WallBox) {
+	                    writer.print('W');
+	                }
+	            }
+	            if (row < length - 1) writer.println(); // éviter d'avoir un '\n' à la fin du fichier
+	        }
+	        writer.close();
+	    } catch (IOException e) {
+	        System.out.println("Error saving file " + fileName + ": " + e.getMessage());
+	    }
+	}
+	public void displayMaze(String fileName) {
+		   Path path = Paths.get(fileName);
+			
+			BufferedReader reader;
+			try {
+				reader = Files.newBufferedReader(path);
+				String line = null;
+				
+				while ( (line = reader.readLine()) != null) {
+					System.out.println(line);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 	}
 }

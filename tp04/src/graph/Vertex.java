@@ -2,15 +2,15 @@ package graph;
 
 public interface Vertex {
 	//
-	public int getX();
+	public int getRow();
 	//
-	public void setX(int x);
+	public void setRow(int row);
 	//
-	public int getY();
+	public int getCol();
 	//
-	public void setY(int y);
+	public void setCol(int col);
 	
 
 	// get label
-	public String getLabel ();
+	public String toString ();
 }
