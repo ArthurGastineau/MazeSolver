@@ -46,24 +46,40 @@ public class Maze implements Graph{
 		int row = vertex.getRow();
 		int col = vertex.getCol();
 		List<Vertex> neighbors = new ArrayList<Vertex>();
-		
-		if ((row + 1) < length && (maze[row + 1][col].typeOfBox().compareTo("Wall") != 0 )) {
-			neighbors.add(maze[row + 1][col]);
+
+		// check top-left neighbor
+		if ((row - 1) >= 0 && (col - 1) >= 0 && (maze[row - 1][col - 1].typeOfBox().compareTo("Wall") != 0 )) {
+			neighbors.add(maze[row - 1][col - 1]);
 		}
-		if ((row - 1) > 0 && (maze[row - 1][col].typeOfBox().compareTo("Wall") != 0)) {
-			neighbors.add(maze[row - 1][col]);
+
+		// check top-right neighbor
+		if ((row - 1) >= 0 && (col + 1) < width && (maze[row - 1][col + 1].typeOfBox().compareTo("Wall") != 0 )) {
+			neighbors.add(maze[row - 1][col + 1]);
+		}
+
+		// check left neighbor
+		if ((col - 1) >= 0 && (maze[row][col - 1].typeOfBox().compareTo("Wall") != 0)) {
+			neighbors.add(maze[row][col - 1]);
 		}
 		
+		// check right neighbor
 		if ((col + 1) < width && (maze[row][col + 1].typeOfBox().compareTo("Wall") != 0)) {
 			neighbors.add(maze[row][col + 1]);
 		}
 		
-		if ((col - 1) > 0 && (maze[row ][col - 1].typeOfBox().compareTo("Wall") != 0)) {
-			neighbors.add(maze[row][col - 1]);
+		// check bottom-left neighbor
+		if ((row + 1) < length && (col - 1) >= 0 && (maze[row + 1][col - 1].typeOfBox().compareTo("Wall") != 0 )) {
+			neighbors.add(maze[row + 1][col - 1]);
 		}
 		
+		// check bottom-right neighbor
+		if ((row + 1) < length && (col + 1) < width && (maze[row + 1][col + 1].typeOfBox().compareTo("Wall") != 0 )) {
+			neighbors.add(maze[row + 1][col + 1]);
+		}
+
 		return neighbors;
 	}
+
 	//return all the vertexes
 	public List<Vertex> getAllVertexes() {
 		List<Vertex> allVertexes = new ArrayList<Vertex>();
