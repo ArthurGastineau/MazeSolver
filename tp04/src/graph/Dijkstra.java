@@ -42,4 +42,13 @@ public class Dijkstra {
 		}
 		return shortestPaths;
 	}
+	
+	public static ShortestPaths dijkstra(Graph graph, Vertex startVertex, Vertex endVertex) {
+	    ProcessedVertexes processedVertexes = new ProcessedVertexesImpl();
+	    MinDistance minDistance = new MinDistanceImpl();
+	    Distance distance = new DistanceImpl();
+	    ShortestPaths shortestPaths = new ShortestPathsImpl();
+
+	    return dijkstra(graph, startVertex, endVertex, processedVertexes, minDistance, distance, shortestPaths);
+	}
 }
