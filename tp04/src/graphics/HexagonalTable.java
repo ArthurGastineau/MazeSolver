@@ -8,7 +8,8 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class HexagonalTable {
+@SuppressWarnings("serial")
+public class HexagonalTable extends JPanel implements MouseMotionListener {
   private static final int ORIGIN_X = 100;
   private static final int ORIGIN_Y = 100;
   private static final double SQRT_3 = Math.sqrt(3);
@@ -17,18 +18,6 @@ public class HexagonalTable {
   
   private static final int numberOfBoxes = 10;
 
-  public static void main(String[] args) {
-    JFrame frame = new JFrame("Hexagonal Table");
-    HexagonalTablePanel panel = new HexagonalTablePanel();
-    frame.add(panel);
-    frame.addMouseMotionListener(panel);
-    frame.setSize(800,800);
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    frame.setVisible(true);
-  }
-
-  @SuppressWarnings("serial")
-private static class HexagonalTablePanel extends JPanel implements MouseMotionListener {
     private int selectedRow = -1;
     private int selectedColumn = -1;
 
@@ -91,14 +80,7 @@ private static class HexagonalTablePanel extends JPanel implements MouseMotionLi
       repaint();
     }
 
-
-    
-
-
-
-
     @Override
     public void mouseDragged(MouseEvent e) {}
-  }
 }
 

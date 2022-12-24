@@ -1,12 +1,16 @@
 package graphics;
 
-import java.awt.*;
+
+
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FilenameFilter;
 
 import javax.swing.*;
+
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame {
@@ -19,7 +23,7 @@ public class MainFrame extends JFrame {
 
   public MainFrame() {
 	// Initialise the window
-	    setSize(800, 600);
+	    setSize(900, 800);
 	    setTitle("Hexagonal Labyrinth");
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -45,7 +49,10 @@ public class MainFrame extends JFrame {
 	    String[] mazeFiles = dataDirectory.list(mazeFilter);
 	    addMazeButtons(mazeFiles, buttonPanel);
 	    
-	    //labyrinthPanel = new HexagonalLabyrinthPanel(this);
+	    HexagonalTable panelMaze = new HexagonalTable();
+	    add(panelMaze, BorderLayout.CENTER);
+	    
+	    
 	    
   }
   
