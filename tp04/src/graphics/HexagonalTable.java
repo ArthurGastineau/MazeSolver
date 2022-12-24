@@ -54,16 +54,16 @@ private static class HexagonalTablePanel extends JPanel implements MouseMotionLi
 
     private void drawHex(Graphics g, int ox, int oy, int size, Color color, String text) {
       g.setColor(color);
-      int[] xPoints = new int [6];
+      /*int[] xPoints = new int [6];
       int[] yPoints = new int [6];
       for (int i = 0; i < 6; i++) {
     	  double angle = (i + 0.5) * 2 * Math.PI / 6 ;
     	  xPoints[i] = (int) (ox + SIZE * Math.cos(angle));
     	  yPoints[i] = (int) (oy + SIZE * Math.sin(angle));
     	  
-      }
-      //int[] xPoints = {ox, (int) ((ox + (SQRT_3 / 2) * SIZE)), (int) ((ox + SQRT_3 / 2 * SIZE)), ox, (int) ((ox - SQRT_3 / 2 * SIZE)), (int) ((ox - (SQRT_3 / 2)* SIZE))};
-      //int[] yPoints = {SIZE + oy, (int) (0.5 * SIZE + oy), (int) (oy - 0.5* SIZE), oy - 1* SIZE, (int) (oy - 0.5* SIZE), (int) (oy + 0.5* SIZE)};
+      }*/
+      int[] xPoints = {ox, (int) ((ox + (SQRT_3 / 2) * SIZE)), (int) ((ox + SQRT_3 / 2 * SIZE)), ox, (int) ((ox - SQRT_3 / 2 * SIZE)), (int) ((ox - (SQRT_3 / 2)* SIZE))};
+      int[] yPoints = {SIZE + oy, (int) (0.5 * SIZE + oy), (int) (oy - 0.5* SIZE), oy - 1* SIZE, (int) (oy - 0.5* SIZE), (int) (oy + 0.5* SIZE)};
       
       
       g.fillPolygon(xPoints, yPoints, 6);
@@ -77,11 +77,11 @@ private static class HexagonalTablePanel extends JPanel implements MouseMotionLi
     public void mouseMoved(MouseEvent e) {
       int x = e.getX() - ORIGIN_X;
       int y = e.getY() - ORIGIN_Y;
-      if (x < 0 || y < 0 || x > WIDTH * 2 * SIZE * SQRT_3 || y > HEIGHT * 3 * SIZE) return;
-      int ii = y / (3 * SIZE);
-      int jj = x / (2 * (int) SQRT_3 * SIZE);
-      int row = (int) Math.round(ii - 0.5 * (jj % 2));
-      int col = (int) Math.round(jj * 1.5);
+      if (x < 0 || y < 0 || x > numberOfBoxes  * SIZE * SQRT_3 || y > numberOfBoxes * 1.5 * SIZE) return;
+      int ii = (int) (y / (1.5 * SIZE));
+      int jj = (int) (x / ( SQRT_3 * SIZE));
+      int row = (int) Math.round(ii - 0.5 * ((jj % 2)));
+      int col = (int) Math.round(jj * 1);
       selectedRow = row;
       selectedColumn = col;
       repaint();
