@@ -10,8 +10,14 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.io.File;
 import java.io.FilenameFilter;
+import java.util.List;
 
 import javax.swing.*;
+
+import graph.Dijkstra;
+import graph.ShortestPaths;
+import graph.Vertex;
+import maze.Maze;
 
 
 @SuppressWarnings("serial")
@@ -21,10 +27,11 @@ public class MainFrame extends JFrame implements MouseMotionListener{
 	private JPanel loadPanel;
 	private JButton loadButton;
 	private HexagonalTable panelMaze;
+	private String fileName = "labyrinthe.maze";
 	//private HexagonalLabyrinthPanel labyrinthPanel;
 
 
-	public MainFrame() {
+	public MainFrame(Maze maze) {
 		// Initialise the window
 		setSize(1500, 1000);
 		setTitle("Hexagonal Labyrinth");
@@ -50,7 +57,7 @@ public class MainFrame extends JFrame implements MouseMotionListener{
 			}
 		};
 		String[] mazeFiles = dataDirectory.list(mazeFilter);
-		addMazeButtons(mazeFiles, buttonPanel);
+		fileName = addMazeButtons(mazeFiles, buttonPanel, maze, panelMaze);
 
 		panelMaze = new HexagonalTable();
 		panelMaze.requestFocus();
@@ -61,7 +68,7 @@ public class MainFrame extends JFrame implements MouseMotionListener{
 
 
 
-	public void addMazeButtons(String[] mazeFiles, JPanel panel) {
+	public String addMazeButtons(String[] mazeFiles, JPanel panel, Maze myMaze, HexagonalTable hex) {
 		for (String mazeFile : mazeFiles) {
 			// Crée un bouton pour chaque fichier de labyrinthe
 			JButton mazeButton = new JButton(mazeFile);
@@ -71,15 +78,24 @@ public class MainFrame extends JFrame implements MouseMotionListener{
 			mazeButton.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
-
+					myMaze.initFromTextFile("data/" + mazeFile);
+					Vertex startVertex = myMaze.getStartVertex();
+					Vertex endVertex = myMaze.getEndVertex();
+					ShortestPaths shortestPaths = Dijkstra.dijkstra(myMaze, startVertex, endVertex);
+					List<Vertex> path = shortestPaths.getShortestPath(endVertex);
+					//System.out.println("New solution file selected : " + "data/solution" + "_" + mazeFile);
+					//hex.setSolutionFile("data/solution" + "_" + mazeFile);
+					myMaze.saveShortestPath("data/solution",path);
 				}
 			});
 			panel.add(mazeButton);
 		}
+		return "";
 	}
 
-
+	public String getFileName() {
+		return fileName;
+	}
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
