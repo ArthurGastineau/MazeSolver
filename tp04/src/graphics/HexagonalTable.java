@@ -79,18 +79,23 @@ private static class HexagonalTablePanel extends JPanel implements MouseMotionLi
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        int x = e.getX() - ORIGIN_X;
-        int y = e.getY() - ORIGIN_Y;
-        if (x < 0 || y < 0 || x > numberOfBoxes * 2 * size * SQRT_3 || y > numberOfBoxes * 3 * size) return;
-        int ii = y / (3 * size);
-        int jj = (int) Math.round(x / (SQRT_3 * size));
+      int mouseX = e.getX() ;
+      int mouseY = e.getY() ;
+      // Calculate the row index based on the mouse position
+      int row = (int) ((mouseY - ORIGIN_Y) / (size * 1.5));
+      // Calculate the column index based on the mouse position
+      int column = (int) ((mouseX + size - ORIGIN_X - ((row % 2) * size * SQRT_3 / 2)) / (SQRT_3 * size));
+      // Update the selected row and column
+      selectedRow = row;
+      selectedColumn = column;
+      repaint();
+    }
 
-        int row = (int) Math.round(ii - 0.5 * (jj % 2));
-        int col = (int) Math.round((2 * jj + row % 2) / 2);
-        selectedRow = row;
-        selectedColumn = col;
-        repaint();
-      }
+
+    
+
+
+
 
     @Override
     public void mouseDragged(MouseEvent e) {}
