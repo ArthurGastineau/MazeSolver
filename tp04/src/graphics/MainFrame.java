@@ -164,7 +164,6 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 			// Vérifiez que l'hexagone sélectionné est valide (c'est-à-dire qu'il a été précédemment sélectionné par la souris)
 			if (selectedRow != -1 && selectedColumn != -1 && selectedRow < actualMaze.getLength() && selectedColumn < actualMaze.getWidth()) {
 				// Vérifiez que l'hexagone sélectionné n'est pas une case de départ ou d'arrivée
-				System.out.println(selectedRow + ":" + selectedColumn);
 				String boxType = actualMaze.getMaze()[selectedRow][selectedColumn].typeOfBox();
 				if (boxType.compareTo("Empty") == 0) {
 					actualMaze.addWallBox(selectedRow, selectedColumn);
@@ -183,6 +182,41 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 				actualMaze.saveToTextFile("data/modified.txt");
 
 				panelMaze.repaint();
+			}
+		}
+		else if (e.getButton() == MouseEvent.BUTTON3) {
+			int selectedRow = panelMaze.getSelectedRow();
+			int selectedColumn = panelMaze.getSelectedColumn();
+			// Vérifiez que l'hexagone sélectionné est valide (c'est-à-dire qu'il a été précédemment sélectionné par la souris)
+			if (selectedRow != -1 && selectedColumn != -1 && selectedRow < actualMaze.getLength() && selectedColumn < actualMaze.getWidth()) {
+				// Vérifiez que l'hexagone sélectionné n'est pas une case de départ ou d'arrivée
+				String boxType = actualMaze.getMaze()[selectedRow][selectedColumn].typeOfBox();
+				if (boxType.compareTo("Arrival") != 0 && boxType.compareTo("Departure") != 0) {
+					System.out.println("Modified Arrival");
+					
+					Vertex oldEndVertex = actualMaze.getEndVertex();
+					//int x = oldEndVertex.getRow();
+					//int y = oldEndVertex.getCol();
+					//System.out.println(actualMaze.getMaze()[oldEndVertex.getRow()][oldEndVertex.getCol()].typeOfBox());
+					actualMaze.addEmptyBox(oldEndVertex.getRow(), oldEndVertex.getCol());
+					//System.out.println(actualMaze.getMaze()[x][y].typeOfBox());
+					// Set the selected hexagon as the new end vertex
+					//System.out.println(actualMaze.getMaze()[selectedRow][selectedColumn].typeOfBox());
+					actualMaze.addArrivalBox(selectedRow, selectedColumn);
+					//System.out.println(actualMaze.getMaze()[selectedRow][selectedColumn].typeOfBox());
+
+					// Recalculate the shortest path
+					Vertex startVertex = actualMaze.getStartVertex();
+					Vertex endVertex = actualMaze.getEndVertex();
+					ShortestPaths shortestPaths = Dijkstra.dijkstra(actualMaze, startVertex, endVertex);
+					List<Vertex> path = shortestPaths.getShortestPath(endVertex);
+					actualMaze.saveShortestPath("data/solution", path);
+					
+					actualMaze.saveToTextFile("data/modified.txt");
+					
+					panelMaze.repaint();
+
+				}
 			}
 		}
 	}

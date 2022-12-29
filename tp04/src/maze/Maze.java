@@ -41,11 +41,13 @@ public class Maze implements Graph{
 	public void addArrivalBox (int row, int col) {
 		// test if in the maze
 		maze[row][col] = new ArrivalBox(this, row, col);
+		endVertex = (Vertex) getMaze()[row][col];
 	}
 
 	public void addDepartureBox (int row, int col) {
 		// test if in the maze
 		maze[row][col] = new DepartureBox(this, row, col);
+		startVertex = (Vertex) getMaze()[row][col];
 	}
 
 	public void addWallBox (int row, int col) {
@@ -156,11 +158,9 @@ public class Maze implements Graph{
 					switch (c) {
 					case 'A':
 						addArrivalBox(row, col);
-						endVertex = (Vertex) getMaze()[row][col];
 						break;
 					case 'D':
 						addDepartureBox(row, col);
-						startVertex = (Vertex) getMaze()[row][col];
 						break;
 					case 'E':
 						addEmptyBox(row, col);
