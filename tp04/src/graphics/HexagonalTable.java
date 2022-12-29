@@ -45,10 +45,10 @@ public class HexagonalTable extends JPanel implements MouseMotionListener {
 				}
 
 				if (solution[i][j] == 'A') {
-					c = Color.blue;
+					c = Color.red;
 
 				} else if (solution[i][j] == 'D') {
-					c = Color.red;
+					c = Color.blue;
 
 				} else if (solution[i][j] == 'E') {
 					c = Color.white;

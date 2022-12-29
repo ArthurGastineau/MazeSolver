@@ -3,6 +3,8 @@ package graphics;
 
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,6 +27,7 @@ import maze.Maze;
 public class MainFrame extends JFrame implements MouseMotionListener, MouseListener{
 
 	private JPanel buttonPanel;
+	private JPanel legendPanel;
 	private HexagonalTable panelMaze;
 	private String fileName = "labyrinthe.maze";
 	private Maze actualMaze = new Maze();
@@ -34,7 +37,7 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 	public MainFrame(Maze maze) {
 		actualMaze = maze;
 		// Initialise the window
-		setSize(1500, 1000);
+		setSize(1600, 1000);
 		setTitle("Hexagonal Labyrinth");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -58,6 +61,50 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 		panelMaze = new HexagonalTable();
 		panelMaze.requestFocus();
 		add(panelMaze, BorderLayout.CENTER);
+		
+		// Display the legend
+		JPanel legendPanel = new JPanel();
+		legendPanel.setLayout(new GridLayout(2, 6, 20, 5));
+
+		// Créez une JLabel pour chaque type de case et une JPanel pour la couleur de chaque case
+		JLabel startLabel = new JLabel("Départ");
+		JPanel startColor = new JPanel();
+		startColor.setBackground(Color.BLUE);
+		legendPanel.add(startLabel);
+		legendPanel.add(startColor);
+
+		JLabel endLabel = new JLabel("Arrivée");
+		JPanel endColor = new JPanel();
+		endColor.setBackground(Color.RED);
+		legendPanel.add(endLabel);
+		legendPanel.add(endColor);		
+
+		JLabel emptyLabel = new JLabel("Vide");
+		JPanel emptyColor = new JPanel();
+		emptyColor.setBackground(Color.WHITE);
+		legendPanel.add(emptyLabel);
+		legendPanel.add(emptyColor);
+
+		JLabel wallLabel = new JLabel("Mur");
+		JPanel wallColor = new JPanel();
+		wallColor.setBackground(Color.BLACK);
+		legendPanel.add(wallLabel);
+		legendPanel.add(wallColor);
+
+		JLabel pathLabel = new JLabel("Chemin");
+		JPanel pathColor = new JPanel();
+		pathColor.setBackground(Color.YELLOW);
+		legendPanel.add(pathLabel);
+		legendPanel.add(pathColor);
+
+		JLabel selectedLabel = new JLabel("Sélectionné");
+		JPanel selectedColor = new JPanel();
+		selectedColor.setBackground(Color.GRAY);
+		legendPanel.add(selectedLabel);
+		legendPanel.add(selectedColor);
+
+		// Ajoutez le panel de légende à la fenêtre
+		add(legendPanel, BorderLayout.SOUTH);
 
 
 	}
@@ -108,34 +155,36 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 		// TODO Auto-generated method stub
 		panelMaze.mouseMoved(e);
 	}
-	
+
 	public void mouseClicked(MouseEvent e) {
-		int selectedRow = panelMaze.getSelectedRow();
-		int selectedColumn = panelMaze.getSelectedColumn();
-		// Vérifiez que l'hexagone sélectionné est valide (c'est-à-dire qu'il a été précédemment sélectionné par la souris)
-		if (selectedRow != -1 && selectedColumn != -1) {
-			// Vérifiez que l'hexagone sélectionné n'est pas une case de départ ou d'arrivée
-			System.out.println(selectedRow + ":" + selectedColumn);
-			String boxType = actualMaze.getMaze()[selectedRow][selectedColumn].typeOfBox();
-			if (boxType.compareTo("Empty") == 0) {
-				actualMaze.addWallBox(selectedRow, selectedColumn);
-			}
-			else if (boxType.compareTo("Wall") == 0) {
-				actualMaze.addEmptyBox(selectedRow, selectedColumn);
+		// Vérifiez si le clic est gauche (1) ou droit (3)
+		if (e.getButton() == MouseEvent.BUTTON1) {
+			int selectedRow = panelMaze.getSelectedRow();
+			int selectedColumn = panelMaze.getSelectedColumn();
+			// Vérifiez que l'hexagone sélectionné est valide (c'est-à-dire qu'il a été précédemment sélectionné par la souris)
+			if (selectedRow != -1 && selectedColumn != -1 && selectedRow < actualMaze.getLength() && selectedColumn < actualMaze.getWidth()) {
+				// Vérifiez que l'hexagone sélectionné n'est pas une case de départ ou d'arrivée
+				System.out.println(selectedRow + ":" + selectedColumn);
+				String boxType = actualMaze.getMaze()[selectedRow][selectedColumn].typeOfBox();
+				if (boxType.compareTo("Empty") == 0) {
+					actualMaze.addWallBox(selectedRow, selectedColumn);
+				}
+				else if (boxType.compareTo("Wall") == 0) {
+					actualMaze.addEmptyBox(selectedRow, selectedColumn);
+				}
+				// Redessinez le panel
+				Vertex startVertex = actualMaze.getStartVertex();
+				Vertex endVertex = actualMaze.getEndVertex();
+				System.out.println("Modified Maze");
+				ShortestPaths shortestPaths = Dijkstra.dijkstra(actualMaze, startVertex, endVertex);
+				List<Vertex> path = shortestPaths.getShortestPath(endVertex);
+				actualMaze.saveShortestPath("data/solution",path);
+
+				actualMaze.saveToTextFile("data/modified.txt");
+
+				panelMaze.repaint();
 			}
 		}
-
-		// Redessinez le panel
-		Vertex startVertex = actualMaze.getStartVertex();
-		Vertex endVertex = actualMaze.getEndVertex();
-		System.out.println("Modified Maze");
-		ShortestPaths shortestPaths = Dijkstra.dijkstra(actualMaze, startVertex, endVertex);
-		List<Vertex> path = shortestPaths.getShortestPath(endVertex);
-		actualMaze.saveShortestPath("data/solution",path);
-
-		actualMaze.saveToTextFile("data/modified.txt");
-		
-		panelMaze.repaint();
 	}
 
 
@@ -143,7 +192,7 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 
@@ -151,7 +200,7 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 
@@ -159,7 +208,7 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 
@@ -167,7 +216,7 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }
 
