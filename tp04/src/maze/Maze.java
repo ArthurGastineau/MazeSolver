@@ -282,4 +282,23 @@ public class Maze implements Graph{
 		}
 		return null;
 	}
+	
+	public void modifyBox(int col, int row, char c) {
+		switch (c) {
+		/*case 'A':
+			addArrivalBox(row, col);
+			endVertex = (Vertex) getMaze()[row][col];
+			break;
+		case 'D':
+			addDepartureBox(row, col);
+			startVertex = (Vertex) getMaze()[row][col];
+			break;*/
+		case 'E':
+			addEmptyBox(row, col);
+			break;
+		case 'W':
+			addWallBox(row, col);
+			break;
+		}
+	}
 }

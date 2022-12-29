@@ -29,6 +29,7 @@ public class GraphicTest {
 		// création de notre fenêtre principale
 	    MainFrame mainFrame = new MainFrame(myMaze);
 	    mainFrame.addMouseMotionListener(mainFrame);
+	    mainFrame.addMouseListener(mainFrame);
 	    
 	    // affichage de la fenêtre
 	    mainFrame.setVisible(true);

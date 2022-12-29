@@ -7,6 +7,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.io.File;
 import java.io.FilenameFilter;
@@ -21,17 +22,17 @@ import maze.Maze;
 
 
 @SuppressWarnings("serial")
-public class MainFrame extends JFrame implements MouseMotionListener{
+public class MainFrame extends JFrame implements MouseMotionListener, MouseListener{
 
 	private JPanel buttonPanel;
-	private JPanel loadPanel;
-	private JButton loadButton;
 	private HexagonalTable panelMaze;
 	private String fileName = "labyrinthe.maze";
+	private Maze actualMaze = new Maze();
 	//private HexagonalLabyrinthPanel labyrinthPanel;
 
 
 	public MainFrame(Maze maze) {
+		actualMaze = maze;
 		// Initialise the window
 		setSize(1500, 1000);
 		setTitle("Hexagonal Labyrinth");
@@ -84,6 +85,7 @@ public class MainFrame extends JFrame implements MouseMotionListener{
 					ShortestPaths shortestPaths = Dijkstra.dijkstra(myMaze, startVertex, endVertex);
 					List<Vertex> path = shortestPaths.getShortestPath(endVertex);
 					myMaze.saveShortestPath("data/solution",path);
+					actualMaze = myMaze;
 				}
 			});
 			panel.add(mazeButton);
@@ -105,6 +107,67 @@ public class MainFrame extends JFrame implements MouseMotionListener{
 	public void mouseMoved(MouseEvent e) {
 		// TODO Auto-generated method stub
 		panelMaze.mouseMoved(e);
+	}
+	
+	public void mouseClicked(MouseEvent e) {
+		int selectedRow = panelMaze.getSelectedRow();
+		int selectedColumn = panelMaze.getSelectedColumn();
+		// Vérifiez que l'hexagone sélectionné est valide (c'est-à-dire qu'il a été précédemment sélectionné par la souris)
+		if (selectedRow != -1 && selectedColumn != -1) {
+			// Vérifiez que l'hexagone sélectionné n'est pas une case de départ ou d'arrivée
+			System.out.println(selectedRow + ":" + selectedColumn);
+			String boxType = actualMaze.getMaze()[selectedRow][selectedColumn].typeOfBox();
+			if (boxType.compareTo("Empty") == 0) {
+				actualMaze.addWallBox(selectedRow, selectedColumn);
+			}
+			else if (boxType.compareTo("Wall") == 0) {
+				actualMaze.addEmptyBox(selectedRow, selectedColumn);
+			}
+		}
+
+		// Redessinez le panel
+		Vertex startVertex = actualMaze.getStartVertex();
+		Vertex endVertex = actualMaze.getEndVertex();
+		System.out.println("Modified Maze");
+		ShortestPaths shortestPaths = Dijkstra.dijkstra(actualMaze, startVertex, endVertex);
+		List<Vertex> path = shortestPaths.getShortestPath(endVertex);
+		actualMaze.saveShortestPath("data/solution",path);
+
+		actualMaze.saveToTextFile("data/modified.txt");
+		
+		panelMaze.repaint();
+	}
+
+
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }
 
