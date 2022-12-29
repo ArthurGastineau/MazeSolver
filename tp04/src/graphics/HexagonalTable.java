@@ -96,7 +96,7 @@ public class HexagonalTable extends JPanel implements MouseMotionListener {
 	@Override
 	public void mouseMoved(MouseEvent e) {
 		try {
-			int mouseX = e.getX() ;
+			int mouseX = e.getX() - MainFrame.westPanelWidth ;
 			int mouseY = e.getY() ;
 			// Calculate the row index based on the mouse position
 			int row = (int) ((mouseY - ORIGIN_Y) / (size * 1.5));
