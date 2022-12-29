@@ -328,4 +328,35 @@ public class Maze implements Graph {
 		}
 	}
 
+	public boolean hasDepartureBox() {
+		// Iterate through the boxes in the maze
+	    for (int i = 0; i < length; i++) {
+	        for (int j = 0; j < width; j++) {
+	            // Check if the current box is a departure box
+	            if (maze[i][j].typeOfBox().compareTo("Departure") == 0) {
+	                // Return the departure box
+	                return true;
+	            }
+	        }
+	    }
+	    // If no departure box was found, return null
+	    return false;
+	}
+
+	public boolean hasArrivalBox() {
+		// Iterate through the boxes in the maze
+	    for (int i = 0; i < length; i++) {
+	        for (int j = 0; j < width; j++) {
+	            // Check if the current box is a departure box
+	            if (maze[i][j].typeOfBox().compareTo("Arrival") == 0) {
+	                // Return the departure box
+	                return true;
+	            }
+	        }
+	    }
+	    // If no departure box was found, return null
+	    return false;
+	}
+	
+
 }

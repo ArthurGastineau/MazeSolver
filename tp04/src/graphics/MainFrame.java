@@ -38,7 +38,12 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 	private JButton createButton;
 	private JButton saveButton;
 
-	final static int westPanelWidth = 150;
+	private JRadioButton wallButton;
+	private JRadioButton emptyButton;
+	private JRadioButton startButton;
+	private JRadioButton endButton;
+
+	final static int westPanelWidth = 200;
 	private boolean editMode = false;
 
 
@@ -63,10 +68,11 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 
 		String[] mazeFiles = dataDirectory.list(mazeFilter);
 		buttonPanel = new JPanel();
-		buttonPanel.setLayout(new GridLayout(2, mazeFiles.length/2));
-		add(buttonPanel, BorderLayout.EAST);
+		buttonPanel.setPreferredSize(new Dimension(200, 200));
+		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
+		buttonPanel.setLayout(new GridLayout(mazeFiles.length, 1));
 		fileName = addMazeButtons(mazeFiles, buttonPanel, maze, panelMaze);
-
+		add(buttonPanel, BorderLayout.EAST);
 		// display the maze
 		panelMaze = new HexagonalTable();
 		panelMaze.requestFocus();
@@ -82,7 +88,7 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 		//
 		editPanel = new JPanel();
 		editPanel.setPreferredSize(new Dimension(westPanelWidth, 480));
-		editPanel.setLayout(new GridLayout(3, 2));
+		editPanel.setLayout(new GridLayout(5, 2));
 
 		// Ajoutez un label pour indiquer à l'utilisateur de saisir la largeur du labyrinthe
 		JLabel widthLabel = new JLabel("Largeur :");
@@ -90,6 +96,7 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 
 		// Créez un champ de saisie pour la largeur du labyrinthe
 		JFormattedTextField widthField = new JFormattedTextField(NumberFormat.getIntegerInstance());
+		widthField.setMaximumSize(new Dimension(200, 50));
 		editPanel.add(widthField);
 
 		// Ajoutez un label pour indiquer à l'utilisateur de saisir la hauteur du labyrinthe
@@ -98,6 +105,7 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 
 		// Créez un champ de saisie pour la hauteur du labyrinthe
 		JFormattedTextField heightField = new JFormattedTextField(NumberFormat.getIntegerInstance());
+		heightField.setMaximumSize(new Dimension(200, 50));
 		editPanel.add(heightField);
 
 		// Ajoutez un bouton pour créer le labyrinthe vide avec les dimensions saisies
@@ -110,12 +118,12 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 					// Récupérez la largeur et la hauteur du labyrinthe saisies par l'utilisateur
 					int width = Integer.parseInt(widthField.getText());
 					int height = Integer.parseInt(heightField.getText());
-					
+
 					// Vérifiez que la largeur et la hauteur sont des valeurs valides (supérieures à zéro)
 					if (width <= 0 || height <= 0) {
 						throw new IllegalArgumentException("La largeur et la hauteur doivent être des valeurs supérieures à zéro");
 					}
-					
+
 					if (width > 20 || height > 20) {
 						throw new IllegalArgumentException("La largeur et la hauteur doivent être des valeurs inférieure ou égae à 20");
 					}
@@ -137,17 +145,60 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 			}
 		});
 		editPanel.add(createButton);
+		//Ajoutez 4 Boutons pour chosiir le type de case en édition
+		ButtonGroup buttonGroup = new ButtonGroup();
+
+		wallButton = new JRadioButton("Mur");
+		buttonGroup.add(wallButton);
+		editPanel.add(wallButton); // Ajoutez chaque JRadioButton individuellement
+
+		emptyButton = new JRadioButton("Vide");
+		buttonGroup.add(emptyButton);
+		editPanel.add(emptyButton);
+
+		startButton = new JRadioButton("Départ");
+		buttonGroup.add(startButton);
+		editPanel.add(startButton);
+
+		endButton = new JRadioButton("Arrivée");
+		buttonGroup.add(endButton);
+		editPanel.add(endButton);
+
+
+		// Définissez un bouton comme bouton par défaut
+		startButton.setSelected(true);
+
+		editPanel.setLayout(new BoxLayout(editPanel, BoxLayout.Y_AXIS));
+		editPanel.add(wallButton);
+		editPanel.add(emptyButton);
+		editPanel.add(startButton);
+		editPanel.add(endButton);
 
 		saveButton = new JButton("Save");
-		editPanel.add(saveButton);
-
 		saveButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// Enregistrez le labyrinthe dans le répertoire "data"
-				actualMaze.saveToTextFile("data/newMaze.maze");
+				actualMaze.saveToTextFile("data/savedMaze.maze");
+				// Refresh the east side panel by removing all the components
+		        buttonPanel.removeAll();
+		        
+		        // Get the updated list of maze files
+		        String[] mazeFiles = dataDirectory.list(mazeFilter);
+		        
+		        // Add the buttons for the maze files to the button panel
+		        fileName = addMazeButtons(mazeFiles, buttonPanel, actualMaze, panelMaze);
+		        
+		        // Revalidate and repaint the button panel to update the display
+		        buttonPanel.setPreferredSize(new Dimension(200, 200));
+				buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
+				buttonPanel.setLayout(new GridLayout(mazeFiles.length, 1));
+		        buttonPanel.revalidate();
+		        buttonPanel.repaint();
 			}
 		});
+		editPanel.add(saveButton);
+
 		add(editPanel, BorderLayout.WEST);
 	}
 
@@ -197,6 +248,8 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 		selectedColor.setBackground(Color.GRAY);
 		legendPanel.add(selectedLabel);
 		legendPanel.add(selectedColor);
+
+
 
 		// Ajoutez le panel de légende à la fenêtre
 		add(legendPanel, BorderLayout.SOUTH);
@@ -314,7 +367,31 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 			}
 		}
 		else {
-			
+			int row = panelMaze.getSelectedRow();
+			int col = panelMaze.getSelectedColumn();
+
+			// Vérifiez si le bouton "Mur" est sélectionné
+			if (wallButton.isSelected()) {
+				// Affectez à la case correspondante dans actualMaze la valeur "Mur"
+				actualMaze.addWallBox(row, col);
+			}
+			// Vérifiez si le bouton "Vide" est sélectionné
+			else if (emptyButton.isSelected()) {
+				// Affectez à la case correspondante dans actualMaze la valeur "Vide"
+				actualMaze.addEmptyBox(row, col);
+			}
+			// Vérifiez si le bouton "Départ" est sélectionné
+			else if (startButton.isSelected() && actualMaze.hasDepartureBox() == false) {
+				// Affectez à la case correspondante dans actualMaze la valeur "Départ"
+				actualMaze.addDepartureBox(row, col);
+			}
+			// Vérifiez si le bouton "Arrivée" est sélectionné
+			else if (endButton.isSelected() && actualMaze.hasArrivalBox() == false) {
+				// Affectez à la case correspondante dans actualMaze la valeur "Arrivée"
+				actualMaze.addArrivalBox(row, col);
+			}
+			actualMaze.saveToTextFile("data/solution");
+			panelMaze.repaint();
 		}
 	}
 
