@@ -29,8 +29,9 @@ public class HexagonalTable extends JPanel implements MouseMotionListener {
 	private static final int size =30;
 	private static final Color[] COLORS = {Color.RED, Color.YELLOW, Color.CYAN, Color.GREEN};
 
-	private static final int numberOfBoxes = 10;
-
+	private int length = 3;
+	private int width = 3;
+	
 	private int selectedRow = -1;
 	private int selectedColumn = -1;
 
@@ -41,9 +42,9 @@ public class HexagonalTable extends JPanel implements MouseMotionListener {
 		Color c = null;
 		String text = "";
 		char[][] solution = null;
-		for (int i = 0; i < numberOfBoxes; i++) {
+		for (int i = 0; i < length; i++) {
 
-			for (int j= 0; j < numberOfBoxes; j++) {
+			for (int j= 0; j < width; j++) {
 
 				try {
 					solution = this.readSolutionFile("data/solution");

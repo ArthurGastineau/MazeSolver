@@ -21,76 +21,88 @@ public class Maze implements Graph{
 		this.maze = new MazeBox[length][width];
 	}
 
+	public Maze () {
+		this.length = 20;
+		this.width = 20;
+		this.maze = new MazeBox[20][20];
+	}
+
+	public void setSize ( int length, int width) {
+		this.length = length;
+		this.width = width;
+		this.maze = new MazeBox[length][width];
+	}
+
 	public void addEmptyBox (int row, int col) {
 		// test if in the maze
-		getMaze()[row][col] = new EmptyBox(this, row, col);
+		maze[row][col] = new EmptyBox(this, row, col);
 	}
 
 	public void addArrivalBox (int row, int col) {
 		// test if in the maze
-		getMaze()[row][col] = new ArrivalBox(this, row, col);
+		maze[row][col] = new ArrivalBox(this, row, col);
 	}
 
 	public void addDepartureBox (int row, int col) {
 		// test if in the maze
-		getMaze()[row][col] = new DepartureBox(this, row, col);
+		maze[row][col] = new DepartureBox(this, row, col);
 	}
 
 	public void addWallBox (int row, int col) {
 		// test if in the maze
-		getMaze()[row][col] = new WallBox(this, row, col);
+		maze[row][col] = new WallBox(this, row, col);
 	}
 
 	// get successors of a vertex
 	// get successors of a vertex
 	public List<Vertex> getSuccessor(Vertex vertex) {
-	    int row = vertex.getRow();
-	    int col = vertex.getCol();
-	    List<Vertex> neighbors = new ArrayList<Vertex>();
+		int row = vertex.getRow();
+		int col = vertex.getCol();
+		List<Vertex> neighbors = new ArrayList<Vertex>();
 
-	    // check top-left neighbor
-	    if ((row - 1) >= 0 && (col - 1) >= 0 && row % 2 == 0 && (getMaze()[row - 1][col - 1].typeOfBox().compareTo("Wall") != 0)) {
-	        neighbors.add(getMaze()[row - 1][col - 1]);
-	    }
-	    if ((row - 1) >= 0 && (col) >= 0 && row % 2 == 1 && (getMaze()[row - 1][col].typeOfBox().compareTo("Wall") != 0)) {
-	        neighbors.add(getMaze()[row - 1][col]);
-	    }
+		// check top-left neighbor
+		if ((row - 1) >= 0 && (col - 1) >= 0 && row % 2 == 0 && (getMaze()[row - 1][col - 1].typeOfBox().compareTo("Wall") != 0)) {
+			neighbors.add(getMaze()[row - 1][col - 1]);
+		}
+		if ((row - 1) >= 0 && (col) >= 0 && row % 2 == 1 && (getMaze()[row - 1][col].typeOfBox().compareTo("Wall") != 0)) {
+			neighbors.add(getMaze()[row - 1][col]);
+		}
 
-	    // check top-right neighbor
-	    if ((row - 1) >= 0 && (col + 1) < width && row % 2 == 0 && (getMaze()[row - 1][col].typeOfBox().compareTo("Wall") != 0)) {
-	        neighbors.add(getMaze()[row - 1][col]);
-	    }
-	    if ((row - 1) >= 0 && (col + 1) < width && row % 2 == 1 && (getMaze()[row - 1][col + 1].typeOfBox().compareTo("Wall") != 0)) {
-	        neighbors.add(getMaze()[row - 1][col + 1]);
-	    }
+		// check top-right neighbor
+		if ((row - 1) >= 0 && (col + 1) < width && row % 2 == 0 && (getMaze()[row - 1][col].typeOfBox().compareTo("Wall") != 0)) {
+			neighbors.add(getMaze()[row - 1][col]);
+		}
+		if ((row - 1) >= 0 && (col + 1) < width && row % 2 == 1 && (getMaze()[row - 1][col + 1].typeOfBox().compareTo("Wall") != 0)) {
+			neighbors.add(getMaze()[row - 1][col + 1]);
+		}
 
-	 // check left neighbor
-	    if ((col - 1) >= 0 && (getMaze()[row][col - 1].typeOfBox().compareTo("Wall") != 0)) {
-	        neighbors.add(getMaze()[row][col - 1]);
-	    }
+		// check left neighbor
+		if ((col - 1) >= 0 && (getMaze()[row][col - 1].typeOfBox().compareTo("Wall") != 0)) {
+			neighbors.add(getMaze()[row][col - 1]);
+		}
 
-	    // check right neighbor
-	    if ((col + 1) < width && (getMaze()[row][col + 1].typeOfBox().compareTo("Wall") != 0)) {
-	        neighbors.add(getMaze()[row][col + 1]);
-	    }
+		// check right neighbor
+		if ((col + 1) < width && (getMaze()[row][col + 1].typeOfBox().compareTo("Wall") != 0)) {
+			neighbors.add(getMaze()[row][col + 1]);
+		}
 
-	    // check bottom-left neighbor
-	    if ((row + 1) < length && (col - 1) >= 0 && row % 2 == 0 && (getMaze()[row + 1][col - 1].typeOfBox().compareTo("Wall") != 0)) {
-	        neighbors.add(getMaze()[row + 1][col - 1]);
-	    }
-	    if ((row + 1) < length && (col) >= 0 && row % 2 == 1 && (getMaze()[row + 1][col].typeOfBox().compareTo("Wall") != 0)) {
-	        neighbors.add(getMaze()[row + 1][col]);
-	    }
+		// check bottom-left neighbor
+		if ((row + 1) < length && (col - 1) >= 0 && row % 2 == 0 && (getMaze()[row + 1][col - 1].typeOfBox().compareTo("Wall") != 0)) {
+			neighbors.add(getMaze()[row + 1][col - 1]);
+		}
+		if ((row + 1) < length && (col) >= 0 && row % 2 == 1 && (getMaze()[row + 1][col].typeOfBox().compareTo("Wall") != 0)) {
+			neighbors.add(getMaze()[row + 1][col]);
+		}
 
-	    // check bottom-right neighbor
-	    if ((row + 1) < length && (col + 1) < width && row % 2 == 0 && (getMaze()[row + 1][col].typeOfBox().compareTo("Wall") != 0)) {
-	        neighbors.add(getMaze()[row + 1][col]);
-	    }
-	    if ((row + 1) < length && (col + 1) < width && row % 2 == 1 && (getMaze()[row + 1][col + 1].typeOfBox().compareTo("Wall") != 0)) {
-	        neighbors.add(getMaze()[row + 1][col + 1]);
-	    }
+		// check bottom-right neighbor
+		if ((row + 1) < length && (col + 1) < width && row % 2 == 0 && (getMaze()[row + 1][col].typeOfBox().compareTo("Wall") != 0)) {
+			neighbors.add(getMaze()[row + 1][col]);
+		}
+		if ((row + 1) < length && (col + 1) < width && row % 2 == 1 && (getMaze()[row + 1][col + 1].typeOfBox().compareTo("Wall") != 0)) {
+			neighbors.add(getMaze()[row + 1][col + 1]);
+		}
 
-	    return neighbors;
+		return neighbors;
 	}
 
 	//return all the vertexes
@@ -105,7 +117,7 @@ public class Maze implements Graph{
 		}
 		return allVertexes;
 	}
-	
+
 	//get the distance between 2 vertexes
 	public int getDistance(Vertex src,Vertex dst) {
 		return 0;
@@ -136,10 +148,12 @@ public class Maze implements Graph{
 
 			while ( (line = reader.readLine()) != null) {
 				lineNumber ++;
+				System.out.println("Line number " + lineNumber + " size : " + line.length());
 				if (line.length() != this.length) {
 					throw new MazeReadingException(fileName, lineNumber, "Incorrect number of columns");
 				}
-				for (int col = 0; col < this.width; col++) {
+				for (int col = 0; col < this.width ; col++) {
+					System.out.println("Column number" + col);
 					char c = line.charAt(col);
 					if (c != 'A' && c != 'D' && c != 'E' && c != 'W') {
 						throw new MazeReadingException(fileName, lineNumber, "Invalid character in maze definition");
@@ -167,9 +181,11 @@ public class Maze implements Graph{
 		}
 
 		catch (MazeReadingException e) {
+			System.out.println(e.getMessage());
 			System.out.println("Error reading file " + e.getFileName() + " at line " + e.getLineNumber() + ": " + e.getMessage());
 		}
 		catch (IOException e) {
+			System.out.println(e.getStackTrace());
 			System.out.println("Error reading file " + fileName + ": " + e.getMessage());
 		}
 	}
@@ -245,5 +261,31 @@ public class Maze implements Graph{
 
 	public MazeBox[][] getMaze() {
 		return maze;
+	}
+
+	public int[] fromFileGetMazeSize(String fileName){
+		try {
+			Path path = Paths.get(fileName);
+
+			BufferedReader reader = Files.newBufferedReader(path);
+
+			String line = null;
+
+			int lineNumber = 0;
+
+			int sizeMaxLine = 0;
+
+			while ( (line = reader.readLine()) != null) {
+				lineNumber ++;
+				if (line.length() > sizeMaxLine) sizeMaxLine = line.length();
+			}
+			reader.close();
+			int [] size = {lineNumber , sizeMaxLine };
+			return size;
+		}
+		catch (IOException e) {
+			System.out.println("Error reading file " + fileName + ": " + e.getMessage());
+		}
+		return null;
 	}
 }

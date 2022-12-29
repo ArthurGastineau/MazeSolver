@@ -78,13 +78,15 @@ public class MainFrame extends JFrame implements MouseMotionListener{
 			mazeButton.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
+					int [] vals = myMaze.fromFileGetMazeSize("data/" + mazeFile);
+				    myMaze.setSize(vals[0], vals[1]);
+				    System.out.println(vals[0] + ":"  + vals[1]);
 					myMaze.initFromTextFile("data/" + mazeFile);
+					System.out.println("Init réussi");
 					Vertex startVertex = myMaze.getStartVertex();
 					Vertex endVertex = myMaze.getEndVertex();
 					ShortestPaths shortestPaths = Dijkstra.dijkstra(myMaze, startVertex, endVertex);
 					List<Vertex> path = shortestPaths.getShortestPath(endVertex);
-					//System.out.println("New solution file selected : " + "data/solution" + "_" + mazeFile);
-					//hex.setSolutionFile("data/solution" + "_" + mazeFile);
 					myMaze.saveShortestPath("data/solution",path);
 				}
 			});
