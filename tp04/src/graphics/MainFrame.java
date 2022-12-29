@@ -40,12 +40,6 @@ public class MainFrame extends JFrame implements MouseMotionListener{
 		buttonPanel = new JPanel();
 		add(buttonPanel, BorderLayout.EAST);
 
-		loadPanel = new JPanel();
-		add(loadPanel, BorderLayout.SOUTH);
-
-		loadButton = new JButton("Load");
-		loadPanel.add(loadButton);
-
 		// Set the layout for the button panel to display the buttons in a grid
 		buttonPanel.setLayout(new GridLayout(3, 3));
 
@@ -59,6 +53,7 @@ public class MainFrame extends JFrame implements MouseMotionListener{
 		String[] mazeFiles = dataDirectory.list(mazeFilter);
 		fileName = addMazeButtons(mazeFiles, buttonPanel, maze, panelMaze);
 
+		// display the maze
 		panelMaze = new HexagonalTable();
 		panelMaze.requestFocus();
 		add(panelMaze, BorderLayout.CENTER);
@@ -79,12 +74,13 @@ public class MainFrame extends JFrame implements MouseMotionListener{
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					int [] vals = myMaze.fromFileGetMazeSize("data/" + mazeFile);
-				    myMaze.setSize(vals[0], vals[1]);
-				    System.out.println(vals[0] + ":"  + vals[1]);
+					myMaze.setSize(vals[0], vals[1]);
+					panelMaze.setLength(vals[0]);
+					panelMaze.setWidth(vals[1]);
 					myMaze.initFromTextFile("data/" + mazeFile);
-					System.out.println("Init réussi");
 					Vertex startVertex = myMaze.getStartVertex();
 					Vertex endVertex = myMaze.getEndVertex();
+					System.out.println("Calculating shotest path from" + startVertex.toString() + " to " + endVertex.toString());
 					ShortestPaths shortestPaths = Dijkstra.dijkstra(myMaze, startVertex, endVertex);
 					List<Vertex> path = shortestPaths.getShortestPath(endVertex);
 					myMaze.saveShortestPath("data/solution",path);
@@ -104,8 +100,6 @@ public class MainFrame extends JFrame implements MouseMotionListener{
 		// TODO Auto-generated method stub
 
 	}
-
-
 
 	@Override
 	public void mouseMoved(MouseEvent e) {

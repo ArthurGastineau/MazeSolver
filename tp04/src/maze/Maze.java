@@ -123,10 +123,6 @@ public class Maze implements Graph{
 		return 0;
 	}
 
-	public void init() {
-		// TODO Auto-generated method stub
-	}
-
 	public Vertex getStartVertex() {
 		return startVertex;
 	}
@@ -148,12 +144,10 @@ public class Maze implements Graph{
 
 			while ( (line = reader.readLine()) != null) {
 				lineNumber ++;
-				System.out.println("Line number " + lineNumber + " size : " + line.length());
 				if (line.length() != this.length) {
 					throw new MazeReadingException(fileName, lineNumber, "Incorrect number of columns");
 				}
 				for (int col = 0; col < this.width ; col++) {
-					System.out.println("Column number" + col);
 					char c = line.charAt(col);
 					if (c != 'A' && c != 'D' && c != 'E' && c != 'W') {
 						throw new MazeReadingException(fileName, lineNumber, "Invalid character in maze definition");

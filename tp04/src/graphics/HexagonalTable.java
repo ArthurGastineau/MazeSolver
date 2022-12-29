@@ -6,20 +6,11 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.swing.JPanel;
 
-import maze.ArrivalBox;
-import maze.DepartureBox;
-import maze.EmptyBox;
-import maze.Maze;
-import maze.MazeBox;
-import maze.WallBox;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.IOException;
 
 @SuppressWarnings("serial")
 public class HexagonalTable extends JPanel implements MouseMotionListener {
@@ -27,11 +18,10 @@ public class HexagonalTable extends JPanel implements MouseMotionListener {
 	private static final int ORIGIN_Y = 50;
 	private static final double SQRT_3 = Math.sqrt(3);
 	private static final int size =30;
-	private static final Color[] COLORS = {Color.RED, Color.YELLOW, Color.CYAN, Color.GREEN};
 
-	private int length = 3;
-	private int width = 3;
-	
+	private int length = 10;
+	private int width = 10;
+
 	private int selectedRow = -1;
 	private int selectedColumn = -1;
 
@@ -150,6 +140,16 @@ public class HexagonalTable extends JPanel implements MouseMotionListener {
 		reader.close();
 		return solution;
 	}
+
+	public void setLength(int length) {
+		this.length = length;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+
 
 }
 

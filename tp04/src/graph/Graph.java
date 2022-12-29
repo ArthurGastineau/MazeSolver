@@ -7,8 +7,6 @@ import java.util.ArrayList;
 
 
 public interface Graph {
-	// Initialization of the valuations (to infinity) except for the root
-	public void init();
 	// get successors of a vertex
 	public List<Vertex> getSuccessor (Vertex vertex);
 	//return all the vertexes
