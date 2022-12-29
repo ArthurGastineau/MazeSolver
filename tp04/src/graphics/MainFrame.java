@@ -41,11 +41,8 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 		setTitle("Hexagonal Labyrinth");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		buttonPanel = new JPanel();
-		add(buttonPanel, BorderLayout.EAST);
 
 		// Set the layout for the button panel to display the buttons in a grid
-		buttonPanel.setLayout(new GridLayout(3, 3));
 
 		File dataDirectory = new File("data");
 		FilenameFilter mazeFilter = new FilenameFilter() {
@@ -54,7 +51,11 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 				return name.endsWith(".maze");
 			}
 		};
+		
 		String[] mazeFiles = dataDirectory.list(mazeFilter);
+		buttonPanel = new JPanel();
+		buttonPanel.setLayout(new GridLayout(mazeFiles.length/2, 2));
+		add(buttonPanel, BorderLayout.EAST);
 		fileName = addMazeButtons(mazeFiles, buttonPanel, maze, panelMaze);
 
 		// display the maze
@@ -64,9 +65,15 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 		
 		// Display the legend
 		JPanel legendPanel = new JPanel();
-		legendPanel.setLayout(new GridLayout(2, 6, 20, 5));
-
-		// Créez une JLabel pour chaque type de case et une JPanel pour la couleur de chaque case
+		legendPanel.setLayout(new GridLayout(2, 8, 20, 5));
+		
+		// Créez une JLabel pour chaque type de case/clic et une JPanel pour la couleur de chaque case
+		
+		JLabel clickGauche = new JLabel("Clic Gauche");
+		legendPanel.add(clickGauche);
+		JLabel Wall_Empty = new JLabel("Modif Mur/Vide");
+		legendPanel.add(Wall_Empty);
+		
 		JLabel startLabel = new JLabel("Départ");
 		JPanel startColor = new JPanel();
 		startColor.setBackground(Color.BLUE);
@@ -84,6 +91,11 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 		emptyColor.setBackground(Color.WHITE);
 		legendPanel.add(emptyLabel);
 		legendPanel.add(emptyColor);
+		
+		JLabel clickDroit = new JLabel("Clic Droit");
+		legendPanel.add(clickDroit);
+		JLabel newArrival = new JLabel("Changer Arrivée");
+		legendPanel.add(newArrival);
 
 		JLabel wallLabel = new JLabel("Mur");
 		JPanel wallColor = new JPanel();

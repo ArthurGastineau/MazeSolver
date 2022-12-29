@@ -41,13 +41,13 @@ public class Maze implements Graph{
 	public void addArrivalBox (int row, int col) {
 		// test if in the maze
 		maze[row][col] = new ArrivalBox(this, row, col);
-		endVertex = (Vertex) getMaze()[row][col];
+		endVertex = (Vertex) maze[row][col];
 	}
 
 	public void addDepartureBox (int row, int col) {
 		// test if in the maze
 		maze[row][col] = new DepartureBox(this, row, col);
-		startVertex = (Vertex) getMaze()[row][col];
+		startVertex = (Vertex) maze[row][col];
 	}
 
 	public void addWallBox (int row, int col) {
@@ -63,45 +63,45 @@ public class Maze implements Graph{
 		List<Vertex> neighbors = new ArrayList<Vertex>();
 
 		// check top-left neighbor
-		if ((row - 1) >= 0 && (col - 1) >= 0 && row % 2 == 0 && (getMaze()[row - 1][col - 1].typeOfBox().compareTo("Wall") != 0)) {
-			neighbors.add(getMaze()[row - 1][col - 1]);
+		if ((row - 1) >= 0 && (col - 1) >= 0 && row % 2 == 0 && (maze[row - 1][col - 1].typeOfBox().compareTo("Wall") != 0)) {
+			neighbors.add(maze[row - 1][col - 1]);
 		}
-		if ((row - 1) >= 0 && (col) >= 0 && row % 2 == 1 && (getMaze()[row - 1][col].typeOfBox().compareTo("Wall") != 0)) {
-			neighbors.add(getMaze()[row - 1][col]);
+		if ((row - 1) >= 0 && (col) >= 0 && row % 2 == 1 && (maze[row - 1][col].typeOfBox().compareTo("Wall") != 0)) {
+			neighbors.add(maze[row - 1][col]);
 		}
 
 		// check top-right neighbor
-		if ((row - 1) >= 0 && (col + 1) < width && row % 2 == 0 && (getMaze()[row - 1][col].typeOfBox().compareTo("Wall") != 0)) {
-			neighbors.add(getMaze()[row - 1][col]);
+		if ((row - 1) >= 0 && (col + 1) < width && row % 2 == 0 && (maze[row - 1][col].typeOfBox().compareTo("Wall") != 0)) {
+			neighbors.add(maze[row - 1][col]);
 		}
-		if ((row - 1) >= 0 && (col + 1) < width && row % 2 == 1 && (getMaze()[row - 1][col + 1].typeOfBox().compareTo("Wall") != 0)) {
-			neighbors.add(getMaze()[row - 1][col + 1]);
+		if ((row - 1) >= 0 && (col + 1) < width && row % 2 == 1 && (maze[row - 1][col + 1].typeOfBox().compareTo("Wall") != 0)) {
+			neighbors.add(maze[row - 1][col + 1]);
 		}
 
 		// check left neighbor
-		if ((col - 1) >= 0 && (getMaze()[row][col - 1].typeOfBox().compareTo("Wall") != 0)) {
-			neighbors.add(getMaze()[row][col - 1]);
+		if ((col - 1) >= 0 && (maze[row][col - 1].typeOfBox().compareTo("Wall") != 0)) {
+			neighbors.add(maze[row][col - 1]);
 		}
 
 		// check right neighbor
-		if ((col + 1) < width && (getMaze()[row][col + 1].typeOfBox().compareTo("Wall") != 0)) {
-			neighbors.add(getMaze()[row][col + 1]);
+		if ((col + 1) < width && (maze[row][col + 1].typeOfBox().compareTo("Wall") != 0)) {
+			neighbors.add(maze[row][col + 1]);
 		}
 
 		// check bottom-left neighbor
-		if ((row + 1) < length && (col - 1) >= 0 && row % 2 == 0 && (getMaze()[row + 1][col - 1].typeOfBox().compareTo("Wall") != 0)) {
-			neighbors.add(getMaze()[row + 1][col - 1]);
+		if ((row + 1) < length && (col - 1) >= 0 && row % 2 == 0 && (maze[row + 1][col - 1].typeOfBox().compareTo("Wall") != 0)) {
+			neighbors.add(maze[row + 1][col - 1]);
 		}
-		if ((row + 1) < length && (col) >= 0 && row % 2 == 1 && (getMaze()[row + 1][col].typeOfBox().compareTo("Wall") != 0)) {
-			neighbors.add(getMaze()[row + 1][col]);
+		if ((row + 1) < length && (col) >= 0 && row % 2 == 1 && (maze[row + 1][col].typeOfBox().compareTo("Wall") != 0)) {
+			neighbors.add(maze[row + 1][col]);
 		}
 
 		// check bottom-right neighbor
-		if ((row + 1) < length && (col + 1) < width && row % 2 == 0 && (getMaze()[row + 1][col].typeOfBox().compareTo("Wall") != 0)) {
-			neighbors.add(getMaze()[row + 1][col]);
+		if ((row + 1) < length && (col) < width && row % 2 == 0 && (maze[row + 1][col].typeOfBox().compareTo("Wall") != 0)) {
+			neighbors.add(maze[row + 1][col]);
 		}
-		if ((row + 1) < length && (col + 1) < width && row % 2 == 1 && (getMaze()[row + 1][col + 1].typeOfBox().compareTo("Wall") != 0)) {
-			neighbors.add(getMaze()[row + 1][col + 1]);
+		if ((row + 1) < length && (col + 1) < width && row % 2 == 1 && (maze[row + 1][col + 1].typeOfBox().compareTo("Wall") != 0)) {
+			neighbors.add(maze[row + 1][col + 1]);
 		}
 
 		return neighbors;
