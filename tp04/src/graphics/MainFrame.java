@@ -5,6 +5,8 @@ package graphics;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,6 +31,7 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 
 	private JPanel buttonPanel;
 	private JPanel legendPanel;
+	private JPanel statusPanel;
 	private HexagonalTable panelMaze;
 	private String fileName = "labyrinthe.maze";
 	private Maze actualMaze = new Maze();
@@ -43,7 +46,10 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 	private JRadioButton startButton;
 	private JRadioButton endButton;
 
+	private JLabel statusLabel;
+
 	final static int westPanelWidth = 200;
+	final static int northPanelHeight = 50;
 	private boolean editMode = false;
 
 
@@ -79,7 +85,7 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 		add(panelMaze, BorderLayout.CENTER);
 
 		// Display the legend
-		JPanel legendPanel = new JPanel();
+		legendPanel = new JPanel();
 		legendPanel.setLayout(new GridLayout(2, 8, 20, 5));
 
 		// Créez une JLabel pour chaque type de case/clic et une JPanel pour la couleur de chaque case
@@ -115,6 +121,13 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 			public void actionPerformed(ActionEvent e) {
 				try {
 					editMode = true;
+					statusLabel.setText("Mode d'édition");
+					// Display the corresponding legend
+					legendPanel.removeAll();
+					legendPanel.setLayout(new GridLayout(2, 8, 20, 5));
+					addLegend(legendPanel);
+					legendPanel.revalidate();
+					legendPanel.repaint();
 					// Récupérez la largeur et la hauteur du labyrinthe saisies par l'utilisateur
 					int width = Integer.parseInt(widthField.getText());
 					int height = Integer.parseInt(heightField.getText());
@@ -181,32 +194,56 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 				// Enregistrez le labyrinthe dans le répertoire "data"
 				actualMaze.saveToTextFile("data/savedMaze.maze");
 				// Refresh the east side panel by removing all the components
-		        buttonPanel.removeAll();
-		        
-		        // Get the updated list of maze files
-		        String[] mazeFiles = dataDirectory.list(mazeFilter);
-		        
-		        // Add the buttons for the maze files to the button panel
-		        fileName = addMazeButtons(mazeFiles, buttonPanel, actualMaze, panelMaze);
-		        
-		        // Revalidate and repaint the button panel to update the display
-		        buttonPanel.setPreferredSize(new Dimension(200, 200));
+				buttonPanel.removeAll();
+
+				// Get the updated list of maze files
+				String[] mazeFiles = dataDirectory.list(mazeFilter);
+
+				// Add the buttons for the maze files to the button panel
+				fileName = addMazeButtons(mazeFiles, buttonPanel, actualMaze, panelMaze);
+
+				// Revalidate and repaint the button panel to update the display
+				buttonPanel.setPreferredSize(new Dimension(200, 200));
 				buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
 				buttonPanel.setLayout(new GridLayout(mazeFiles.length, 1));
-		        buttonPanel.revalidate();
-		        buttonPanel.repaint();
+				buttonPanel.revalidate();
+				buttonPanel.repaint();
 			}
 		});
 		editPanel.add(saveButton);
 
 		add(editPanel, BorderLayout.WEST);
+
+		//Top Display of the status of edition
+		statusPanel = new JPanel();
+		statusPanel.setPreferredSize(new Dimension(1600, northPanelHeight));
+		//statusPanel.setLayout(new BoxLayout(statusPanel, BoxLayout.Y_AXIS));
+		statusPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+
+		statusLabel = new JLabel();
+		statusLabel.setFont(new Font(statusLabel.getFont().getName(), statusLabel.getFont().getStyle(), 20));
+		if (editMode) {
+			statusLabel.setText("Mode d'édition");
+		} else {
+			statusLabel.setText("Fichier chargé : " + fileName);
+		}
+		statusLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		statusPanel.add(statusLabel);
+
+		add(statusPanel, BorderLayout.NORTH);
 	}
 
 	public void addLegend (JPanel legendPanel) {
 		JLabel clickGauche = new JLabel("Clic Gauche");
 		legendPanel.add(clickGauche);
-		JLabel Wall_Empty = new JLabel("Modif Mur/Vide");
-		legendPanel.add(Wall_Empty);
+		if (editMode == false) {
+			JLabel Wall_Empty = new JLabel("Modif Mur/Vide");
+			legendPanel.add(Wall_Empty);
+		}
+		else {
+			JLabel Wall_Empty = new JLabel("Ajout Case Choisie");
+			legendPanel.add(Wall_Empty);
+		}
 
 		JLabel startLabel = new JLabel("Départ");
 		JPanel startColor = new JPanel();
@@ -228,8 +265,14 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 
 		JLabel clickDroit = new JLabel("Clic Droit");
 		legendPanel.add(clickDroit);
-		JLabel newArrival = new JLabel("Changer Arrivée");
-		legendPanel.add(newArrival);
+		if (editMode == false) {
+			JLabel newArrival = new JLabel("Changer Arrivée");
+			legendPanel.add(newArrival);
+		}
+		else {
+			JLabel newArrival = new JLabel("Aucune Action");
+			legendPanel.add(newArrival);
+		}
 
 		JLabel wallLabel = new JLabel("Mur");
 		JPanel wallColor = new JPanel();
@@ -267,6 +310,13 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					editMode = false;
+					statusLabel.setText("Fichier chargé : " + mazeFile);
+					legendPanel.removeAll();
+					legendPanel.setLayout(new GridLayout(2, 8, 20, 5));
+					addLegend(legendPanel);
+					legendPanel.revalidate();
+					legendPanel.repaint();
+					//
 					int [] vals = myMaze.fromFileGetMazeSize("data/" + mazeFile);
 					myMaze.setSize(vals[0], vals[1]);
 					panelMaze.setLength(vals[0]);
