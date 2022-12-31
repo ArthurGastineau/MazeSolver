@@ -8,8 +8,8 @@ public class Dijkstra {
 		processedVertexes.add(startVertex);
 		Vertex pivotVertex = startVertex;
 		minDistance.setShortestPath(pivotVertex, 0);
-		
-		
+
+
 		// for all vertexes except the start one we have minDistance(vertex) = infinity
 		minDistance.initValuations(graph);
 		while (processedVertexes.present(endVertex) == false) {
@@ -17,7 +17,7 @@ public class Dijkstra {
 				if (processedVertexes.present(succVertex) == false) {
 					if ((minDistance.getShortestPath(pivotVertex)
 							+ distance.getValuation(pivotVertex, succVertex)) < 
-								(minDistance.getShortestPath(succVertex))) {
+							(minDistance.getShortestPath(succVertex))) {
 						minDistance.setShortestPath(succVertex,
 								(minDistance.getShortestPath(pivotVertex)
 										+ distance.getValuation(pivotVertex, succVertex)));
@@ -39,13 +39,13 @@ public class Dijkstra {
 		}
 		return shortestPaths;
 	}
-	
-	public static ShortestPaths dijkstra(Graph graph, Vertex startVertex, Vertex endVertex) {
-	    ProcessedVertexes processedVertexes = new ProcessedVertexesImpl();
-	    MinDistance minDistance = new MinDistanceImpl(startVertex);
-	    Distance distance = new Distance();
-	    ShortestPaths shortestPaths = new ShortestPathsImpl();
 
-	    return dijkstra(graph, startVertex, endVertex, processedVertexes, minDistance, distance, shortestPaths);
+	public static ShortestPaths dijkstra(Graph graph, Vertex startVertex, Vertex endVertex) {
+		ProcessedVertexes processedVertexes = new ProcessedVertexesImpl();
+		MinDistance minDistance = new MinDistanceImpl(startVertex);
+		Distance distance = new Distance();
+		ShortestPaths shortestPaths = new ShortestPathsImpl();
+
+		return dijkstra(graph, startVertex, endVertex, processedVertexes, minDistance, distance, shortestPaths);
 	}
 }

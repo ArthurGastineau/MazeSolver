@@ -24,7 +24,7 @@ public class HexagonalTable extends JPanel implements MouseMotionListener {
 
 	private int selectedRow = -1;
 	private int selectedColumn = -1;
-	
+
 	char[][] solution = null;
 
 	public void paintComponent(Graphics g) {
@@ -38,7 +38,7 @@ public class HexagonalTable extends JPanel implements MouseMotionListener {
 			for (int j= 0; j < width; j++) {
 
 				try {
-				solution = this.readSolutionFile("data/solution");
+					solution = this.readSolutionFile("data/solution");
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -114,8 +114,8 @@ public class HexagonalTable extends JPanel implements MouseMotionListener {
 
 	@Override
 	public void mouseDragged(MouseEvent e) {}
-	
-	
+
+
 
 
 
@@ -160,6 +160,6 @@ public class HexagonalTable extends JPanel implements MouseMotionListener {
 	public int getSelectedColumn() {
 		return selectedColumn;
 	}
-	
+
 }
 

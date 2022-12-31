@@ -2,7 +2,7 @@ package maze;
 
 @SuppressWarnings("serial")
 public class MazeReadingException extends Exception{
-	
+
 	String fileName;
 	int lineNumber;
 	String messageError;
@@ -13,17 +13,17 @@ public class MazeReadingException extends Exception{
 		this.lineNumber = lineNumber;
 		this.messageError = messageError;
 	}
-	
+
 	public String getFileName() {
-        return fileName;
-    }
+		return fileName;
+	}
 
-    public int getLineNumber() {
-        return lineNumber;
-    }
+	public int getLineNumber() {
+		return lineNumber;
+	}
 
-    public String getMessageError() {
-        return messageError;
-    }
-	
+	public String getMessageError() {
+		return messageError;
+	}
+
 }

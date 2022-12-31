@@ -2,7 +2,7 @@ package maze;
 import graph.Vertex;
 
 public abstract class MazeBox implements Vertex{
-	
+
 	private boolean hasCrossed;
 	private int row;
 	private int col;
@@ -43,12 +43,12 @@ public abstract class MazeBox implements Vertex{
 	public void setCol(int col) {
 		this.col = col;
 	}
-	
+
 	@Override
 	public String toString() {
-	    return "Vertex at (" + row + ", " + col + ")";
+		return "Vertex at (" + row + ", " + col + ")";
 	}
-	
+
 
 	public abstract String typeOfBox();
 

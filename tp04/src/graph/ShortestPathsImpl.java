@@ -8,31 +8,31 @@ import java.util.Map;
 
 public class ShortestPathsImpl implements ShortestPaths {
 
-    private Map<Vertex, Vertex> predecessors;
+	private Map<Vertex, Vertex> predecessors;
 
-    public ShortestPathsImpl() {
-        this.predecessors = new HashMap<Vertex, Vertex>();
-    }
-    
-    @Override
-    public List<Vertex> getShortestPath(Vertex endVertex) {
-    	List<Vertex> path = new ArrayList<>();
-    	Vertex current = endVertex;
-    	while (current != null) {
-    		path.add(current);
-    	    current = predecessors.get(current);
-    	}
-    	Collections.reverse(path);
-    	return path;
-    }
+	public ShortestPathsImpl() {
+		this.predecessors = new HashMap<Vertex, Vertex>();
+	}
 
-    @Override
-    public void setPrevious(Vertex son, Vertex father) {
-    	predecessors.put(son, father);
-    }
+	@Override
+	public List<Vertex> getShortestPath(Vertex endVertex) {
+		List<Vertex> path = new ArrayList<>();
+		Vertex current = endVertex;
+		while (current != null) {
+			path.add(current);
+			current = predecessors.get(current);
+		}
+		Collections.reverse(path);
+		return path;
+	}
 
-    @Override
-    public Vertex getPrevious(Vertex father) {
-        return predecessors.get(father);
-    }
+	@Override
+	public void setPrevious(Vertex son, Vertex father) {
+		predecessors.put(son, father);
+	}
+
+	@Override
+	public Vertex getPrevious(Vertex father) {
+		return predecessors.get(father);
+	}
 }

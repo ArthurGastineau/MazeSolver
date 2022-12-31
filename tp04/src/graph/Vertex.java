@@ -9,7 +9,7 @@ public interface Vertex {
 	public int getCol();
 	//
 	public void setCol(int col);
-	
+
 
 	// get label
 	public String toString ();

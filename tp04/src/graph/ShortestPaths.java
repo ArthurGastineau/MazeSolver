@@ -9,6 +9,6 @@ public interface ShortestPaths {
 	// get the vertex son having the lowest valuation of his arc going to father
 	public Vertex getPrevious(Vertex father);
 
-    // get the shortest path from the start vertex to the end vertex
-    public List<Vertex> getShortestPath(Vertex endVertex);
+	// get the shortest path from the start vertex to the end vertex
+	public List<Vertex> getShortestPath(Vertex endVertex);
 }
