@@ -6,13 +6,15 @@ import java.util.Map;
 public class MinDistanceImpl implements MinDistance {
 
     private Map<Vertex, Integer> distanceMap;
+    private Vertex root;
 
-    public MinDistanceImpl() {
-        this.distanceMap = new HashMap<Vertex, Integer>();
+    public MinDistanceImpl(Vertex startVertex) {
+        distanceMap = new HashMap<Vertex, Integer>();
+        root = startVertex;
     }
 
     @Override
-    public void initValuations(Graph graph, Vertex root) {
+    public void initValuations(Graph graph) {
         for (Vertex vertex : graph.getAllVertexes()) {
             if (!vertex.equals(root)) {
                 distanceMap.put(vertex, Integer.MAX_VALUE);
@@ -21,12 +23,12 @@ public class MinDistanceImpl implements MinDistance {
     }
 
     @Override
-    public double getShortestPath(Vertex root, Vertex pivot) {
+    public double getShortestPath(Vertex pivot) {
         return distanceMap.get(pivot);
     }
 
     @Override
-    public void setShortestPath(Vertex root, Vertex pivot, double value) {
+    public void setShortestPath(Vertex pivot, double value) {
         distanceMap.put(pivot, (int) value);
     }
 }

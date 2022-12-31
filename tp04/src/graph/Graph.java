@@ -3,8 +3,6 @@ package graph;
 
 import java.util.List;
 
-import java.util.ArrayList;
-
 
 public interface Graph {
 	// get successors of a vertex

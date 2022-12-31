@@ -37,8 +37,6 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 	private Maze actualMaze = new Maze();
 	//private HexagonalLabyrinthPanel labyrinthPanel;
 	private JPanel editPanel;
-	private JTextField dimensionField;
-	private JButton createButton;
 	private JButton saveButton;
 
 	private JRadioButton wallButton;
@@ -49,7 +47,7 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 	private JLabel statusLabel;
 
 	final static int westPanelWidth = 200;
-	final static int northPanelHeight = 50;
+	final static int northPanelHeight = 30;
 	private boolean editMode = false;
 
 
@@ -57,28 +55,18 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 	public MainFrame(Maze maze) {
 		actualMaze = maze;
 		// Initialise the window
-		setSize(1600, 1000);
+		setSize(1700, 1000);
 		setTitle("Hexagonal Labyrinth");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
 		// Set the layout for the button panel to display the buttons in a grid
-
-		File dataDirectory = new File("data");
-		FilenameFilter mazeFilter = new FilenameFilter() {
-			@Override
-			public boolean accept(File dir, String name) {
-				return name.endsWith(".maze");
-			}
-		};
-
-		String[] mazeFiles = dataDirectory.list(mazeFilter);
 		buttonPanel = new JPanel();
 		buttonPanel.setPreferredSize(new Dimension(200, 200));
 		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
-		buttonPanel.setLayout(new GridLayout(mazeFiles.length, 1));
-		fileName = addMazeButtons(mazeFiles, buttonPanel, maze, panelMaze);
+		fileName = addMazeButtons(buttonPanel, maze, panelMaze);
 		add(buttonPanel, BorderLayout.EAST);
+		
 		// display the maze
 		panelMaze = new HexagonalTable();
 		panelMaze.requestFocus();
@@ -94,7 +82,11 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 		//
 		editPanel = new JPanel();
 		editPanel.setPreferredSize(new Dimension(westPanelWidth, 480));
-		editPanel.setLayout(new GridLayout(5, 2));
+		
+		JLabel editLabel = new JLabel();
+		editLabel.setText("Mode d'édition");
+		editLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		editPanel.add(editLabel);
 
 		// Ajoutez un label pour indiquer à l'utilisateur de saisir la largeur du labyrinthe
 		JLabel widthLabel = new JLabel("Largeur :");
@@ -176,7 +168,7 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 		endButton = new JRadioButton("Arrivée");
 		buttonGroup.add(endButton);
 		editPanel.add(endButton);
-
+		
 
 		// Définissez un bouton comme bouton par défaut
 		startButton.setSelected(true);
@@ -186,26 +178,46 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 		editPanel.add(emptyButton);
 		editPanel.add(startButton);
 		editPanel.add(endButton);
+		
+		// Ajoutez un label pour indiquer à l'utilisateur de saisir le nom du fichier sauvegardé
+		JLabel savedFileNameLabel = new JLabel("Nom du fichier :");
+		editPanel.add(savedFileNameLabel);
+				
+		// Permet à l'utilsiateur de choisir le nom du fichier sauvegardé
+		JTextField savedFileNameField = new JTextField();
+		savedFileNameField.setMaximumSize(new Dimension(200, 50));
+		editPanel.add(savedFileNameField);
 
 		saveButton = new JButton("Save");
 		saveButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// Enregistrez le labyrinthe dans le répertoire "data"
-				actualMaze.saveToTextFile("data/savedMaze.maze");
+				// Récupérez le nom du fichier saisi par l'utilisateur
+		        String savedFileName = savedFileNameField.getText();
+				// Vérifiez si le nom du fichier se termine par ".maze"
+		        if (!savedFileName.endsWith(".maze")) {
+		            // Si ce n'est pas le cas, ajoutez l'extension ".maze" au nom du fichier
+		        	savedFileName += ".maze";
+		        }
+		        System.out.println(savedFileName);
+		        // Vérifiez si le nom du fichier contient un point autre que celui qui indique l'extension
+		        if (savedFileName.indexOf(".") != savedFileName.lastIndexOf(".")) {
+		            // Si c'est le cas, supprimez tout ce qui se trouve après le premier point
+		        	savedFileName = savedFileName.substring(0, savedFileName.indexOf("."));
+		        }
+		        System.out.println(savedFileName);
+		        
+		        // Enregistrez le labyrinthe dans le fichier
+		        actualMaze.saveToTextFile("data/" + savedFileName);
+				statusLabel.setText("Votre labyrinthe " + savedFileName + " a été sauvegardé");
+		        
 				// Refresh the east side panel by removing all the components
 				buttonPanel.removeAll();
 
-				// Get the updated list of maze files
-				String[] mazeFiles = dataDirectory.list(mazeFilter);
-
-				// Add the buttons for the maze files to the button panel
-				fileName = addMazeButtons(mazeFiles, buttonPanel, actualMaze, panelMaze);
+				// Get the new files and add the buttons for the maze files to the button panel
+				fileName = addMazeButtons(buttonPanel, actualMaze, panelMaze);
 
 				// Revalidate and repaint the button panel to update the display
-				buttonPanel.setPreferredSize(new Dimension(200, 200));
-				buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
-				buttonPanel.setLayout(new GridLayout(mazeFiles.length, 1));
 				buttonPanel.revalidate();
 				buttonPanel.repaint();
 			}
@@ -222,11 +234,7 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 
 		statusLabel = new JLabel();
 		statusLabel.setFont(new Font(statusLabel.getFont().getName(), statusLabel.getFont().getStyle(), 20));
-		if (editMode) {
-			statusLabel.setText("Mode d'édition");
-		} else {
-			statusLabel.setText("Fichier chargé : " + fileName);
-		}
+		statusLabel.setText("Veuillez sélectionner un labyrinthe ou en créer un");
 		statusLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		statusPanel.add(statusLabel);
 
@@ -299,7 +307,16 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 	}
 
 
-	public String addMazeButtons(String[] mazeFiles, JPanel panel, Maze myMaze, HexagonalTable hex) {
+	public String addMazeButtons(JPanel panel, Maze myMaze, HexagonalTable hex) {
+		File dataDirectory = new File("data");
+		FilenameFilter mazeFilter = new FilenameFilter() {
+			@Override
+			public boolean accept(File dir, String name) {
+				return name.endsWith(".maze");
+			}
+		};
+		String[] mazeFiles = dataDirectory.list(mazeFilter);
+		buttonPanel.setLayout(new GridLayout(mazeFiles.length, 1));
 		for (String mazeFile : mazeFiles) {
 			// Crée un bouton pour chaque fichier de labyrinthe
 			JButton mazeButton = new JButton(mazeFile);

@@ -7,19 +7,19 @@ public class Dijkstra {
 
 		processedVertexes.add(startVertex);
 		Vertex pivotVertex = startVertex;
-		minDistance.setShortestPath(startVertex, pivotVertex, 0);
+		minDistance.setShortestPath(pivotVertex, 0);
 		
 		
 		// for all vertexes except the start one we have minDistance(vertex) = infinity
-		minDistance.initValuations(graph, pivotVertex);
+		minDistance.initValuations(graph);
 		while (processedVertexes.present(endVertex) == false) {
 			for (Vertex succVertex : graph.getSuccessor(pivotVertex)) {
 				if (processedVertexes.present(succVertex) == false) {
-					if ((minDistance.getShortestPath(startVertex, pivotVertex)
+					if ((minDistance.getShortestPath(pivotVertex)
 							+ distance.getValuation(pivotVertex, succVertex)) < 
-								(minDistance.getShortestPath(startVertex, succVertex))) {
-						minDistance.setShortestPath(startVertex, succVertex,
-								(minDistance.getShortestPath(startVertex, pivotVertex)
+								(minDistance.getShortestPath(succVertex))) {
+						minDistance.setShortestPath(succVertex,
+								(minDistance.getShortestPath(pivotVertex)
 										+ distance.getValuation(pivotVertex, succVertex)));
 						shortestPaths.setPrevious(succVertex, pivotVertex);
 					}
@@ -30,8 +30,8 @@ public class Dijkstra {
 			double temp = Double.POSITIVE_INFINITY;
 			for (Vertex nextVertex : graph.getAllVertexes()) {
 				if (processedVertexes.present(nextVertex) == false
-						&& (minDistance.getShortestPath(startVertex, nextVertex) < temp)) {
-					temp = minDistance.getShortestPath(startVertex, nextVertex);
+						&& (minDistance.getShortestPath(nextVertex) < temp)) {
+					temp = minDistance.getShortestPath(nextVertex);
 					pivotVertex = nextVertex;
 				}
 			}
@@ -42,7 +42,7 @@ public class Dijkstra {
 	
 	public static ShortestPaths dijkstra(Graph graph, Vertex startVertex, Vertex endVertex) {
 	    ProcessedVertexes processedVertexes = new ProcessedVertexesImpl();
-	    MinDistance minDistance = new MinDistanceImpl();
+	    MinDistance minDistance = new MinDistanceImpl(startVertex);
 	    Distance distance = new Distance();
 	    ShortestPaths shortestPaths = new ShortestPathsImpl();
 

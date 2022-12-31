@@ -17,7 +17,7 @@ public class HexagonalTable extends JPanel implements MouseMotionListener {
 	private static final int ORIGIN_X = 50;
 	private static final int ORIGIN_Y = 50;
 	private static final double SQRT_3 = Math.sqrt(3);
-	private static final int size =30;
+	private static final int size = 30;
 
 	private int length = 10;
 	private int width = 10;
@@ -38,7 +38,7 @@ public class HexagonalTable extends JPanel implements MouseMotionListener {
 			for (int j= 0; j < width; j++) {
 
 				try {
-					solution = this.readSolutionFile("data/solution");
+				solution = this.readSolutionFile("data/solution");
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
