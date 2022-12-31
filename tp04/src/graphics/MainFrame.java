@@ -2,14 +2,9 @@ package graphics;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -47,7 +42,7 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 	private JRadioButton endButton;
 
 	private JLabel statusLabel;
-	JLabel editionStatusLabel;
+	JLabel creationStatusLabel;
 
 	final static int westPanelWidth = 200;
 	final static int northPanelHeight = 30;
@@ -71,8 +66,6 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 		// Set the layout for the button panel to display the buttons in a grid on the
 		// right size of the window
 		buttonPanel = new JPanel();
-		buttonPanel.setPreferredSize(new Dimension(200, 200));
-		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
 		fileName = addMazeButtons(buttonPanel, maze, panelMaze);
 		add(buttonPanel, BorderLayout.EAST);
 
@@ -96,53 +89,53 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 		add(editPanel, BorderLayout.WEST);
 	}
 	
-	public void addStatus(JPanel statusPanel) {
+	public void addStatus(JPanel panel) {
 		
-		editionStatusLabel = new JLabel("Mode lecture seule");
-		editionStatusLabel.setFont(new Font(editionStatusLabel.getFont().getName(), editionStatusLabel.getFont().getStyle(), 20));
-		editionStatusLabel.setForeground(Color.RED);
-		statusPanel.add(editionStatusLabel, BorderLayout.WEST);
+		creationStatusLabel = new JLabel("Mode Edition");
+		creationStatusLabel.setFont(new Font(creationStatusLabel.getFont().getName(), creationStatusLabel.getFont().getStyle(), 20));
+		creationStatusLabel.setForeground(Color.RED);
+		panel.add(creationStatusLabel, BorderLayout.WEST);
 
 		statusLabel = new JLabel();
 		statusLabel.setFont(new Font(statusLabel.getFont().getName(), statusLabel.getFont().getStyle(), 20));
 		statusLabel.setText("Veuillez sélectionner un labyrinthe ou en créer un");
 		statusLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		statusPanel.add(statusLabel, BorderLayout.CENTER);
+		panel.add(statusLabel, BorderLayout.CENTER);
 
 
 
 	}
 
-	public void addEdit(JPanel editPanel) {
+	public void addEdit(JPanel panel) {
 		// Ajoutez un label pour indiquer le mendu d'édition
 		JLabel editLabel = new JLabel();
-		editLabel.setText("Mode d'édition");
+		editLabel.setText("Menu Création");
 		editLabel.setFont(new Font(editLabel.getFont().getName(), editLabel.getFont().getStyle(), 15));
 		editLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		editPanel.add(editLabel);
+		panel.add(editLabel);
 		
 		// Ajoutez un JSeparator comme espace vide
-		editPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+		panel.add(Box.createRigidArea(new Dimension(0, 10)));
 
 		// Ajoutez un label pour indiquer à l'utilisateur de saisir la largeur du
 		// labyrinthe
 		JLabel widthLabel = new JLabel("Largeur :");
-		editPanel.add(widthLabel);
+		panel.add(widthLabel);
 
 		// Créez un champ de saisie pour la largeur du labyrinthe
 		JFormattedTextField widthField = new JFormattedTextField(NumberFormat.getIntegerInstance());
 		widthField.setMaximumSize(new Dimension(200, 50));
-		editPanel.add(widthField);
+		panel.add(widthField);
 
 		// Ajoutez un label pour indiquer à l'utilisateur de saisir la hauteur du
 		// labyrinthe
 		JLabel heightLabel = new JLabel("Hauteur :");
-		editPanel.add(heightLabel);
+		panel.add(heightLabel);
 
 		// Créez un champ de saisie pour la hauteur du labyrinthe
 		JFormattedTextField heightField = new JFormattedTextField(NumberFormat.getIntegerInstance());
 		heightField.setMaximumSize(new Dimension(200, 50));
-		editPanel.add(heightField);
+		panel.add(heightField);
 
 		// Ajoutez un bouton pour créer le labyrinthe vide avec les dimensions saisies
 		JButton createButton = new JButton("Créer");
@@ -177,8 +170,8 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 					panelMaze.repaint();
 					
 					editMode = true;
-					editionStatusLabel.setText("Mode édition      ");
-					editionStatusLabel.setForeground(Color.GREEN);
+					creationStatusLabel.setText("Mode Création      ");
+					creationStatusLabel.setForeground(Color.GREEN);
 					statusLabel.setText("Labyrinthe créé");
 					// Display the corresponding legend
 					legendPanel.removeAll();
@@ -195,15 +188,15 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 				}
 			}
 		});
-		editPanel.add(createButton);
+		panel.add(createButton);
 		//
 		JButton resetButton = new JButton("Reset");
 		resetButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (editMode = true) {
-					editionStatusLabel.setText("Mode édition       ");
-					editionStatusLabel.setForeground(Color.GREEN);
+					creationStatusLabel.setText("Mode Création       ");
+					creationStatusLabel.setForeground(Color.GREEN);
 					statusLabel.setText("Labyrinthe réinitialisé");
 					actualMaze.initEmptyMaze(actualMaze.getLength(), actualMaze.getWidth());
 					panelMaze.repaint();
@@ -215,25 +208,25 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 				}
 			}
 		});
-		editPanel.add(resetButton);
+		panel.add(resetButton);
 		// Ajoutez 4 Boutons pour chosiir le type de case en édition
 		ButtonGroup buttonGroup = new ButtonGroup();
 
 		wallButton = new JRadioButton("Mur");
 		buttonGroup.add(wallButton);
-		editPanel.add(wallButton); // Ajoutez chaque JRadioButton individuellement
+		panel.add(wallButton); // Ajoutez chaque JRadioButton individuellement
 
 		emptyButton = new JRadioButton("Vide");
 		buttonGroup.add(emptyButton);
-		editPanel.add(emptyButton);
+		panel.add(emptyButton);
 
 		startButton = new JRadioButton("Départ");
 		buttonGroup.add(startButton);
-		editPanel.add(startButton);
+		panel.add(startButton);
 
 		endButton = new JRadioButton("Arrivée");
 		buttonGroup.add(endButton);
-		editPanel.add(endButton);
+		panel.add(endButton);
 
 		// Définissez un bouton comme bouton par défaut
 		startButton.setSelected(true);
@@ -246,7 +239,7 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 		// Permet à l'utilsiateur de choisir le nom du fichier sauvegardé
 		JTextField savedFileNameField = new JTextField();
 		savedFileNameField.setMaximumSize(new Dimension(200, 50));
-		editPanel.add(savedFileNameField);
+		panel.add(savedFileNameField);
 
 		saveButton = new JButton("Save");
 		saveButton.addActionListener(new ActionListener() {
@@ -285,68 +278,69 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 				buttonPanel.repaint();
 			}
 		});
-		editPanel.add(saveButton);
+		panel.add(saveButton);
 	}
 
-	public void addLegend(JPanel legendPanel) {
+	public void addLegend(JPanel panel) {
 		JLabel clickGauche = new JLabel("Clic Gauche");
-		legendPanel.add(clickGauche);
+		panel.add(clickGauche);
 		if (editMode == false) {
 			JLabel Wall_Empty = new JLabel("Modif Mur/Vide");
-			legendPanel.add(Wall_Empty);
+			panel.add(Wall_Empty);
 		} else {
 			JLabel Wall_Empty = new JLabel("Ajout Case Choisie");
-			legendPanel.add(Wall_Empty);
+			panel.add(Wall_Empty);
 		}
 
 		JLabel startLabel = new JLabel("Départ");
 		JPanel startColor = new JPanel();
 		startColor.setBackground(Color.BLUE);
-		legendPanel.add(startLabel);
-		legendPanel.add(startColor);
+		panel.add(startLabel);
+		panel.add(startColor);
 
 		JLabel endLabel = new JLabel("Arrivée");
 		JPanel endColor = new JPanel();
 		endColor.setBackground(Color.RED);
-		legendPanel.add(endLabel);
-		legendPanel.add(endColor);
+		panel.add(endLabel);
+		panel.add(endColor);
 
 		JLabel emptyLabel = new JLabel("Vide");
 		JPanel emptyColor = new JPanel();
 		emptyColor.setBackground(Color.WHITE);
-		legendPanel.add(emptyLabel);
-		legendPanel.add(emptyColor);
+		panel.add(emptyLabel);
+		panel.add(emptyColor);
 
 		JLabel clickDroit = new JLabel("Clic Droit");
-		legendPanel.add(clickDroit);
+		panel.add(clickDroit);
 		if (editMode == false) {
 			JLabel newArrival = new JLabel("Changer Arrivée");
-			legendPanel.add(newArrival);
+			panel.add(newArrival);
 		} else {
 			JLabel newArrival = new JLabel("Aucune Action");
-			legendPanel.add(newArrival);
+			panel.add(newArrival);
 		}
 
 		JLabel wallLabel = new JLabel("Mur");
 		JPanel wallColor = new JPanel();
 		wallColor.setBackground(Color.BLACK);
-		legendPanel.add(wallLabel);
-		legendPanel.add(wallColor);
+		panel.add(wallLabel);
+		panel.add(wallColor);
 
 		JLabel pathLabel = new JLabel("Chemin");
 		JPanel pathColor = new JPanel();
 		pathColor.setBackground(Color.YELLOW);
-		legendPanel.add(pathLabel);
-		legendPanel.add(pathColor);
+		panel.add(pathLabel);
+		panel.add(pathColor);
 
 		JLabel selectedLabel = new JLabel("Sélectionné");
 		JPanel selectedColor = new JPanel();
 		selectedColor.setBackground(Color.GRAY);
-		legendPanel.add(selectedLabel);
-		legendPanel.add(selectedColor);
+		panel.add(selectedLabel);
+		panel.add(selectedColor);
 	}
 
 	public String addMazeButtons(JPanel panel, Maze myMaze, HexagonalTable hex) {
+		
 		File dataDirectory = new File("data");
 		FilenameFilter mazeFilter = new FilenameFilter() {
 			@Override
@@ -355,19 +349,25 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 			}
 		};
 		String[] mazeFiles = dataDirectory.list(mazeFilter);
-		buttonPanel.setLayout(new GridLayout(mazeFiles.length, 1));
+		
+		panel.setLayout(new GridLayout(mazeFiles.length + 1, 1, 0, 0));
+		
+		JLabel editionStatusLabel = new JLabel("Menu Edition");
+		editionStatusLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		editionStatusLabel.setFont(new Font(editionStatusLabel.getFont().getName(), editionStatusLabel.getFont().getStyle(), 15));
+		panel.add(editionStatusLabel);
 		for (String mazeFile : mazeFiles) {
 			// Crée un bouton pour chaque fichier de labyrinthe
 			JButton mazeButton = new JButton(mazeFile);
-			buttonPanel.add(mazeButton);
+			panel.add(mazeButton);
 
 			// Ajoute un écouteur d'événement pour chaque bouton
 			mazeButton.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					editMode = false;
-					editionStatusLabel.setText("Mode lecture seule");
-					editionStatusLabel.setForeground(Color.RED);
+					creationStatusLabel.setText("Mode lecture seule");
+					creationStatusLabel.setForeground(Color.RED);
 					statusLabel.setText("Fichier chargé : " + mazeFile);
 					legendPanel.removeAll();
 					legendPanel.setLayout(new GridLayout(2, 8, 20, 5));
