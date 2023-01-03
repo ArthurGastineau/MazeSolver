@@ -13,6 +13,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.io.File;
 import java.io.FilenameFilter;
+import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.List;
 
@@ -30,12 +31,15 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 	private JPanel buttonPanel;
 	private JPanel legendPanel;
 	private JPanel statusPanel;
-	private HexagonalTable panelMaze;
-	private String fileName = "labyrinthe.maze";
-	private Maze actualMaze = new Maze();
-	// private HexagonalLabyrinthPanel labyrinthPanel;
 	private JPanel editPanel;
+	private HexagonalTable panelMaze;
+
+	private String fileName = "labyrinthe.maze";
+
+	private Maze actualMaze = new Maze();
+
 	private JButton saveButton;
+	private JButton deleteButton;
 
 	private JRadioButton wallButton;
 	private JRadioButton emptyButton;
@@ -43,10 +47,11 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 	private JRadioButton endButton;
 
 	private JLabel statusLabel;
-	JLabel creationStatusLabel;
+	private JLabel creationStatusLabel;
 
-	final static int westPanelWidth = 200;
-	final static int northPanelHeight = 30;
+	public final static int westPanelWidth = 200;
+	public final static int northPanelHeight = 30;
+
 	private boolean editMode = false;
 
 	public MainFrame(Maze maze) {
@@ -68,7 +73,7 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 		// Set the layout for the button panel to display the buttons in a grid on the
 		// right size of the window
 		buttonPanel = new JPanel();
-		fileName = addMazeButtons(buttonPanel, maze, panelMaze);
+		fileName = addMazeButtons(buttonPanel, actualMaze, panelMaze);
 		add(buttonPanel, BorderLayout.EAST);
 
 		// Set the layout to display the maze at the center of the window
@@ -169,6 +174,7 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 					panelMaze.setWidth(height);
 					actualMaze = newMaze;
 					panelMaze.repaint();
+					System.out.println(actualMaze.getLength() + ":" + actualMaze.getWidth());
 
 					editMode = true;
 					creationStatusLabel.setText("Mode Création      ");
@@ -351,13 +357,85 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 		};
 		String[] mazeFiles = dataDirectory.list(mazeFilter);
 
-		panel.setLayout(new GridLayout(mazeFiles.length + 1, 1, 0, 0));
+		panel.setLayout(new GridLayout(mazeFiles.length + 2, 1, 0, 0));
 
 		JLabel editionStatusLabel = new JLabel("Menu Edition");
 		editionStatusLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		editionStatusLabel
 				.setFont(new Font(editionStatusLabel.getFont().getName(), editionStatusLabel.getFont().getStyle(), 15));
-		panel.add(editionStatusLabel);
+		buttonPanel.add(editionStatusLabel);
+
+		// Create the delete button
+		deleteButton = new JButton("Delete Maze");
+
+		// Add an action listener to the delete button
+		deleteButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (editMode == false) {
+					if (!fileName.equals("labyrinthe.maze")) {
+						// Check if the file exists
+						File file = new File("data/" + fileName);
+						if (!file.exists()) {
+							JOptionPane.showMessageDialog(buttonPanel, "The file does not exist.", "Error",
+									JOptionPane.ERROR_MESSAGE);
+							return;
+						}
+
+						// Check if the file can be deleted
+						if (!file.canWrite()) {
+							JOptionPane.showMessageDialog(buttonPanel, "You don't have permission to delete this file.",
+									"Error", JOptionPane.ERROR_MESSAGE);
+							return;
+						}
+
+						// Try to delete the file
+						if (!file.delete()) {
+							JOptionPane.showMessageDialog(buttonPanel, "An error occurred while deleting the file.",
+									"Error", JOptionPane.ERROR_MESSAGE);
+							return;
+						}
+						statusLabel.setText("Fichier supprimé : " + fileName);
+						buttonPanel.removeAll();
+						addMazeButtons(buttonPanel, actualMaze, panelMaze);
+						buttonPanel.revalidate();
+						buttonPanel.repaint();
+
+						// display defaultMaze
+						Maze newMaze = new Maze();
+
+						fileName = "labyrinthe.maze";
+						int[] vals = newMaze.fromFileGetMazeSize("data/" + fileName);
+						System.out.println(vals.toString());
+						int length = vals[0];
+						int width = vals[1];
+						if (width > Maze.MAX_WIDTH || length > Maze.MAX_LENGTH) {
+							throw new IllegalArgumentException(
+									"La largeur et la hauteur doivent être des valeurs inférieure ou égale à 18");
+						}
+						newMaze.setSize(vals[0], vals[1]);
+						panelMaze.setLength(length);
+						panelMaze.setWidth(width);
+						newMaze.initFromTextFile("data/" + fileName);
+						Vertex startVertex = newMaze.getStartVertex();
+						Vertex endVertex = newMaze.getEndVertex();
+						ShortestPaths shortestPaths = Dijkstra.dijkstra(newMaze, startVertex, endVertex);
+						List<Vertex> path = shortestPaths.getShortestPath(endVertex);
+						newMaze.saveShortestPath("data/solution", path);
+						actualMaze = newMaze;
+						panelMaze.repaint();
+
+					} else {
+						JOptionPane.showMessageDialog(buttonPanel, "You can't delete the default maze.", "Error",
+								JOptionPane.ERROR_MESSAGE);
+					}
+				} else {
+					JOptionPane.showMessageDialog(buttonPanel, "You can't delete a maze while in Creation Mode",
+							"Error", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
+		buttonPanel.add(deleteButton);
+
 		for (String mazeFile : mazeFiles) {
 			// Crée un bouton pour chaque fichier de labyrinthe
 			JButton mazeButton = new JButton(mazeFile);
@@ -371,6 +449,7 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 						editMode = false;
 						creationStatusLabel.setText("Mode lecture seule");
 						creationStatusLabel.setForeground(Color.RED);
+						fileName = mazeFile;
 						statusLabel.setText("Fichier chargé : " + mazeFile);
 						legendPanel.removeAll();
 						legendPanel.setLayout(new GridLayout(2, 8, 20, 5));
@@ -391,8 +470,6 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 						myMaze.initFromTextFile("data/" + mazeFile);
 						Vertex startVertex = myMaze.getStartVertex();
 						Vertex endVertex = myMaze.getEndVertex();
-						System.out.println("Calculating shotest path from" + startVertex.toString() + " to "
-								+ endVertex.toString());
 						ShortestPaths shortestPaths = Dijkstra.dijkstra(myMaze, startVertex, endVertex);
 						List<Vertex> path = shortestPaths.getShortestPath(endVertex);
 						myMaze.saveShortestPath("data/solution", path);
@@ -409,7 +486,7 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 			});
 			panel.add(mazeButton);
 		}
-		return "";
+		return fileName;
 	}
 
 	public String getFileName() {
@@ -494,31 +571,37 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 			}
 		} else {
 			if (e.getButton() == MouseEvent.BUTTON1) {
-				int row = panelMaze.getSelectedRow();
-				int col = panelMaze.getSelectedColumn();
+				int selectedRow = panelMaze.getSelectedRow();
+				int selectedColumn = panelMaze.getSelectedColumn();
 
-				// Vérifiez si le bouton "Mur" est sélectionné
-				if (wallButton.isSelected()) {
-					// Affectez à la case correspondante dans actualMaze la valeur "Mur"
-					actualMaze.addWallBox(row, col);
+				// Vérifiez que l'hexagone sélectionné est valide (c'est-à-dire qu'il a été
+				// précédemment sélectionné par la souris)
+				if (selectedRow >= 0 && selectedColumn >= 0 && selectedRow < actualMaze.getLength()
+						&& selectedColumn < actualMaze.getWidth()) {
+
+					// Vérifiez si le bouton "Mur" est sélectionné
+					if (wallButton.isSelected()) {
+						// Affectez à la case correspondante dans actualMaze la valeur "Mur"
+						actualMaze.addWallBox(selectedRow, selectedColumn);
+					}
+					// Vérifiez si le bouton "Vide" est sélectionné
+					else if (emptyButton.isSelected()) {
+						// Affectez à la case correspondante dans actualMaze la valeur "Vide"
+						actualMaze.addEmptyBox(selectedRow, selectedColumn);
+					}
+					// Vérifiez si le bouton "Départ" est sélectionné
+					else if (startButton.isSelected() && actualMaze.hasDepartureBox() == false) {
+						// Affectez à la case correspondante dans actualMaze la valeur "Départ"
+						actualMaze.addDepartureBox(selectedRow, selectedColumn);
+					}
+					// Vérifiez si le bouton "Arrivée" est sélectionné
+					else if (endButton.isSelected() && actualMaze.hasArrivalBox() == false) {
+						// Affectez à la case correspondante dans actualMaze la valeur "Arrivée"
+						actualMaze.addArrivalBox(selectedRow, selectedColumn);
+					}
+					actualMaze.saveToTextFile("data/solution");
+					panelMaze.repaint();
 				}
-				// Vérifiez si le bouton "Vide" est sélectionné
-				else if (emptyButton.isSelected()) {
-					// Affectez à la case correspondante dans actualMaze la valeur "Vide"
-					actualMaze.addEmptyBox(row, col);
-				}
-				// Vérifiez si le bouton "Départ" est sélectionné
-				else if (startButton.isSelected() && actualMaze.hasDepartureBox() == false) {
-					// Affectez à la case correspondante dans actualMaze la valeur "Départ"
-					actualMaze.addDepartureBox(row, col);
-				}
-				// Vérifiez si le bouton "Arrivée" est sélectionné
-				else if (endButton.isSelected() && actualMaze.hasArrivalBox() == false) {
-					// Affectez à la case correspondante dans actualMaze la valeur "Arrivée"
-					actualMaze.addArrivalBox(row, col);
-				}
-				actualMaze.saveToTextFile("data/solution");
-				panelMaze.repaint();
 			}
 		}
 	}

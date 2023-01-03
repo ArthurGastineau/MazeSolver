@@ -106,7 +106,7 @@ public class HexagonalTable extends JPanel implements MouseMotionListener {
 				// Update the selected row and column
 				selectedRow = row;
 				selectedColumn = column;
-				System.out.println(row + ":" + column);
+				//System.out.println(row + ":" + column);
 				repaint();
 			}
 		catch (Exception e1) {
