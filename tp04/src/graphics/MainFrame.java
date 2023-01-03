@@ -123,7 +123,7 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 		panel.add(widthLabel);
 
 		// Créez un champ de saisie pour la largeur du labyrinthe
-		JFormattedTextField widthField = new JFormattedTextField(NumberFormat.getIntegerInstance());
+		final JFormattedTextField widthField = new JFormattedTextField(NumberFormat.getIntegerInstance());
 		widthField.setMaximumSize(new Dimension(200, 50));
 		panel.add(widthField);
 
@@ -133,7 +133,7 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 		panel.add(heightLabel);
 
 		// Créez un champ de saisie pour la hauteur du labyrinthe
-		JFormattedTextField heightField = new JFormattedTextField(NumberFormat.getIntegerInstance());
+		final JFormattedTextField heightField = new JFormattedTextField(NumberFormat.getIntegerInstance());
 		heightField.setMaximumSize(new Dimension(200, 50));
 		panel.add(heightField);
 
@@ -237,7 +237,7 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 		editPanel.add(savedFileNameLabel);
 
 		// Permet à l'utilsiateur de choisir le nom du fichier sauvegardé
-		JTextField savedFileNameField = new JTextField();
+		final JTextField savedFileNameField = new JTextField();
 		savedFileNameField.setMaximumSize(new Dimension(200, 50));
 		panel.add(savedFileNameField);
 
@@ -339,7 +339,7 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 		panel.add(selectedColor);
 	}
 
-	public String addMazeButtons(JPanel panel, Maze myMaze, HexagonalTable hex) {
+	public String addMazeButtons(JPanel panel, final Maze myMaze, HexagonalTable hex) {
 		
 		File dataDirectory = new File("data");
 		FilenameFilter mazeFilter = new FilenameFilter() {
@@ -356,7 +356,7 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 		editionStatusLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		editionStatusLabel.setFont(new Font(editionStatusLabel.getFont().getName(), editionStatusLabel.getFont().getStyle(), 15));
 		panel.add(editionStatusLabel);
-		for (String mazeFile : mazeFiles) {
+		for (final String mazeFile : mazeFiles) {
 			// Crée un bouton pour chaque fichier de labyrinthe
 			JButton mazeButton = new JButton(mazeFile);
 			panel.add(mazeButton);
