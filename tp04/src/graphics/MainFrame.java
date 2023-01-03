@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -51,14 +52,15 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 	public MainFrame(Maze maze) {
 		actualMaze = maze;
 		// Initialise the window
-		setSize(1700, 1000);
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		setSize(screenSize.width, screenSize.height);
 		setTitle("Hexagonal Labyrinth");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// Top Display of the status of edition
 		statusPanel = new JPanel();
 		statusPanel.setPreferredSize(new Dimension(1600, northPanelHeight));
-		statusPanel.setLayout(new BorderLayout(0,0));
+		statusPanel.setLayout(new BorderLayout(0, 0));
 		statusPanel.setBorder(BorderFactory.createEmptyBorder());
 		addStatus(statusPanel);
 		add(statusPanel, BorderLayout.NORTH);
@@ -71,7 +73,7 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 
 		// Set the layout to display the maze at the center of the window
 		panelMaze = new HexagonalTable();
-		//panelMaze.requestFocus();
+		// panelMaze.requestFocus();
 		add(panelMaze, BorderLayout.CENTER);
 
 		// Set the layout to display the legend at the bottom of the window
@@ -88,11 +90,12 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 		addEdit(editPanel);
 		add(editPanel, BorderLayout.WEST);
 	}
-	
+
 	public void addStatus(JPanel panel) {
-		
+
 		creationStatusLabel = new JLabel("Mode Edition");
-		creationStatusLabel.setFont(new Font(creationStatusLabel.getFont().getName(), creationStatusLabel.getFont().getStyle(), 20));
+		creationStatusLabel.setFont(
+				new Font(creationStatusLabel.getFont().getName(), creationStatusLabel.getFont().getStyle(), 20));
 		creationStatusLabel.setForeground(Color.RED);
 		panel.add(creationStatusLabel, BorderLayout.WEST);
 
@@ -101,8 +104,6 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 		statusLabel.setText("Veuillez sélectionner un labyrinthe ou en créer un");
 		statusLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(statusLabel, BorderLayout.CENTER);
-
-
 
 	}
 
@@ -113,7 +114,7 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 		editLabel.setFont(new Font(editLabel.getFont().getName(), editLabel.getFont().getStyle(), 15));
 		editLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(editLabel);
-		
+
 		// Ajoutez un JSeparator comme espace vide
 		panel.add(Box.createRigidArea(new Dimension(0, 10)));
 
@@ -154,9 +155,9 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 								"La largeur et la hauteur doivent être des valeurs supérieures à zéro");
 					}
 
-					if (width > 20 || height > 20) {
+					if (width > Maze.MAX_WIDTH || height > Maze.MAX_LENGTH) {
 						throw new IllegalArgumentException(
-								"La largeur et la hauteur doivent être des valeurs inférieure ou égae à 20");
+								"La largeur et la hauteur doivent être des valeurs inférieure ou égale à 18");
 					}
 
 					// Créez un nouveau labyrinthe vide avec les dimensions spécifiées
@@ -168,7 +169,7 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 					panelMaze.setWidth(height);
 					actualMaze = newMaze;
 					panelMaze.repaint();
-					
+
 					editMode = true;
 					creationStatusLabel.setText("Mode Création      ");
 					creationStatusLabel.setForeground(Color.GREEN);
@@ -194,7 +195,7 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 		resetButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (editMode = true) {
+				if (editMode == true) {
 					creationStatusLabel.setText("Mode Création       ");
 					creationStatusLabel.setForeground(Color.GREEN);
 					statusLabel.setText("Labyrinthe réinitialisé");
@@ -203,7 +204,7 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 				} else {
 					// Affichez un message d'erreur signifiant que l'on ne peut seulement reset en
 					// mode édition
-					JOptionPane.showMessageDialog(MainFrame.this, "Reset seulement possible en mode édition", "Erreur",
+					JOptionPane.showMessageDialog(MainFrame.this, "Reset seulement possible en mode Création", "Erreur",
 							JOptionPane.ERROR_MESSAGE);
 				}
 			}
@@ -340,7 +341,7 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 	}
 
 	public String addMazeButtons(JPanel panel, Maze myMaze, HexagonalTable hex) {
-		
+
 		File dataDirectory = new File("data");
 		FilenameFilter mazeFilter = new FilenameFilter() {
 			@Override
@@ -349,12 +350,13 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 			}
 		};
 		String[] mazeFiles = dataDirectory.list(mazeFilter);
-		
+
 		panel.setLayout(new GridLayout(mazeFiles.length + 1, 1, 0, 0));
-		
+
 		JLabel editionStatusLabel = new JLabel("Menu Edition");
 		editionStatusLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		editionStatusLabel.setFont(new Font(editionStatusLabel.getFont().getName(), editionStatusLabel.getFont().getStyle(), 15));
+		editionStatusLabel
+				.setFont(new Font(editionStatusLabel.getFont().getName(), editionStatusLabel.getFont().getStyle(), 15));
 		panel.add(editionStatusLabel);
 		for (String mazeFile : mazeFiles) {
 			// Crée un bouton pour chaque fichier de labyrinthe
@@ -365,30 +367,44 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 			mazeButton.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					editMode = false;
-					creationStatusLabel.setText("Mode lecture seule");
-					creationStatusLabel.setForeground(Color.RED);
-					statusLabel.setText("Fichier chargé : " + mazeFile);
-					legendPanel.removeAll();
-					legendPanel.setLayout(new GridLayout(2, 8, 20, 5));
-					addLegend(legendPanel);
-					legendPanel.revalidate();
-					legendPanel.repaint();
-					//
-					int[] vals = myMaze.fromFileGetMazeSize("data/" + mazeFile);
-					myMaze.setSize(vals[0], vals[1]);
-					panelMaze.setLength(vals[0]);
-					panelMaze.setWidth(vals[1]);
-					myMaze.initFromTextFile("data/" + mazeFile);
-					Vertex startVertex = myMaze.getStartVertex();
-					Vertex endVertex = myMaze.getEndVertex();
-					System.out.println(
-							"Calculating shotest path from" + startVertex.toString() + " to " + endVertex.toString());
-					ShortestPaths shortestPaths = Dijkstra.dijkstra(myMaze, startVertex, endVertex);
-					List<Vertex> path = shortestPaths.getShortestPath(endVertex);
-					myMaze.saveShortestPath("data/solution", path);
-					actualMaze = myMaze;
-					panelMaze.repaint();
+					try {
+						editMode = false;
+						creationStatusLabel.setText("Mode lecture seule");
+						creationStatusLabel.setForeground(Color.RED);
+						statusLabel.setText("Fichier chargé : " + mazeFile);
+						legendPanel.removeAll();
+						legendPanel.setLayout(new GridLayout(2, 8, 20, 5));
+						addLegend(legendPanel);
+						legendPanel.revalidate();
+						legendPanel.repaint();
+						//
+						int[] vals = myMaze.fromFileGetMazeSize("data/" + mazeFile);
+						int length = vals[0];
+						int width = vals[1];
+						if (width > Maze.MAX_WIDTH || length > Maze.MAX_LENGTH) {
+							throw new IllegalArgumentException(
+									"La largeur et la hauteur doivent être des valeurs inférieure ou égale à 18");
+						}
+						myMaze.setSize(vals[0], vals[1]);
+						panelMaze.setLength(length);
+						panelMaze.setWidth(width);
+						myMaze.initFromTextFile("data/" + mazeFile);
+						Vertex startVertex = myMaze.getStartVertex();
+						Vertex endVertex = myMaze.getEndVertex();
+						System.out.println("Calculating shotest path from" + startVertex.toString() + " to "
+								+ endVertex.toString());
+						ShortestPaths shortestPaths = Dijkstra.dijkstra(myMaze, startVertex, endVertex);
+						List<Vertex> path = shortestPaths.getShortestPath(endVertex);
+						myMaze.saveShortestPath("data/solution", path);
+						actualMaze = myMaze;
+						panelMaze.repaint();
+					} catch (IllegalArgumentException ex) {
+						// Affichez un message d'erreur si la largeur ou la hauteur n'est pas une valeur
+						// valide
+						JOptionPane.showMessageDialog(MainFrame.this,
+								"La largeur et/ou la hauteur du labyrinthe chargé n'est pas valide \n Ils doivent être compris entre 1 et 18",
+								"Erreur", JOptionPane.ERROR_MESSAGE);
+					}
 				}
 			});
 			panel.add(mazeButton);
@@ -402,7 +418,6 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -420,7 +435,7 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 				int selectedColumn = panelMaze.getSelectedColumn();
 				// Vérifiez que l'hexagone sélectionné est valide (c'est-à-dire qu'il a été
 				// précédemment sélectionné par la souris)
-				if (selectedRow != -1 && selectedColumn != -1 && selectedRow < actualMaze.getLength()
+				if (selectedRow >= 0 && selectedColumn >= 0 && selectedRow < actualMaze.getLength()
 						&& selectedColumn < actualMaze.getWidth()) {
 					// Vérifiez que l'hexagone sélectionné n'est pas une case de départ ou d'arrivée
 					String boxType = actualMaze.getMaze()[selectedRow][selectedColumn].typeOfBox();
@@ -446,7 +461,7 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 				int selectedColumn = panelMaze.getSelectedColumn();
 				// Vérifiez que l'hexagone sélectionné est valide (c'est-à-dire qu'il a été
 				// précédemment sélectionné par la souris)
-				if (selectedRow != -1 && selectedColumn != -1 && selectedRow < actualMaze.getLength()
+				if (selectedRow >= 0 && selectedColumn >= 0 && selectedRow < actualMaze.getLength()
 						&& selectedColumn < actualMaze.getWidth()) {
 					// Vérifiez que l'hexagone sélectionné n'est pas une case de départ ou d'arrivée
 					String boxType = actualMaze.getMaze()[selectedRow][selectedColumn].typeOfBox();
@@ -510,7 +525,6 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 

@@ -2,6 +2,7 @@ package maze;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,6 +17,9 @@ public class Maze implements Graph {
 	private Vertex startVertex;
 	private Vertex endVertex;
 
+	public static final int MAX_LENGTH = 18;
+	public static final int MAX_WIDTH = 18;
+
 	public Maze(int length, int width) {
 		this.length = length;
 		this.width = width;
@@ -24,8 +28,8 @@ public class Maze implements Graph {
 	}
 
 	public Maze() {
-		length = 20;
-		width = 20;
+		length = MAX_LENGTH;
+		width = MAX_WIDTH;
 		maze = new MazeBox[length][width];
 		initEmptyMaze(length, width);
 	}
@@ -357,6 +361,5 @@ public class Maze implements Graph {
 		// If no departure box was found, return null
 		return false;
 	}
-
 
 }
