@@ -388,6 +388,7 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 					List<Vertex> path = shortestPaths.getShortestPath(endVertex);
 					myMaze.saveShortestPath("data/solution", path);
 					actualMaze = myMaze;
+					panelMaze.repaint();
 				}
 			});
 			panel.add(mazeButton);
