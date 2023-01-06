@@ -13,7 +13,6 @@ public class MinDistanceImpl implements MinDistance {
 		root = startVertex;
 	}
 
-	@Override
 	public void initValuations(Graph graph) {
 		for (Vertex vertex : graph.getAllVertexes()) {
 			if (!vertex.equals(root)) {
@@ -22,12 +21,10 @@ public class MinDistanceImpl implements MinDistance {
 		}
 	}
 
-	@Override
 	public double getShortestPath(Vertex pivot) {
 		return distanceMap.get(pivot);
 	}
 
-	@Override
 	public void setShortestPath(Vertex pivot, double value) {
 		distanceMap.put(pivot, (int) value);
 	}

@@ -11,12 +11,10 @@ public class ProcessedVertexesImpl implements ProcessedVertexes {
 		this.vertexes = new HashSet<Vertex>();
 	}
 
-	@Override
 	public void add(Vertex vertex) {
 		vertexes.add(vertex);
 	}
 
-	@Override
 	public boolean present(Vertex vertex) {
 		return vertexes.contains(vertex);
 	}
