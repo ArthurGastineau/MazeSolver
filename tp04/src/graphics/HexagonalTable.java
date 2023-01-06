@@ -14,10 +14,11 @@ import java.io.FileReader;
 
 @SuppressWarnings("serial")
 public class HexagonalTable extends JPanel implements MouseMotionListener {
-	private static final int ORIGIN_X = 50;
-	private static final int ORIGIN_Y = 50;
+	private static final int ORIGIN_X = 30;
+	private static final int ORIGIN_Y = 30;
 	private static final double SQRT_3 = Math.sqrt(3);
 	private static final int size = 30;
+	
 
 	private int length = 10;
 	private int width = 10;
@@ -96,17 +97,18 @@ public class HexagonalTable extends JPanel implements MouseMotionListener {
 	@Override
 	public void mouseMoved(MouseEvent e) {
 		try {
-			int mouseX = e.getX() - MainFrame.westPanelWidth ;
-			int mouseY = e.getY() - MainFrame.northPanelHeight;
-			// Calculate the row index based on the mouse position
-			int row = (int) ((mouseY - ORIGIN_Y) / (size * 1.5));
-			// Calculate the column index based on the mouse position
-			int column = (int) ((mouseX + size - ORIGIN_X - ((row % 2) * size * SQRT_3 / 2)) / (SQRT_3 * size));
-			// Update the selected row and column
-			selectedRow = row;
-			selectedColumn = column;
-			repaint();
-		}
+				int mouseX = e.getX() - MainFrame.westPanelWidth - ORIGIN_X;
+				int mouseY = e.getY() - MainFrame.northPanelHeight - ORIGIN_Y;
+				// Calculate the row index based on the mouse position
+				int row = (int) (mouseY  / (size * 1.5));
+				// Calculate the column index based on the mouse position
+				int column = (int) ((mouseX + size  - ((row % 2) * size * SQRT_3 / 2)) / (SQRT_3 * size));
+				// Update the selected row and column
+				selectedRow = row;
+				selectedColumn = column;
+				//System.out.println(row + ":" + column);
+				repaint();
+			}
 		catch (Exception e1) {
 			e1.printStackTrace();
 		}
