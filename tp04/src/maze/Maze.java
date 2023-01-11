@@ -79,7 +79,7 @@ public class Maze implements Graph {
 		}
 
 		// check top-right neighbor
-		if ((row - 1) >= 0 && (col + 1) < width && row % 2 == 0
+		if ((row - 1) >= 0 && (col) < width && row % 2 == 0
 				&& (maze[row - 1][col].typeOfBox().compareTo("Wall") != 0)) {
 			neighbors.add(maze[row - 1][col]);
 		}
