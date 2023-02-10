@@ -14,7 +14,6 @@ public class ShortestPathsImpl implements ShortestPaths {
 		this.predecessors = new HashMap<Vertex, Vertex>();
 	}
 
-	@Override
 	public List<Vertex> getShortestPath(Vertex endVertex) {
 		List<Vertex> path = new ArrayList<>();
 		Vertex current = endVertex;
@@ -26,12 +25,10 @@ public class ShortestPathsImpl implements ShortestPaths {
 		return path;
 	}
 
-	@Override
 	public void setPrevious(Vertex son, Vertex father) {
 		predecessors.put(son, father);
 	}
 
-	@Override
 	public Vertex getPrevious(Vertex father) {
 		return predecessors.get(father);
 	}

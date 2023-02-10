@@ -128,7 +128,7 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 		panel.add(widthLabel);
 
 		// Créez un champ de saisie pour la largeur du labyrinthe
-		JFormattedTextField widthField = new JFormattedTextField(NumberFormat.getIntegerInstance());
+		final JFormattedTextField widthField = new JFormattedTextField(NumberFormat.getIntegerInstance());
 		widthField.setMaximumSize(new Dimension(200, 50));
 		panel.add(widthField);
 
@@ -138,7 +138,7 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 		panel.add(heightLabel);
 
 		// Créez un champ de saisie pour la hauteur du labyrinthe
-		JFormattedTextField heightField = new JFormattedTextField(NumberFormat.getIntegerInstance());
+		final JFormattedTextField heightField = new JFormattedTextField(NumberFormat.getIntegerInstance());
 		heightField.setMaximumSize(new Dimension(200, 50));
 		panel.add(heightField);
 
@@ -243,7 +243,7 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 		editPanel.add(savedFileNameLabel);
 
 		// Permet à l'utilsiateur de choisir le nom du fichier sauvegardé
-		JTextField savedFileNameField = new JTextField();
+		final JTextField savedFileNameField = new JTextField();
 		savedFileNameField.setMaximumSize(new Dimension(200, 50));
 		panel.add(savedFileNameField);
 
