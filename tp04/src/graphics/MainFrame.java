@@ -13,7 +13,6 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.io.File;
 import java.io.FilenameFilter;
-import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.List;
 
