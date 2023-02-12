@@ -23,6 +23,7 @@ import graph.Dijkstra;
 import graph.ShortestPaths;
 import graph.Vertex;
 import maze.Maze;
+import maze.MazeBox;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame implements MouseMotionListener, MouseListener {
@@ -514,10 +515,10 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 				if (selectedRow >= 0 && selectedColumn >= 0 && selectedRow < actualMaze.getLength()
 						&& selectedColumn < actualMaze.getWidth()) {
 					// Vérifiez que l'hexagone sélectionné n'est pas une case de départ ou d'arrivée
-					String boxType = actualMaze.getMaze()[selectedRow][selectedColumn].typeOfBox();
-					if (boxType.compareTo("Empty") == 0) {
+					MazeBox box = actualMaze.getMaze()[selectedRow][selectedColumn];
+					if (box.isEmpty()) {
 						actualMaze.addWallBox(selectedRow, selectedColumn);
-					} else if (boxType.compareTo("Wall") == 0) {
+					} else if (box.isWall()) {
 						actualMaze.addEmptyBox(selectedRow, selectedColumn);
 					}
 					// Redessinez le panel
@@ -540,8 +541,8 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 				if (selectedRow >= 0 && selectedColumn >= 0 && selectedRow < actualMaze.getLength()
 						&& selectedColumn < actualMaze.getWidth()) {
 					// Vérifiez que l'hexagone sélectionné n'est pas une case de départ ou d'arrivée
-					String boxType = actualMaze.getMaze()[selectedRow][selectedColumn].typeOfBox();
-					if (boxType.compareTo("Arrival") != 0 && boxType.compareTo("Departure") != 0) {
+					MazeBox box = actualMaze.getMaze()[selectedRow][selectedColumn];
+					if (box.isArrival() == false && box.isDeparture() == false) {
 						System.out.println("Modified Arrival");
 
 						Vertex oldEndVertex = actualMaze.getEndVertex();

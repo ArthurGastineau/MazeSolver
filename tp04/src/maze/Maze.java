@@ -71,50 +71,50 @@ public class Maze implements Graph {
 
 		// check top-left neighbor
 		if ((row - 1) >= 0 && (col - 1) >= 0 && row % 2 == 0
-				&& (maze[row - 1][col - 1].typeOfBox().compareTo("Wall") != 0)) {
+				&& (maze[row - 1][col - 1].isWall()) == false) {
 			neighbors.add(maze[row - 1][col - 1]);
 		}
-		if ((row - 1) >= 0 && (col) >= 0 && row % 2 == 1 && (maze[row - 1][col].typeOfBox().compareTo("Wall") != 0)) {
+		if ((row - 1) >= 0 && (col) >= 0 && row % 2 == 1 && (maze[row - 1][col].isWall() == false)) {
 			neighbors.add(maze[row - 1][col]);
 		}
 
 		// check top-right neighbor
 		if ((row - 1) >= 0 && (col) < width && row % 2 == 0
-				&& (maze[row - 1][col].typeOfBox().compareTo("Wall") != 0)) {
+				&& (maze[row - 1][col].isWall() == false)) {
 			neighbors.add(maze[row - 1][col]);
 		}
 		if ((row - 1) >= 0 && (col + 1) < width && row % 2 == 1
-				&& (maze[row - 1][col + 1].typeOfBox().compareTo("Wall") != 0)) {
+				&& (maze[row - 1][col + 1].isWall() == false)) {
 			neighbors.add(maze[row - 1][col + 1]);
 		}
 
 		// check left neighbor
-		if ((col - 1) >= 0 && (maze[row][col - 1].typeOfBox().compareTo("Wall") != 0)) {
+		if ((col - 1) >= 0 && (maze[row][col - 1].isWall() == false)) {
 			neighbors.add(maze[row][col - 1]);
 		}
 
 		// check right neighbor
-		if ((col + 1) < width && (maze[row][col + 1].typeOfBox().compareTo("Wall") != 0)) {
+		if ((col + 1) < width && (maze[row][col + 1].isWall() == false)) {
 			neighbors.add(maze[row][col + 1]);
 		}
 
 		// check bottom-left neighbor
 		if ((row + 1) < length && (col - 1) >= 0 && row % 2 == 0
-				&& (maze[row + 1][col - 1].typeOfBox().compareTo("Wall") != 0)) {
+				&& (maze[row + 1][col - 1].isWall() == false)) {
 			neighbors.add(maze[row + 1][col - 1]);
 		}
 		if ((row + 1) < length && (col) >= 0 && row % 2 == 1
-				&& (maze[row + 1][col].typeOfBox().compareTo("Wall") != 0)) {
+				&& (maze[row + 1][col].isWall() == false)) {
 			neighbors.add(maze[row + 1][col]);
 		}
 
 		// check bottom-right neighbor
 		if ((row + 1) < length && (col) < width && row % 2 == 0
-				&& (maze[row + 1][col].typeOfBox().compareTo("Wall") != 0)) {
+				&& (maze[row + 1][col].isWall() == false)) {
 			neighbors.add(maze[row + 1][col]);
 		}
 		if ((row + 1) < length && (col + 1) < width && row % 2 == 1
-				&& (maze[row + 1][col + 1].typeOfBox().compareTo("Wall") != 0)) {
+				&& (maze[row + 1][col + 1].isWall() == false)) {
 			neighbors.add(maze[row + 1][col + 1]);
 		}
 
@@ -204,15 +204,15 @@ public class Maze implements Graph {
 			for (int row = 0; row < this.length; row++) {
 				for (int col = 0; col < this.width; col++) {
 					MazeBox box = this.getMaze()[row][col];
-					if (box instanceof ArrivalBox) {
+					if (box.isArrival()) {
 						writer.print('A');
 
-					} else if (box instanceof DepartureBox) {
+					} else if (box.isDeparture()) {
 						writer.print('D');
 
-					} else if (box instanceof EmptyBox) {
+					} else if (box.isEmpty()) {
 						writer.print('E');
-					} else if (box instanceof WallBox) {
+					} else if (box.isWall()) {
 						writer.print('W');
 					}
 				}
@@ -231,17 +231,17 @@ public class Maze implements Graph {
 			for (int row = 0; row < this.length; row++) {
 				for (int col = 0; col < this.width; col++) {
 					MazeBox box = this.getMaze()[row][col];
-					if (box instanceof ArrivalBox) {
+					if (box.isArrival()) {
 						writer.print('A');
 
-					} else if (box instanceof DepartureBox) {
+					} else if (box.isDeparture()) {
 						writer.print('D');
 
 					} else if (shortestPath.contains((Vertex) box)) {
 						writer.print('.');
-					} else if (box instanceof EmptyBox) {
+					} else if (box.isEmpty()) {
 						writer.print('E');
-					} else if (box instanceof WallBox) {
+					} else if (box.isWall()) {
 						writer.print('W');
 					}
 				}
@@ -337,7 +337,7 @@ public class Maze implements Graph {
 		for (int i = 0; i < length; i++) {
 			for (int j = 0; j < width; j++) {
 				// Check if the current box is a departure box
-				if (maze[i][j].typeOfBox().compareTo("Departure") == 0) {
+				if (maze[i][j].isDeparture()) {
 					// Return the departure box
 					return true;
 				}
@@ -352,7 +352,7 @@ public class Maze implements Graph {
 		for (int i = 0; i < length; i++) {
 			for (int j = 0; j < width; j++) {
 				// Check if the current box is a departure box
-				if (maze[i][j].typeOfBox().compareTo("Arrival") == 0) {
+				if (maze[i][j].isArrival()) {
 					// Return the departure box
 					return true;
 				}

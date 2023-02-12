@@ -8,11 +8,6 @@ public abstract class MazeBox implements Vertex{
 	private int col;
 	private Maze maze;
 
-	public final String departure = "Departure";
-	public final String arrival = "Arrival";
-	public final String empty = "Empty";
-	public final String wall = "Wall";
-
 	public MazeBox(Maze maze, int row, int col) {
 		this.row = row;
 		this.col = col;
@@ -49,9 +44,6 @@ public abstract class MazeBox implements Vertex{
 		return "Vertex at (" + row + ", " + col + ")";
 	}
 
-
-	public abstract String typeOfBox();
-
 	public Maze getMaze() {
 		return maze;
 	}
@@ -59,5 +51,13 @@ public abstract class MazeBox implements Vertex{
 	public void setMaze(Maze maze) {
 		this.maze = maze;
 	}
+	
+	public abstract boolean isWall();
+	
+	public abstract boolean isEmpty();
+	
+	public abstract boolean isArrival();
+	
+	public abstract boolean isDeparture();
 
 }
