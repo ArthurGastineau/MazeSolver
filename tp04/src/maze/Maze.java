@@ -19,6 +19,8 @@ public class Maze implements Graph {
 
 	public static final int MAX_LENGTH = 50;
 	public static final int MAX_WIDTH = 50;
+	
+	private String fileName;
 
 	public Maze(int length, int width) {
 		this.length = length;
@@ -185,6 +187,7 @@ public class Maze implements Graph {
 					}
 				}
 			}
+			this.fileName = fileName;
 			reader.close();
 		}
 
@@ -395,6 +398,14 @@ public class Maze implements Graph {
 		}
 		// If no departure box was found, return null
 		return false;
+	}
+	
+	/**
+	 * Resets the maze, clearing the start, end and goal cells, as well as reinitializing the maze cells.
+	 */
+	public void resetMaze() {
+		if (fileName == null) initFromTextFile("data/labyrinthe.maze");
+		else initFromTextFile(fileName);
 	}
 
 }

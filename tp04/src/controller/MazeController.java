@@ -1,8 +1,12 @@
 package controller;
 
+import java.awt.event.ActionListener;
+
+import controller.listeners.MazeResetListener;
 import controller.listeners.MazeSolverListener;
 import maze.Maze;
 import model.MazeSolver;
+import model.MazeState;
 import view.MazeView;
 
 /**
@@ -19,19 +23,24 @@ public class MazeController {
 	private final MazeView view;
 	//Buttons
 	private final MazeSolverListener mazeSolverListener;
+	private final MazeResetListener mazeResetListener;
+	//
+	private MazeState state;
 	// Listeners
 	private MazeSolver solver;
 	private int numRows;
 	private int numCols;
 	
 	public MazeController (){
-		System.out.println("Init controller");
+		this.state = MazeState.INIT;
+		
 		this.maze = new Maze();
 		int [] vals = maze.fromFileGetMazeSize(labyrinthFileName);
 		maze.setSize(vals[0], vals[1]);
 		maze.initFromTextFile(labyrinthFileName);
 		
 		this.mazeSolverListener = new MazeSolverListener(this);
+		this.mazeResetListener = new MazeResetListener(this);
 		
 		this.view = new MazeView(maze, this);
 		
@@ -55,10 +64,27 @@ public class MazeController {
 		solver = new MazeSolver(maze, this);
 		solver.initMazeSolver();
 		view.repaintMaze(maze);
-		//Maze solvedMaze = solver.initMazeSolver();
-		//maze.displayMaze();
-		//solvedMaze.displayMaze();
-		//view.repaintMaze(solvedMaze);
+		state = MazeState.SOLVED;
+	}
+	
+	/**
+	 * Resets the maze to its initial state. This includes resetting the maze cells, and repainting the view.
+	 * 
+	 */
+	public void reset() {
+
+		state = MazeState.INIT;
+
+		maze.resetMaze();
+		view.resetView();
+	}
+
+	/**
+	 * @return
+	 */
+	public ActionListener getMazeResetListener() {
+		// TODO Auto-generated method stub
+		return mazeResetListener;
 	}
 
 }
