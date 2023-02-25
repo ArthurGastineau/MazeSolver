@@ -25,7 +25,6 @@ public class GraphicTest {
 		ShortestPaths shortestPaths = Dijkstra.dijkstra(myMaze, startVertex, endVertex);
 		List<Vertex> path = shortestPaths.getShortestPath(endVertex);
 		myMaze.saveShortestPath("data/solution",path);
-
 		// création de notre fenêtre principale
 		MainFrame mainFrame = new MainFrame(myMaze);
 		mainFrame.addMouseMotionListener(mainFrame);

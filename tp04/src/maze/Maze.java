@@ -17,8 +17,8 @@ public class Maze implements Graph {
 	private Vertex startVertex;
 	private Vertex endVertex;
 
-	public static final int MAX_LENGTH = 18;
-	public static final int MAX_WIDTH = 18;
+	public static final int MAX_LENGTH = 50;
+	public static final int MAX_WIDTH = 50;
 
 	public Maze(int length, int width) {
 		this.length = length;

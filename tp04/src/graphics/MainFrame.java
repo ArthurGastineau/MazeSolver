@@ -2,12 +2,15 @@ package graphics;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -62,6 +65,7 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 		setTitle("Hexagonal Labyrinth");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+
 		// Top Display of the status of edition
 		statusPanel = new JPanel();
 		statusPanel.setPreferredSize(new Dimension(1600, northPanelHeight));
@@ -80,6 +84,15 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 		panelMaze = new HexagonalTable();
 		// panelMaze.requestFocus();
 		add(panelMaze, BorderLayout.CENTER);
+		
+		getRootPane().addComponentListener(new ComponentAdapter() {
+            public void componentResized(ComponentEvent e) {
+            	 panelMaze.changeSize((int) (Math.min(getSize().height - legendPanel.getSize().height - statusPanel.getSize().height,
+            			 							  getSize().width - editPanel.getSize().width - buttonPanel.getSize().width) ) 
+            			 							  / (2 * Math.max(actualMaze.getLength(), actualMaze.getWidth())));
+		         panelMaze.repaint();
+            }
+        });
 
 		// Set the layout to display the legend at the bottom of the window
 		legendPanel = new JPanel();
@@ -162,7 +175,7 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 
 					if (width > Maze.MAX_WIDTH || height > Maze.MAX_LENGTH) {
 						throw new IllegalArgumentException(
-								"La largeur et la hauteur doivent être des valeurs inférieure ou égale à 18");
+								"La largeur et la hauteur doivent être des valeurs inférieure ou égale à 50");
 					}
 
 					// Créez un nouveau labyrinthe vide avec les dimensions spécifiées
@@ -173,6 +186,9 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 					panelMaze.setLength(width);
 					panelMaze.setWidth(height);
 					actualMaze = newMaze;
+					panelMaze.changeSize((int) (Math.min(getSize().height - legendPanel.getSize().height - statusPanel.getSize().height,
+							  getSize().width - editPanel.getSize().width - buttonPanel.getSize().width) ) 
+							  / (2 * Math.max(actualMaze.getLength(), actualMaze.getWidth())));
 					panelMaze.repaint();
 					System.out.println(actualMaze.getLength() + ":" + actualMaze.getWidth());
 
