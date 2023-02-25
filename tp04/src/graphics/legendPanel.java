@@ -10,11 +10,12 @@ import javax.swing.JPanel;
  *
  */
 @SuppressWarnings("serial")
-public class legendPanel extends JPanel{
+public class legendPanel extends JPanel {
 	public legendPanel() {
 		super();
 	}
-	public void addJPanel (JPanel panel) {
+
+	public void addJPanel(JPanel panel) {
 		add(panel);
 	}
 }

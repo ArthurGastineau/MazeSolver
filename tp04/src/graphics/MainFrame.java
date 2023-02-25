@@ -65,7 +65,6 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 		setTitle("Hexagonal Labyrinth");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-
 		// Top Display of the status of edition
 		statusPanel = new JPanel();
 		statusPanel.setPreferredSize(new Dimension(1600, northPanelHeight));
@@ -84,15 +83,16 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 		panelMaze = new HexagonalTable();
 		// panelMaze.requestFocus();
 		add(panelMaze, BorderLayout.CENTER);
-		
+
 		getRootPane().addComponentListener(new ComponentAdapter() {
-            public void componentResized(ComponentEvent e) {
-            	 panelMaze.changeSize((int) (Math.min(getSize().height - legendPanel.getSize().height - statusPanel.getSize().height,
-            			 							  getSize().width - editPanel.getSize().width - buttonPanel.getSize().width) ) 
-            			 							  / (2 * Math.max(actualMaze.getLength(), actualMaze.getWidth())));
-		         panelMaze.repaint();
-            }
-        });
+			public void componentResized(ComponentEvent e) {
+				panelMaze.changeSize(
+						(int) (Math.min(getSize().height - legendPanel.getSize().height - statusPanel.getSize().height,
+								getSize().width - editPanel.getSize().width - buttonPanel.getSize().width))
+								/ (2 * Math.max(actualMaze.getLength(), actualMaze.getWidth())));
+				panelMaze.repaint();
+			}
+		});
 
 		// Set the layout to display the legend at the bottom of the window
 		legendPanel = new JPanel();
@@ -186,9 +186,10 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 					panelMaze.setLength(width);
 					panelMaze.setWidth(height);
 					actualMaze = newMaze;
-					panelMaze.changeSize((int) (Math.min(getSize().height - legendPanel.getSize().height - statusPanel.getSize().height,
-							  getSize().width - editPanel.getSize().width - buttonPanel.getSize().width) ) 
-							  / (2 * Math.max(actualMaze.getLength(), actualMaze.getWidth())));
+					panelMaze.changeSize((int) (Math.min(
+							getSize().height - legendPanel.getSize().height - statusPanel.getSize().height,
+							getSize().width - editPanel.getSize().width - buttonPanel.getSize().width))
+							/ (2 * Math.max(actualMaze.getLength(), actualMaze.getWidth())));
 					panelMaze.repaint();
 					System.out.println(actualMaze.getLength() + ":" + actualMaze.getWidth());
 

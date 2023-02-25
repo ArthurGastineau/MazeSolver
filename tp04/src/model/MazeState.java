@@ -6,7 +6,7 @@ package model;
 /**
  * @author arthur
  *
- * The potential states for the maze to be in.
+ *         The potential states for the maze to be in.
  */
 
 public enum MazeState {

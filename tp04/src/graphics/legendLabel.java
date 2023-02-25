@@ -10,9 +10,10 @@ import javax.swing.JLabel;
  *
  */
 @SuppressWarnings("serial")
-public class legendLabel extends JLabel{
+public class legendLabel extends JLabel {
 	String text;
-	public legendLabel (String text) {
+
+	public legendLabel(String text) {
 		super(text);
 		this.text = text;
 	}

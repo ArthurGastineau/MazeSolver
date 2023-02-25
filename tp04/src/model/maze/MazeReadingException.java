@@ -1,7 +1,7 @@
 package model.maze;
 
 @SuppressWarnings("serial")
-public class MazeReadingException extends Exception{
+public class MazeReadingException extends Exception {
 
 	String fileName;
 	int lineNumber;

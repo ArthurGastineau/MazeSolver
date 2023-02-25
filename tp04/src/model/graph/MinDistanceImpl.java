@@ -29,4 +29,3 @@ public class MinDistanceImpl implements MinDistance {
 		distanceMap.put(pivot, (int) value);
 	}
 }
-

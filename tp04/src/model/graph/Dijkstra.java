@@ -9,18 +9,16 @@ public class Dijkstra {
 		Vertex pivotVertex = startVertex;
 		minDistance.setShortestPath(pivotVertex, 0);
 
-
 		// for all vertexes except the start one we have minDistance(vertex) = infinity
 		minDistance.initValuations(graph);
 		while (processedVertexes.present(endVertex) == false) {
 			for (Vertex succVertex : graph.getSuccessor(pivotVertex)) {
 				if (processedVertexes.present(succVertex) == false) {
 					if ((minDistance.getShortestPath(pivotVertex)
-							+ distance.getValuation(pivotVertex, succVertex)) < 
-							(minDistance.getShortestPath(succVertex))) {
-						minDistance.setShortestPath(succVertex,
-								(minDistance.getShortestPath(pivotVertex)
-										+ distance.getValuation(pivotVertex, succVertex)));
+							+ distance.getValuation(pivotVertex, succVertex)) < (minDistance
+									.getShortestPath(succVertex))) {
+						minDistance.setShortestPath(succVertex, (minDistance.getShortestPath(pivotVertex)
+								+ distance.getValuation(pivotVertex, succVertex)));
 						shortestPaths.setPrevious(succVertex, pivotVertex);
 					}
 

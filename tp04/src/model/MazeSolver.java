@@ -23,8 +23,8 @@ public class MazeSolver {
 		this.maze = maze;
 		this.mazeController = mazeController;
 	}
-	
-	public void initMazeSolver () {
+
+	public void initMazeSolver() {
 		maze.displayMaze();
 		Vertex startVertex = maze.getStartVertex();
 		Vertex endVertex = maze.getEndVertex();

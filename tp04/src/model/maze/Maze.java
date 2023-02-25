@@ -17,9 +17,11 @@ public class Maze implements Graph {
 	private Vertex startVertex;
 	private Vertex endVertex;
 
+	private MazeBox selectedBox;
+
 	public static final int MAX_LENGTH = 50;
 	public static final int MAX_WIDTH = 50;
-	
+
 	private String fileName;
 
 	public Maze(int length, int width) {
@@ -72,8 +74,7 @@ public class Maze implements Graph {
 		List<Vertex> neighbors = new ArrayList<Vertex>();
 
 		// check top-left neighbor
-		if ((row - 1) >= 0 && (col - 1) >= 0 && row % 2 == 0
-				&& (maze[row - 1][col - 1].isWall()) == false) {
+		if ((row - 1) >= 0 && (col - 1) >= 0 && row % 2 == 0 && (maze[row - 1][col - 1].isWall()) == false) {
 			neighbors.add(maze[row - 1][col - 1]);
 		}
 		if ((row - 1) >= 0 && (col) >= 0 && row % 2 == 1 && (maze[row - 1][col].isWall() == false)) {
@@ -81,12 +82,10 @@ public class Maze implements Graph {
 		}
 
 		// check top-right neighbor
-		if ((row - 1) >= 0 && (col) < width && row % 2 == 0
-				&& (maze[row - 1][col].isWall() == false)) {
+		if ((row - 1) >= 0 && (col) < width && row % 2 == 0 && (maze[row - 1][col].isWall() == false)) {
 			neighbors.add(maze[row - 1][col]);
 		}
-		if ((row - 1) >= 0 && (col + 1) < width && row % 2 == 1
-				&& (maze[row - 1][col + 1].isWall() == false)) {
+		if ((row - 1) >= 0 && (col + 1) < width && row % 2 == 1 && (maze[row - 1][col + 1].isWall() == false)) {
 			neighbors.add(maze[row - 1][col + 1]);
 		}
 
@@ -101,22 +100,18 @@ public class Maze implements Graph {
 		}
 
 		// check bottom-left neighbor
-		if ((row + 1) < length && (col - 1) >= 0 && row % 2 == 0
-				&& (maze[row + 1][col - 1].isWall() == false)) {
+		if ((row + 1) < length && (col - 1) >= 0 && row % 2 == 0 && (maze[row + 1][col - 1].isWall() == false)) {
 			neighbors.add(maze[row + 1][col - 1]);
 		}
-		if ((row + 1) < length && (col) >= 0 && row % 2 == 1
-				&& (maze[row + 1][col].isWall() == false)) {
+		if ((row + 1) < length && (col) >= 0 && row % 2 == 1 && (maze[row + 1][col].isWall() == false)) {
 			neighbors.add(maze[row + 1][col]);
 		}
 
 		// check bottom-right neighbor
-		if ((row + 1) < length && (col) < width && row % 2 == 0
-				&& (maze[row + 1][col].isWall() == false)) {
+		if ((row + 1) < length && (col) < width && row % 2 == 0 && (maze[row + 1][col].isWall() == false)) {
 			neighbors.add(maze[row + 1][col]);
 		}
-		if ((row + 1) < length && (col + 1) < width && row % 2 == 1
-				&& (maze[row + 1][col + 1].isWall() == false)) {
+		if ((row + 1) < length && (col + 1) < width && row % 2 == 1 && (maze[row + 1][col + 1].isWall() == false)) {
 			neighbors.add(maze[row + 1][col + 1]);
 		}
 
@@ -256,15 +251,15 @@ public class Maze implements Graph {
 			System.out.println("Error saving file " + fileName + ": " + e.getMessage());
 		}
 	}
-	
-    public void markShortestPath(List<Vertex> shortestPath) {
 
-        // Iterating through the shortest path
-        for (Vertex v : shortestPath) {
-            this.maze[v.getRow()][v.getCol()].setHasCrossed(true);
-        }
-    }
-    
+	public void markShortestPath(List<Vertex> shortestPath) {
+
+		// Iterating through the shortest path
+		for (Vertex v : shortestPath) {
+			this.maze[v.getRow()][v.getCol()].setHasCrossed(true);
+		}
+	}
+
 	public void displayMaze(String fileName) {
 		Path path = Paths.get(fileName);
 
@@ -280,7 +275,7 @@ public class Maze implements Graph {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void displayMaze() {
 		for (int r = 0; r < getLength(); r++) {
 			for (int c = 0; c < getWidth(); c++) {
@@ -304,10 +299,22 @@ public class Maze implements Graph {
 		System.out.println("\n");
 	}
 
+	public void setSelected(int rowClosest, int colClosest) {
+		if (selectedBox != null) {
+			selectedBox.setSelected(false);
+		}
+		this.selectedBox = getBox(rowClosest, colClosest);
+		selectedBox.setSelected(true);
+	}
+
+	public MazeBox getSelected() {
+		return selectedBox;
+	}
+
 	public MazeBox[][] getMaze() {
 		return maze;
 	}
-	
+
 	public MazeBox getBox(int row, int col) {
 		return maze[row][col];
 	}
@@ -399,13 +406,16 @@ public class Maze implements Graph {
 		// If no departure box was found, return null
 		return false;
 	}
-	
+
 	/**
-	 * Resets the maze, clearing the start, end and goal cells, as well as reinitializing the maze cells.
+	 * Resets the maze, clearing the start, end and goal cells, as well as
+	 * reinitializing the maze cells.
 	 */
 	public void resetMaze() {
-		if (fileName == null) initFromTextFile("data/labyrinthe.maze");
-		else initFromTextFile(fileName);
+		if (fileName == null)
+			initFromTextFile("data/labyrinthe.maze");
+		else
+			initFromTextFile(fileName);
 	}
 
 }

@@ -1,11 +1,13 @@
 package model.maze;
+
 import java.awt.Color;
 
 import model.graph.Vertex;
 
-public abstract class MazeBox implements Vertex{
+public abstract class MazeBox implements Vertex {
 
 	private boolean hasCrossed;
+	protected boolean isSelected;
 	private int row;
 	private int col;
 	private Maze maze;
@@ -53,15 +55,23 @@ public abstract class MazeBox implements Vertex{
 	public void setMaze(Maze maze) {
 		this.maze = maze;
 	}
-	
+
 	public abstract boolean isWall();
-	
+
 	public abstract boolean isEmpty();
-	
+
 	public abstract boolean isArrival();
-	
+
 	public abstract boolean isDeparture();
-	
+
 	public abstract Color getColor();
+
+	public boolean isSelected() {
+		return isSelected;
+	}
+
+	public void setSelected(boolean isSelected) {
+		this.isSelected = isSelected;
+	}
 
 }

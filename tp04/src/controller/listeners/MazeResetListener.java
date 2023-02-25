@@ -12,11 +12,12 @@ import controller.MazeController;
 /**
  * @author arthur
  *
- * An ActionListener (extending MazeActionListener) that is registered and listens for clicks from the 'Reset'
- * button and triggers maze resetting.
+ *         An ActionListener (extending MazeActionListener) that is registered
+ *         and listens for clicks from the 'Reset' button and triggers maze
+ *         resetting.
  */
 @SuppressWarnings("serial")
-public class MazeResetListener extends MazeActionListener{
+public class MazeResetListener extends MazeActionListener {
 	public MazeResetListener(MazeController mazeController) {
 		super(mazeController);
 	}

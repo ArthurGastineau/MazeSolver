@@ -27,15 +27,15 @@ import model.maze.Maze;
  * @author arthur
  *
  */
-public class buttonPanel extends JPanel{
-	
+public class buttonPanel extends JPanel {
+
 	String fileName;
 	JFrame myFrame;
-	
-	public buttonPanel (JFrame myFrame ) {
+
+	public buttonPanel(JFrame myFrame) {
 		this.myFrame = myFrame;
 	}
-	
+
 	public String addMazeButtons(Maze myMaze, HexagonalTable hex, boolean editMode) {
 
 		File dataDirectory = new File("data");
@@ -55,7 +55,6 @@ public class buttonPanel extends JPanel{
 				.setFont(new Font(editionStatusLabel.getFont().getName(), editionStatusLabel.getFont().getStyle(), 15));
 		add(editionStatusLabel);
 
-
 		for (String mazeFile : mazeFiles) {
 			// Crée un bouton pour chaque fichier de labyrinthe
 			JButton mazeButton = new JButton(mazeFile);
@@ -66,7 +65,7 @@ public class buttonPanel extends JPanel{
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					try {
-						//editMode = false;
+						// editMode = false;
 						fileName = mazeFile;
 						//
 						int[] vals = myMaze.fromFileGetMazeSize("data/" + mazeFile);
@@ -77,16 +76,16 @@ public class buttonPanel extends JPanel{
 									"La largeur et la hauteur doivent être des valeurs inférieure ou égale à 18");
 						}
 						myMaze.setSize(vals[0], vals[1]);
-						//panelMaze.setLength(length);
-						//panelMaze.setWidth(width);
+						// panelMaze.setLength(length);
+						// panelMaze.setWidth(width);
 						myMaze.initFromTextFile("data/" + mazeFile);
 						Vertex startVertex = myMaze.getStartVertex();
 						Vertex endVertex = myMaze.getEndVertex();
 						ShortestPaths shortestPaths = Dijkstra.dijkstra(myMaze, startVertex, endVertex);
 						List<Vertex> path = shortestPaths.getShortestPath(endVertex);
 						myMaze.saveShortestPath("data/solution", path);
-						//actualMaze = myMaze;
-						//panelMaze.repaint();
+						// actualMaze = myMaze;
+						// panelMaze.repaint();
 					} catch (IllegalArgumentException ex) {
 						// Affichez un message d'erreur si la largeur ou la hauteur n'est pas une valeur
 						// valide
@@ -100,5 +99,5 @@ public class buttonPanel extends JPanel{
 		}
 		return fileName;
 	}
-	
+
 }

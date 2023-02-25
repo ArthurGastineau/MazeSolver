@@ -22,32 +22,29 @@ import static view.drawable.DrawableHelper.addComponent;
  */
 
 @SuppressWarnings("serial")
-public class GUIPanel extends JPanel implements ActionListener{
+public class GUIPanel extends JPanel implements ActionListener {
 	private final MazeController mazeController;
 
 	public GUIPanel(MazeController mazeController) {
 		this.mazeController = mazeController;
 		initGUIPanel();
 	}
-	
+
 	private void initGUIPanel() {
 		setLayout(new GridBagLayout());
 
 		Insets insets = new Insets(5, 0, 0, 0);
-		
-		// Solve Maze Button
-		initButton(new JButton("Solve"), "solve", 3,
-				mazeController.getMazeSolverListener(), insets);
-		
-		// Reset Maze Button
-		initButton(new JButton("Reset"), "reset", 5,
-				mazeController.getMazeResetListener(), insets);
 
+		// Solve Maze Button
+		initButton(new JButton("Solve"), "solve", 3, mazeController.getMazeSolverListener(), insets);
+
+		// Reset Maze Button
+		initButton(new JButton("Reset"), "reset", 5, mazeController.getMazeResetListener(), insets);
 
 		// Exit Button
 		initButton(new JButton("Exit"), "exit", 6, this, insets);
 	}
-	
+
 	/**
 	 * Initializes a button and adds it to the GUI panel.
 	 *
@@ -57,20 +54,17 @@ public class GUIPanel extends JPanel implements ActionListener{
 	 * @param actionListener      The actionListener to attach to the button
 	 * @param insets              The button's insets
 	 */
-	private void initButton(JButton button,
-							String buttonActionCommand,
-							int gridy,
-							ActionListener actionListener,
-							Insets insets) {
+	private void initButton(JButton button, String buttonActionCommand, int gridy, ActionListener actionListener,
+			Insets insets) {
 		button.setActionCommand(buttonActionCommand);
 		button.addActionListener(actionListener);
-		addComponent(this, button, 0, gridy, 1, 1,
-				GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, insets);
+		addComponent(this, button, 0, gridy, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, insets);
 	}
 
 	/**
-	 * Override of the actionPerformed action. The only button that is listened to and handled directly by the GUI panel
-	 * is the 'Exit' button, which terminates the application.
+	 * Override of the actionPerformed action. The only button that is listened to
+	 * and handled directly by the GUI panel is the 'Exit' button, which terminates
+	 * the application.
 	 *
 	 * @param mazeGuiButtonClick A button click ActionEvent
 	 */

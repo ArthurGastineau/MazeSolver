@@ -16,12 +16,11 @@ import graphics.MainFrame;
 import model.maze.Maze;
 
 /**
- * @author arthur
- * A JPanel of the maze. This panel is where the maze is drawn, and where the user
- * can pick the start and end points.
+ * @author arthur A JPanel of the maze. This panel is where the maze is drawn,
+ *         and where the user can pick the start and end points.
  */
 @SuppressWarnings("serial")
-public class MazePanel extends JPanel{
+public class MazePanel extends JPanel {
 	private static final Color BACKGROUND = new Color(0, 100, 0);
 	private final MazeController mazeController;
 	private final MazeDrawable mazeDrawable;
@@ -29,7 +28,7 @@ public class MazePanel extends JPanel{
 	private int yOffset, xOffset;
 	private Dimension mazeDimension;
 	private static final double SQRT_3 = Math.sqrt(3);
-	
+
 	public MazePanel(Maze maze, MazeController mazeController) {
 		this.maze = maze;
 		this.mazeController = mazeController;
@@ -39,23 +38,24 @@ public class MazePanel extends JPanel{
 
 		initMazePanel();
 	}
-	
+
 	private void initMazePanel() {
-		int mazeWidth = (int) (maze.getWidth() * MazeDrawable.getBoxSize() * SQRT_3 + xOffset * 1.5) ;
+		int mazeWidth = (int) (maze.getWidth() * MazeDrawable.getBoxSize() * SQRT_3 + xOffset * 1.5);
 		int mazeLength = (int) (maze.getLength() * MazeDrawable.getBoxSize() * 1.5 + yOffset * 1.3);
 
 		mazeDimension = new Dimension(mazeWidth, mazeLength);
 		setMinimumSize(mazeDimension);
 		setPreferredSize(mazeDimension);
 		setBackground(BACKGROUND);
-		
+
 		addMouseMotionListener(new MazeSelectedBoxListener(this, mazeController));
 
 		repaint();
 	}
-	
+
 	/**
-	 * Calculate the x and y offsets to account for a change in the number of rows and columns.
+	 * Calculate the x and y offsets to account for a change in the number of rows
+	 * and columns.
 	 *
 	 * @param panelWidth  The maze panel width
 	 * @param panelHeight The maze panel height
@@ -76,32 +76,32 @@ public class MazePanel extends JPanel{
 			yOffset = 0;
 		}
 	}
-	
+
 	public void repaintMaze(Maze maze) {
 		System.out.println("Repaint");
 		this.maze = maze;
 		repaint();
 	}
-	
+
 	@Override
 	public void paintComponent(Graphics graphics) {
 		super.paintComponent(graphics);
-		//get state
+		// get state
 		mazeDrawable.drawMaze(maze, graphics, xOffset, yOffset);
 	}
-	
+
 	public void setSelected(int mouseX, int mouseY) {
 		double closestDistance = Double.MAX_VALUE;
-		
+
 		int size = MazeDrawable.getBoxSize();
-		int rowClosest = 0;
-		int colClosest = 0;
-		
-		for (int row = 0; row < maze.getLength(); row ++) {
-			for (int col = 0; col < maze.getWidth(); col ++) {
-				int xCenter = xOffset + (int) ((col * SQRT_3 * size) + ((row%2) * size * SQRT_3 / 2));
-				int yCenter = yOffset + (int) ((1.5 * size * row) );
-				
+		int rowClosest = -1;
+		int colClosest = -1;
+
+		for (int row = 0; row < maze.getLength(); row++) {
+			for (int col = 0; col < maze.getWidth(); col++) {
+				int xCenter = xOffset + (int) ((col * SQRT_3 * size) + ((row % 2) * size * SQRT_3 / 2));
+				int yCenter = yOffset + (int) ((1.5 * size * row));
+
 				double distance = Math.sqrt(Math.pow(xCenter - mouseX, 2) + Math.pow(yCenter - mouseY, 2));
 
 				if (distance < closestDistance) {
@@ -113,22 +113,25 @@ public class MazePanel extends JPanel{
 		}
 		// Check if the mouse is in the maze
 		if (closestDistance < size) {
-			//change the color of the box
+			// Store the new selected row and column in the model
+			maze.setSelected(rowClosest, colClosest);
+			// Repaint the maze to show the new selected box color
+			repaint();
 		}
 	}
-	
-	
+
 	/**
-	 * Resizes the maze panel view based on the number of columns and the number of rows. This method is called on each
-	 * iteration of generating the maze, and enables the user to be able to customize the dimensions of the maze.
+	 * Resizes the maze panel view based on the number of columns and the number of
+	 * rows. This method is called on each iteration of generating the maze, and
+	 * enables the user to be able to customize the dimensions of the maze.
 	 */
 	public void resize() {
 		int mazeWidth = (int) (maze.getWidth() * MazeDrawable.getBoxSize() * SQRT_3);
-		int mazeLength = (int)( maze.getLength() * MazeDrawable.getBoxSize() * 1.5);
+		int mazeLength = (int) (maze.getLength() * MazeDrawable.getBoxSize() * 1.5);
 
 		mazeDimension = new Dimension(mazeWidth, mazeLength);
 		setMinimumSize(mazeDimension);
 		setPreferredSize(mazeDimension);
 	}
-	
+
 }

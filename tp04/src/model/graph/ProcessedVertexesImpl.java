@@ -19,4 +19,3 @@ public class ProcessedVertexesImpl implements ProcessedVertexes {
 		return vertexes.contains(vertex);
 	}
 }
-

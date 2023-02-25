@@ -12,9 +12,10 @@ import javax.swing.JPanel;
  *
  */
 @SuppressWarnings("serial")
-public class legendColor extends JPanel{
-	Color color; 
-	public legendColor (Color color) {
+public class legendColor extends JPanel {
+	Color color;
+
+	public legendColor(Color color) {
 		super();
 		this.color = color;
 		setBackground(color);

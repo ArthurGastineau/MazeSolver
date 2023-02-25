@@ -12,7 +12,7 @@ import controller.MazeController;
  * @author arthur
  *
  */
-public class MazeSolverListener extends MazeActionListener{
+public class MazeSolverListener extends MazeActionListener {
 	public MazeSolverListener(MazeController mazeController) {
 		super(mazeController);
 	}
