@@ -10,14 +10,16 @@ import model.MazeState;
 import view.MazeView;
 
 /**
- * @author arthur The controller of the maze (i.e. the controller in the MVC
+ * @author arthur 
+ * 
+ * 		   The controller of the maze (i.e. the controller in the MVC
  *         design pattern). This is the main orchestrator of the application,
  *         initializing and controlling the maze and the maze view, handling GUI
  *         interactions,
  */
 
 public class MazeController {
-	private final static String labyrinthFileName = "data/labyrinthe.maze";
+	private final static String labyrinthFileName = "data/labyrinthe2.maze";
 	// Model
 	private Maze maze;
 	// View

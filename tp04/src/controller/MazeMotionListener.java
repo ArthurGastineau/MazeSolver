@@ -3,7 +3,6 @@
  */
 package controller;
 
-import java.awt.event.ActionListener;
 import java.awt.event.MouseMotionListener;
 
 /**

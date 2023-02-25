@@ -118,6 +118,12 @@ public class MazePanel extends JPanel {
 			// Repaint the maze to show the new selected box color
 			repaint();
 		}
+		else {
+			// Store the new selected row and column in the model
+			maze.setSelected(-1, -1);
+			// Repaint the maze to show the new selected box color
+			repaint();
+		}
 	}
 
 	/**

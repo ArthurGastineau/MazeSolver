@@ -300,11 +300,14 @@ public class Maze implements Graph {
 	}
 
 	public void setSelected(int rowClosest, int colClosest) {
-		if (selectedBox != null) {
+		if (selectedBox != null ) {
+			// desactivate the last selected
 			selectedBox.setSelected(false);
 		}
-		this.selectedBox = getBox(rowClosest, colClosest);
-		selectedBox.setSelected(true);
+		if ((rowClosest >= 0 && colClosest >= 0 && rowClosest < getLength() && colClosest < getWidth())) {
+			this.selectedBox = getBox(rowClosest, colClosest);
+			selectedBox.setSelected(true);
+		}
 	}
 
 	public MazeBox getSelected() {
