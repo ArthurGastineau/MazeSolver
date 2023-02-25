@@ -6,11 +6,10 @@ package model;
 import java.util.List;
 
 import controller.MazeController;
-import graph.Dijkstra;
-import graph.ShortestPaths;
-import graph.Vertex;
-import maze.Maze;
-import maze.MazeBox;
+import model.graph.Dijkstra;
+import model.graph.ShortestPaths;
+import model.graph.Vertex;
+import model.maze.Maze;
 
 /**
  * @author arthur

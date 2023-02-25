@@ -2,10 +2,10 @@ package graphics;
 
 import java.util.List;
 
-import graph.Dijkstra;
-import graph.ShortestPaths;
-import graph.Vertex;
-import maze.Maze;
+import model.graph.Dijkstra;
+import model.graph.ShortestPaths;
+import model.graph.Vertex;
+import model.maze.Maze;
 
 
 public class GraphicTest {

@@ -1,4 +1,4 @@
-package graph;
+package model.graph;
 
 public class Dijkstra {
 	public static ShortestPaths dijkstra(Graph graph, Vertex startVertex, Vertex endVertex,

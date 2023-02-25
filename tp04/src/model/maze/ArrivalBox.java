@@ -1,15 +1,15 @@
-package maze;
+package model.maze;
 
 import java.awt.Color;
 
-public class WallBox extends MazeBox {
+public class ArrivalBox extends MazeBox {
 
-	public WallBox(Maze maze, int row, int col) {
+	public ArrivalBox(Maze maze, int row, int col) {
 		super(maze, row, col);
 	}
 	
 	public boolean isWall() {
-		return true;
+		return false;
 	}
 	
 	public boolean isEmpty() {
@@ -17,7 +17,7 @@ public class WallBox extends MazeBox {
 	}
 	
 	public boolean isArrival() {
-		return false;
+		return true;
 	}
 	
 	public boolean isDeparture() {
@@ -25,6 +25,6 @@ public class WallBox extends MazeBox {
 	}
 	
 	public final Color getColor(){
-		return Color.black;
+		return Color.red;
 	}
 }

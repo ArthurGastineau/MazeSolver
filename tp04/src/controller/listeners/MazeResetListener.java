@@ -4,6 +4,7 @@
 package controller.listeners;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
 
 import controller.MazeActionListener;
 import controller.MazeController;
@@ -14,6 +15,7 @@ import controller.MazeController;
  * An ActionListener (extending MazeActionListener) that is registered and listens for clicks from the 'Reset'
  * button and triggers maze resetting.
  */
+@SuppressWarnings("serial")
 public class MazeResetListener extends MazeActionListener{
 	public MazeResetListener(MazeController mazeController) {
 		super(mazeController);
@@ -23,4 +25,5 @@ public class MazeResetListener extends MazeActionListener{
 	public void actionPerformed(ActionEvent e) {
 		mazeController.reset();
 	}
+
 }

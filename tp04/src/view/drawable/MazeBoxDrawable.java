@@ -6,7 +6,7 @@ package view.drawable;
 import java.awt.Color;
 import java.awt.Graphics;
 
-import maze.MazeBox;
+import model.maze.MazeBox;
 
 /**
  * @author arthur

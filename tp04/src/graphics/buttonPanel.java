@@ -3,7 +3,6 @@
  */
 package graphics;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -19,10 +18,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import graph.Dijkstra;
-import graph.ShortestPaths;
-import graph.Vertex;
-import maze.Maze;
+import model.graph.Dijkstra;
+import model.graph.ShortestPaths;
+import model.graph.Vertex;
+import model.maze.Maze;
 
 /**
  * @author arthur
@@ -67,7 +66,7 @@ public class buttonPanel extends JPanel{
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					try {
-						editMode = false;
+						//editMode = false;
 						fileName = mazeFile;
 						//
 						int[] vals = myMaze.fromFileGetMazeSize("data/" + mazeFile);
@@ -78,16 +77,16 @@ public class buttonPanel extends JPanel{
 									"La largeur et la hauteur doivent être des valeurs inférieure ou égale à 18");
 						}
 						myMaze.setSize(vals[0], vals[1]);
-						panelMaze.setLength(length);
-						panelMaze.setWidth(width);
+						//panelMaze.setLength(length);
+						//panelMaze.setWidth(width);
 						myMaze.initFromTextFile("data/" + mazeFile);
 						Vertex startVertex = myMaze.getStartVertex();
 						Vertex endVertex = myMaze.getEndVertex();
 						ShortestPaths shortestPaths = Dijkstra.dijkstra(myMaze, startVertex, endVertex);
 						List<Vertex> path = shortestPaths.getShortestPath(endVertex);
 						myMaze.saveShortestPath("data/solution", path);
-						actualMaze = myMaze;
-						panelMaze.repaint();
+						//actualMaze = myMaze;
+						//panelMaze.repaint();
 					} catch (IllegalArgumentException ex) {
 						// Affichez un message d'erreur si la largeur ou la hauteur n'est pas une valeur
 						// valide

@@ -1,4 +1,4 @@
-package graph;
+package model.graph;
 
 public interface ProcessedVertexes {
 	// add a vertex in the set

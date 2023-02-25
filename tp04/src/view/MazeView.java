@@ -1,6 +1,6 @@
 package view;
 
-import maze.Maze;
+import model.maze.Maze;
 import view.drawable.GUIPanel;
 import view.drawable.MazePanel;
 

@@ -22,11 +22,11 @@ import java.util.List;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-import graph.Dijkstra;
-import graph.ShortestPaths;
-import graph.Vertex;
-import maze.Maze;
-import maze.MazeBox;
+import model.graph.Dijkstra;
+import model.graph.ShortestPaths;
+import model.graph.Vertex;
+import model.maze.Maze;
+import model.maze.MazeBox;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame implements MouseMotionListener, MouseListener {

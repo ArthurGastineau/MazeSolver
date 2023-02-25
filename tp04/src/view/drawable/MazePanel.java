@@ -6,11 +6,14 @@ package view.drawable;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
 
 import controller.MazeController;
-import maze.Maze;
+import controller.listeners.MazeSelectedBoxListener;
+import graphics.MainFrame;
+import model.maze.Maze;
 
 /**
  * @author arthur
@@ -45,6 +48,8 @@ public class MazePanel extends JPanel{
 		setMinimumSize(mazeDimension);
 		setPreferredSize(mazeDimension);
 		setBackground(BACKGROUND);
+		
+		addMouseMotionListener(new MazeSelectedBoxListener(this, mazeController));
 
 		repaint();
 	}
@@ -85,6 +90,34 @@ public class MazePanel extends JPanel{
 		mazeDrawable.drawMaze(maze, graphics, xOffset, yOffset);
 	}
 	
+	public void setSelected(int mouseX, int mouseY) {
+		double closestDistance = Double.MAX_VALUE;
+		
+		int size = MazeDrawable.getBoxSize();
+		int rowClosest = 0;
+		int colClosest = 0;
+		
+		for (int row = 0; row < maze.getLength(); row ++) {
+			for (int col = 0; col < maze.getWidth(); col ++) {
+				int xCenter = xOffset + (int) ((col * SQRT_3 * size) + ((row%2) * size * SQRT_3 / 2));
+				int yCenter = yOffset + (int) ((1.5 * size * row) );
+				
+				double distance = Math.sqrt(Math.pow(xCenter - mouseX, 2) + Math.pow(yCenter - mouseY, 2));
+
+				if (distance < closestDistance) {
+					rowClosest = row;
+					colClosest = col;
+					closestDistance = distance;
+				}
+			}
+		}
+		// Check if the mouse is in the maze
+		if (closestDistance < size) {
+			//change the color of the box
+		}
+	}
+	
+	
 	/**
 	 * Resizes the maze panel view based on the number of columns and the number of rows. This method is called on each
 	 * iteration of generating the maze, and enables the user to be able to customize the dimensions of the maze.
@@ -97,4 +130,5 @@ public class MazePanel extends JPanel{
 		setMinimumSize(mazeDimension);
 		setPreferredSize(mazeDimension);
 	}
+	
 }

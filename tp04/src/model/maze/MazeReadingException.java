@@ -1,4 +1,4 @@
-package maze;
+package model.maze;
 
 @SuppressWarnings("serial")
 public class MazeReadingException extends Exception{

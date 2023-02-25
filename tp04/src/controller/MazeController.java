@@ -4,7 +4,7 @@ import java.awt.event.ActionListener;
 
 import controller.listeners.MazeResetListener;
 import controller.listeners.MazeSolverListener;
-import maze.Maze;
+import model.maze.Maze;
 import model.MazeSolver;
 import model.MazeState;
 import view.MazeView;

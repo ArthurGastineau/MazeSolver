@@ -1,7 +1,7 @@
-package maze;
+package model.maze;
 import java.awt.Color;
 
-import graph.Vertex;
+import model.graph.Vertex;
 
 public abstract class MazeBox implements Vertex{
 

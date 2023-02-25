@@ -1,4 +1,4 @@
-package maze;
+package model.maze;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.*;
 
-import graph.*;
+import model.graph.*;
 
 public class Maze implements Graph {
 	private MazeBox[][] maze;

@@ -5,8 +5,8 @@ package view.drawable;
 
 import java.awt.Graphics;
 
-import maze.Maze;
-import maze.MazeBox;
+import model.maze.Maze;
+import model.maze.MazeBox;
 
 /**
  * @author arthur

@@ -1,19 +1,19 @@
-package maze;
+package model.maze;
 
 import java.awt.Color;
 
-public class EmptyBox extends MazeBox {
+public class WallBox extends MazeBox {
 
-	public EmptyBox(Maze maze, int row, int col) {
+	public WallBox(Maze maze, int row, int col) {
 		super(maze, row, col);
 	}
 	
 	public boolean isWall() {
-		return false;
+		return true;
 	}
 	
 	public boolean isEmpty() {
-		return true;
+		return false;
 	}
 	
 	public boolean isArrival() {
@@ -25,12 +25,6 @@ public class EmptyBox extends MazeBox {
 	}
 	
 	public final Color getColor(){
-		if (super.getHasCrossed()) {
-			return Color.yellow;
-		}
-		else {
-			return Color.white;
-		}
+		return Color.black;
 	}
-
 }

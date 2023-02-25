@@ -1,10 +1,10 @@
-package maze;
+package model.maze;
 
 import java.awt.Color;
 
-public class DepartureBox extends MazeBox {
+public class EmptyBox extends MazeBox {
 
-	public DepartureBox(Maze maze, int row, int col) {
+	public EmptyBox(Maze maze, int row, int col) {
 		super(maze, row, col);
 	}
 	
@@ -13,7 +13,7 @@ public class DepartureBox extends MazeBox {
 	}
 	
 	public boolean isEmpty() {
-		return false;
+		return true;
 	}
 	
 	public boolean isArrival() {
@@ -21,10 +21,16 @@ public class DepartureBox extends MazeBox {
 	}
 	
 	public boolean isDeparture() {
-		return true;
+		return false;
 	}
 	
 	public final Color getColor(){
-		return Color.blue;
+		if (super.getHasCrossed()) {
+			return Color.yellow;
+		}
+		else {
+			return Color.white;
+		}
 	}
+
 }

@@ -1,4 +1,4 @@
-package graph;
+package model.graph;
 
 public interface MinDistance {
 	// initialization of the valuations of the vertexes different from root
