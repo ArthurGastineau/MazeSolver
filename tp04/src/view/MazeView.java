@@ -1,6 +1,7 @@
 package view;
 
 import maze.Maze;
+import view.drawable.GUIPanel;
 import view.drawable.MazePanel;
 
 import java.awt.Component;
@@ -16,16 +17,21 @@ import controller.MazeController;
 /**
  * @author arthur
  *
+ * The view of the maze (i.e. the view in the MVC design pattern). This is a JPanel that contains both the maze panel
+ * (the JPanel containing the maze) and the GUI panel (the panel containing all the UI elements). This class also acts
+ * as an intermediary between the controller and between each of the its child panels.
  */
 @SuppressWarnings("serial")
 public class MazeView extends JFrame{
 	private final MazeController mazeController;
 	private final MazePanel mazePanel;
+	private final GUIPanel guiPanel;
 	
 	public MazeView(Maze maze, MazeController mazeController) {
 		super("Maze Solver - Arthur Gastineau");
 		this.mazeController = mazeController;
 		this.mazePanel = new MazePanel(maze, mazeController);
+		this.guiPanel = new GUIPanel(mazeController);
 
 		initDisplay();
 	}
@@ -39,6 +45,8 @@ public class MazeView extends JFrame{
 
 		addComponent(mazePanel, 0, 0, 2, 1, GridBagConstraints.CENTER,
 				GridBagConstraints.BOTH, insets);
+		addComponent(guiPanel, 2, 0, 1, 1, GridBagConstraints.NORTH,
+				GridBagConstraints.HORIZONTAL, insets);
 
 		setVisible(true);
 		pack();
@@ -54,7 +62,6 @@ public class MazeView extends JFrame{
 		mazePanel.setOffset(mazePanel.getWidth(), mazePanel.getHeight());
 		mazePanel.repaint();
 	}
-	
 	
 	public void repaintMaze(Maze maze) {
 		mazePanel.repaintMaze(maze);

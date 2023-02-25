@@ -1,4 +1,6 @@
 package maze;
+import java.awt.Color;
+
 import graph.Vertex;
 
 public abstract class MazeBox implements Vertex{
@@ -59,5 +61,7 @@ public abstract class MazeBox implements Vertex{
 	public abstract boolean isArrival();
 	
 	public abstract boolean isDeparture();
+	
+	public abstract Color getColor();
 
 }

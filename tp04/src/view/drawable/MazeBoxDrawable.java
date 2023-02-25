@@ -27,15 +27,11 @@ public class MazeBoxDrawable {
 	 * @param yOffset    The y offset
 	 */
 	public static void drawMazeBox(MazeBox box, Graphics g, int xOffset, int yOffset, int size) {
-
-		g.setColor(box.getColor());
 		
 		int[] xPoints = {xOffset, (int) ((xOffset + (SQRT_3 / 2) * size)), (int) ((xOffset + SQRT_3 / 2 * size)), xOffset, (int) ((xOffset - SQRT_3 / 2 * size)), (int) ((xOffset - (SQRT_3 / 2)* size))};
 		int[] yPoints = {size + yOffset, (int) (0.5 * size + yOffset), (int) (yOffset - 0.5* size), yOffset - 1* size, (int) (yOffset - 0.5* size), (int) (yOffset + 0.5* size)};
-
-		// fill of the cell 
-		//generatedCellDraw(g, box, xOffset, yOffset);
 		
+		g.setColor(box.getColor());
 		g.fillPolygon(xPoints, yPoints, 6);
 		g.setColor(Color.BLACK);
 		g.drawPolygon(xPoints, yPoints, 6);

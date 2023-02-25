@@ -14,10 +14,10 @@ import java.io.FileReader;
 
 @SuppressWarnings("serial")
 public class HexagonalTable extends JPanel implements MouseMotionListener {
-	private static final int ORIGIN_X = 30;
-	private static final int ORIGIN_Y = 30;
+	private int ORIGIN_X = 50;
+	private int ORIGIN_Y = 50;
 	private static final double SQRT_3 = Math.sqrt(3);
-	private static final int size = 30;
+	private int size = 30;
 	
 
 	private int length = 10;
@@ -29,7 +29,6 @@ public class HexagonalTable extends JPanel implements MouseMotionListener {
 	char[][] solution = null;
 
 	public void paintComponent(Graphics g) {
-
 		int x = 0;
 		int y = 0;
 		Color c = null;
@@ -59,7 +58,8 @@ public class HexagonalTable extends JPanel implements MouseMotionListener {
 				else if (solution[i][j] == '.') {
 					c = Color.yellow;
 				}
-
+				ORIGIN_X = size * 2;
+				ORIGIN_Y = size * 2;
 				y= ORIGIN_Y + (int) ((1.5 * size * i) );
 				x = ORIGIN_X + (int) ((j * SQRT_3 * size) + ((i%2) * size * SQRT_3 / 2));
 				text = i + ":" + j;
@@ -84,14 +84,14 @@ public class HexagonalTable extends JPanel implements MouseMotionListener {
 		g.setColor(Color.BLACK);
 		g.drawPolygon(xPoints, yPoints, 6);
 		// Calculate the position of the text within the hexagon
-		g.setFont(g.getFont().deriveFont(12f));
+		/*g.setFont(g.getFont().deriveFont(12f));
 		FontMetrics fontMetrics = g.getFontMetrics();
 		int textWidth = fontMetrics.stringWidth(text);
 		int textHeight = fontMetrics.getHeight();
 		int textX = ox - textWidth / 2;
 		int textY = oy + textHeight / 4;
 		// Draw the text
-		g.drawString(text, textX, textY);
+		g.drawString(text, textX, textY);*/
 	}
 
 	@Override
@@ -106,7 +106,7 @@ public class HexagonalTable extends JPanel implements MouseMotionListener {
 				// Update the selected row and column
 				selectedRow = row;
 				selectedColumn = column;
-				//System.out.println(row + ":" + column);
+				System.out.println(row + ":" + column);
 				repaint();
 			}
 		catch (Exception e1) {
@@ -161,6 +161,10 @@ public class HexagonalTable extends JPanel implements MouseMotionListener {
 
 	public int getSelectedColumn() {
 		return selectedColumn;
+	}
+	
+	public void changeSize(int size) {
+		this.size= size;
 	}
 
 }

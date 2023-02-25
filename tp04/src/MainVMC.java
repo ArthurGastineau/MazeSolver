@@ -1,10 +1,6 @@
 import controller.MazeController;
 
 /**
- * 
- */
-
-/**
  * @author arthur
  *
  */

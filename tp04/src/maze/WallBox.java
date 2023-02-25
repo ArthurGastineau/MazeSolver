@@ -1,5 +1,7 @@
 package maze;
 
+import java.awt.Color;
+
 public class WallBox extends MazeBox {
 
 	public WallBox(Maze maze, int row, int col) {
@@ -20,5 +22,9 @@ public class WallBox extends MazeBox {
 	
 	public boolean isDeparture() {
 		return false;
+	}
+	
+	public final Color getColor(){
+		return Color.black;
 	}
 }

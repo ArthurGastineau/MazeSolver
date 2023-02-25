@@ -1,6 +1,8 @@
 package controller;
 
+import controller.listeners.MazeSolverListener;
 import maze.Maze;
+import model.MazeSolver;
 import view.MazeView;
 
 /**
@@ -12,18 +14,24 @@ import view.MazeView;
 public class MazeController {
 	private final static String labyrinthFileName = "data/labyrinthe.maze";
 	// Model
-	private final Maze maze;
+	private Maze maze;
 	// View
 	private final MazeView view;
+	//Buttons
+	private final MazeSolverListener mazeSolverListener;
 	// Listeners
+	private MazeSolver solver;
 	private int numRows;
 	private int numCols;
 	
 	public MazeController (){
+		System.out.println("Init controller");
 		this.maze = new Maze();
 		int [] vals = maze.fromFileGetMazeSize(labyrinthFileName);
 		maze.setSize(vals[0], vals[1]);
 		maze.initFromTextFile(labyrinthFileName);
+		
+		this.mazeSolverListener = new MazeSolverListener(this);
 		
 		this.view = new MazeView(maze, this);
 		
@@ -37,6 +45,20 @@ public class MazeController {
 
 	public void setMazeNumCols(int numCols) {
 		this.numCols = numCols;
+	}
+	
+	public MazeSolverListener getMazeSolverListener() {
+		return mazeSolverListener;
+	}
+	
+	public void solveMaze() {
+		solver = new MazeSolver(maze, this);
+		solver.initMazeSolver();
+		view.repaintMaze(maze);
+		//Maze solvedMaze = solver.initMazeSolver();
+		//maze.displayMaze();
+		//solvedMaze.displayMaze();
+		//view.repaintMaze(solvedMaze);
 	}
 
 }

@@ -253,7 +253,15 @@ public class Maze implements Graph {
 			System.out.println("Error saving file " + fileName + ": " + e.getMessage());
 		}
 	}
+	
+    public void markShortestPath(List<Vertex> shortestPath) {
 
+        // Iterating through the shortest path
+        for (Vertex v : shortestPath) {
+            this.maze[v.getRow()][v.getCol()].setHasCrossed(true);
+        }
+    }
+    
 	public void displayMaze(String fileName) {
 		Path path = Paths.get(fileName);
 
@@ -269,9 +277,36 @@ public class Maze implements Graph {
 			e.printStackTrace();
 		}
 	}
+	
+	public void displayMaze() {
+		for (int r = 0; r < getLength(); r++) {
+			for (int c = 0; c < getWidth(); c++) {
+				MazeBox box = this.getBox(r, c);
+				if (box.isArrival()) {
+					System.out.print('A');
+
+				} else if (box.isDeparture()) {
+					System.out.print('D');
+
+				} else if (box.isEmpty() && box.getHasCrossed()) {
+					System.out.print('.');
+				} else if (box.isEmpty() && !box.getHasCrossed()) {
+					System.out.print('E');
+				} else if (box.isWall()) {
+					System.out.print('W');
+				}
+			}
+			System.out.println();
+		}
+		System.out.println("\n");
+	}
 
 	public MazeBox[][] getMaze() {
 		return maze;
+	}
+	
+	public MazeBox getBox(int row, int col) {
+		return maze[row][col];
 	}
 
 	public int[] fromFileGetMazeSize(String fileName) {

@@ -1,5 +1,7 @@
 package maze;
 
+import java.awt.Color;
+
 public class EmptyBox extends MazeBox {
 
 	public EmptyBox(Maze maze, int row, int col) {
@@ -20,6 +22,15 @@ public class EmptyBox extends MazeBox {
 	
 	public boolean isDeparture() {
 		return false;
+	}
+	
+	public final Color getColor(){
+		if (super.getHasCrossed()) {
+			return Color.yellow;
+		}
+		else {
+			return Color.white;
+		}
 	}
 
 }

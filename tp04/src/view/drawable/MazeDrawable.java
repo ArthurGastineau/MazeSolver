@@ -27,7 +27,7 @@ public class MazeDrawable {
 	 */
 	public void drawMaze(Maze maze, Graphics g, int xOffset, int yOffset) {
 		Graphics graphics = (Graphics) g;
-
+		System.out.println("Drawing");
 		for (int r = 0; r < maze.getLength(); r++) {
 			for (int c = 0; c < maze.getWidth(); c++) {
 				int xCenter = xOffset + (int) ((c * SQRT_3 * BOX_SIZE) + ((r%2) * BOX_SIZE * SQRT_3 / 2));

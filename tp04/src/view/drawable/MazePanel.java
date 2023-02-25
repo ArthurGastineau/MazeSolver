@@ -46,8 +46,6 @@ public class MazePanel extends JPanel{
 		setPreferredSize(mazeDimension);
 		setBackground(BACKGROUND);
 
-		//addMouseListener(new MazeArrivalpointClickListener(this, mazeController));
-
 		repaint();
 	}
 	
@@ -75,6 +73,7 @@ public class MazePanel extends JPanel{
 	}
 	
 	public void repaintMaze(Maze maze) {
+		System.out.println("Repaint");
 		this.maze = maze;
 		repaint();
 	}
