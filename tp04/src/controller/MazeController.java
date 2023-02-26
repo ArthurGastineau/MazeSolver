@@ -13,10 +13,10 @@ import model.MazeState;
 import view.MazeView;
 
 /**
- * @author arthur 
+ * @author arthur
  * 
- * 		   The controller of the maze (i.e. the controller in the MVC
- *         design pattern). This is the main orchestrator of the application,
+ *         The controller of the maze (i.e. the controller in the MVC design
+ *         pattern). This is the main orchestrator of the application,
  *         initializing and controlling the maze and the maze view, handling GUI
  *         interactions,
  */
@@ -45,7 +45,7 @@ public class MazeController {
 
 		this.maze = new Maze(labyrinthFileName);
 		this.boxType = null;
-		
+
 		this.mazeBoxSelectionRadioListener = new MazeBoxSelectionRadioListener(this);
 		this.mazeSolverListener = new MazeSolverListener(this);
 		this.mazeResetListener = new MazeResetListener(this);
@@ -56,15 +56,15 @@ public class MazeController {
 		this.numRows = maze.getLength();
 		this.numCols = maze.getWidth();
 	}
-	
+
 	public MazeState getState() {
 		return state;
 	}
-	
+
 	public BoxType getBoxType() {
 		return boxType;
 	}
-	
+
 	public void setBoxType(BoxType boxType) {
 		this.boxType = boxType;
 	}
@@ -76,7 +76,7 @@ public class MazeController {
 	public void setMazeNumCols(int numCols) {
 		this.numCols = numCols;
 	}
-	
+
 	public MazeBoxSelectionRadioListener getMazeBoxSelectionRadioListener() {
 		return mazeBoxSelectionRadioListener;
 	}
@@ -84,7 +84,7 @@ public class MazeController {
 	public MazeSolverListener getMazeSolverListener() {
 		return mazeSolverListener;
 	}
-	
+
 	public MazeResetListener getMazeResetListener() {
 		return mazeResetListener;
 	}
@@ -99,7 +99,7 @@ public class MazeController {
 		view.repaintMaze(maze);
 		state = MazeState.SOLVED;
 	}
-	
+
 	public void load(String fileName) {
 		System.out.println("Loading");
 		maze.initFromTextFile(fileName);

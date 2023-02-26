@@ -10,11 +10,11 @@ import controller.MazeController;
 import view.drawable.MazePanel;
 
 /**
- * @author arthur
- * A MouseAdapter that listens for clicks on a generated maze to modify some of the boxes.
+ * @author arthur A MouseAdapter that listens for clicks on a generated maze to
+ *         modify some of the boxes.
  * 
  */
-public class MazeBoxClickListener extends MouseAdapter{
+public class MazeBoxClickListener extends MouseAdapter {
 	private final MazePanel mazePanel;
 	private final MazeController mazeController;
 
@@ -23,9 +23,9 @@ public class MazeBoxClickListener extends MouseAdapter{
 		this.mazePanel = mazePanel;
 		this.mazeController = mazeController;
 	}
-	
+
 	@Override
 	public void mouseReleased(MouseEvent mouseEvent) {
-			mazePanel.setMazeBox();
+		mazePanel.setMazeBox();
 	}
 }

@@ -12,15 +12,16 @@ import model.BoxType;
 /**
  * @author arthur
  *
- * An ActionListener (extending MazeActionListener) that is registered and listens for changes in the box type
- * radio, and updates the maze accordingly on change.
+ *         An ActionListener (extending MazeActionListener) that is registered
+ *         and listens for changes in the box type radio, and updates the maze
+ *         accordingly on change.
  */
-public class MazeBoxSelectionRadioListener extends MazeActionListener{
+public class MazeBoxSelectionRadioListener extends MazeActionListener {
 
 	public MazeBoxSelectionRadioListener(MazeController mazeController) {
 		super(mazeController);
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
@@ -32,5 +33,5 @@ public class MazeBoxSelectionRadioListener extends MazeActionListener{
 
 		mazeController.setBoxType(boxTypeChoice);
 	}
-	
+
 }

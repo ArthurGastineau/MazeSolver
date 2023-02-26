@@ -34,14 +34,14 @@ public class GUIPanel extends JPanel implements ActionListener {
 		setLayout(new GridBagLayout());
 
 		Insets insets = new Insets(5, 0, 0, 0);
-		
+
 		// Solve Method Radio
 		JPanel boxSelectionRadio = new BoxTypeRadioPanel(mazeController.getMazeBoxSelectionRadioListener(),
 				mazeController.getBoxType());
-		addComponent(this, boxSelectionRadio, 0, 2, 1, 1,
-				GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, insets);
-		
-		//Load Maze Button
+		addComponent(this, boxSelectionRadio, 0, 2, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
+				insets);
+
+		// Load Maze Button
 		initButton(new JButton("Load"), "load", 3, mazeController.getMazeLoadListener(), insets);
 
 		// Solve Maze Button

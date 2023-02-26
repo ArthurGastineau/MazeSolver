@@ -28,8 +28,8 @@ public class Maze implements Graph {
 		setSize(length, width);
 		initEmptyMaze(length, width);
 	}
-	
-	public Maze (String fileName) {
+
+	public Maze(String fileName) {
 		initFromTextFile(fileName);
 	}
 
@@ -262,6 +262,15 @@ public class Maze implements Graph {
 		}
 	}
 
+	public void deleteShortestPath() {
+		// Iterating through the maze and delete the one's marked
+		for (MazeBox[] rowBox : maze) {
+			for (MazeBox box : rowBox) {
+				box.setHasCrossed(false);
+			}
+		}
+	}
+
 	public void displayMaze(String fileName) {
 		Path path = Paths.get(fileName);
 
@@ -302,7 +311,7 @@ public class Maze implements Graph {
 	}
 
 	public void setSelected(int rowClosest, int colClosest) {
-		if (selectedBox != null ) {
+		if (selectedBox != null) {
 			// desactivate the last selected
 			selectedBox.setSelected(false);
 		}

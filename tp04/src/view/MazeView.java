@@ -74,7 +74,7 @@ public class MazeView extends JFrame {
 	public void resetView() {
 		mazePanel.repaint();
 	}
-	
+
 	public JPanel getGuiPanel() {
 		return guiPanel;
 	}

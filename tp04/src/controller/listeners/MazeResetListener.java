@@ -4,7 +4,6 @@
 package controller.listeners;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.MouseEvent;
 
 import controller.MazeActionListener;
 import controller.MazeController;
