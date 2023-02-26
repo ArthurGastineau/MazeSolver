@@ -3,6 +3,8 @@ package controller;
 import java.awt.event.ActionListener;
 
 import controller.listeners.MazeBoxSelectionRadioListener;
+import controller.listeners.MazeCustomNumColsListener;
+import controller.listeners.MazeCustomNumRowsListener;
 import controller.listeners.MazeLoadListener;
 import controller.listeners.MazeResetListener;
 import controller.listeners.MazeSaveListener;
@@ -26,16 +28,18 @@ public class MazeController {
 	private final static String labyrinthFileName = "data/labyrinthe2.maze";
 	// Model
 	private Maze maze;
+	private MazeState state;
 	// View
 	private final MazeView view;
-	// Buttons
+	////Custom Maze Dimensions
+	private final MazeCustomNumRowsListener mazeCustomNumRowsListener;
+	private final MazeCustomNumColsListener mazeCustomNumColsListener;
+	//// Buttons
 	private final MazeBoxSelectionRadioListener mazeBoxSelectionRadioListener;
 	private final MazeSolverListener mazeSolverListener;
 	private final MazeResetListener mazeResetListener;
 	private final MazeLoadListener mazeLoadListener;
 	private final MazeSaveListener mazeSaveListener;
-	//
-	private MazeState state;
 	// Listeners
 	private MazeSolver solver;
 	private int numRows;
@@ -47,6 +51,9 @@ public class MazeController {
 
 		this.maze = new Maze(labyrinthFileName);
 		this.boxType = null;
+		
+		this.mazeCustomNumRowsListener = new MazeCustomNumRowsListener(this);
+		this.mazeCustomNumColsListener = new MazeCustomNumColsListener(this);
 
 		this.mazeBoxSelectionRadioListener = new MazeBoxSelectionRadioListener(this);
 		this.mazeSolverListener = new MazeSolverListener(this);
@@ -98,6 +105,14 @@ public class MazeController {
 	
 	public MazeSaveListener getMazeSaveListener() {
 		return mazeSaveListener;
+	}
+	
+	public MazeCustomNumRowsListener getMazeCustomNumRowsListener() {
+		return mazeCustomNumRowsListener;
+	}
+
+	public MazeCustomNumColsListener getMazeCustomNumColsListener() {
+		return mazeCustomNumColsListener;
 	}
 
 	public void solveMaze() {

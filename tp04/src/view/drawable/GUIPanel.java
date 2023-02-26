@@ -36,10 +36,16 @@ public class GUIPanel extends JPanel implements ActionListener {
 		Insets insets = new Insets(5, 0, 0, 0);
 		
 		// Load Maze Button
-		initButton(new JButton("Load"), "load", 1, mazeController.getMazeLoadListener(), insets);
+		initButton(new JButton("Load"), "load", 0, mazeController.getMazeLoadListener(), insets);
 		
 		// Load Maze Button
-		initButton(new JButton("Save"), "save", 2, mazeController.getMazeSaveListener(), insets);
+		initButton(new JButton("Save"), "save", 1, mazeController.getMazeSaveListener(), insets);
+		
+		// Maze Size Inputs
+		JPanel customMazeSizeInputs = new MazeSizeInputs(mazeController.getMazeCustomNumRowsListener(),
+				mazeController.getMazeCustomNumColsListener());
+		addComponent(this, customMazeSizeInputs, 0, 2, 1, 1,
+				GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, insets);
 
 		// Solve Method Radio
 		JPanel boxSelectionRadio = new BoxTypeRadioPanel(mazeController.getMazeBoxSelectionRadioListener(),
