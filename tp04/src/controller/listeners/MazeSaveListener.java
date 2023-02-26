@@ -13,6 +13,9 @@ import controller.MazeController;
 
 /**
  * 
+ * An ActionListener (extending {@link MazeActionListener}) that is registered
+ * and listens for clicks from the 'Save' button, allow the user to choose a
+ * file and triggers maze saving.
  *
  * @author Arthur Gastineau
  */

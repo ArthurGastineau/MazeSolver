@@ -13,6 +13,8 @@ import model.maze.Maze;
 
 /**
  * 
+ * The maze solver that draws the solution path of the maze from the start box
+ * to the end box
  * 
  * @author Arthur Gastineau
  */

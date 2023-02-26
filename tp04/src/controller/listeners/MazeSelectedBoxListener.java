@@ -11,6 +11,9 @@ import view.drawable.MazePanel;
 
 /**
  *
+ * An ActionListener (extending {@link MazeMotionListener}) that is registered
+ * and listens for mouse movements, allow the user to select an hexagon of the
+ * maze.
  *
  * @author Arthur Gastineau
  */

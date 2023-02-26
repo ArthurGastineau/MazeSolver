@@ -10,8 +10,8 @@ import controller.MazeController;
 
 /**
  *
- * An ActionListener (extending MazeActionListener) that is registered and
- * listens for clicks from the 'Reset' button and triggers maze resetting.
+ * An ActionListener (extending {@link MazeActionListener}) that is registered
+ * and listens for clicks from the 'Reset' button and triggers maze resetting.
  * 
  * @author Arthur Gastineau
  */

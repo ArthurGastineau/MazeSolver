@@ -2,11 +2,30 @@ package model.graph;
 
 /**
  * 
+ * Dijkstra's algorithm implementation for finding the shortest path in a graph.
  *
  * @author Arthur Gastineau
  */
 
 public class Dijkstra {
+
+	/**
+	 * Finds the shortest path between two vertices in a graph using Dijkstra's
+	 * algorithm.
+	 * 
+	 * @param graph             the graph in which to search for the shortest path
+	 * @param startVertex       the vertex from which to start the search
+	 * @param endVertex         the vertex to which the shortest path should lead
+	 * @param processedVertexes a set of already processed vertexes
+	 * @param minDistance       the minimum distance from the start vertex to each
+	 *                          vertex
+	 * @param distance          the distance between each pair of vertices in the
+	 *                          graph
+	 * @param shortestPaths     the current set of shortest paths
+	 * @return the shortest paths from the start vertex to all other vertices in the
+	 *         graph
+	 */
+
 	public static ShortestPaths dijkstra(Graph graph, Vertex startVertex, Vertex endVertex,
 			ProcessedVertexes processedVertexes, MinDistance minDistance, Distance distance,
 			ShortestPaths shortestPaths) {
@@ -42,6 +61,17 @@ public class Dijkstra {
 		}
 		return shortestPaths;
 	}
+
+	/**
+	 * Finds the shortest path between two vertices in a graph using Dijkstra's
+	 * algorithm.
+	 * 
+	 * @param graph       the graph in which to search for the shortest path
+	 * @param startVertex the vertex from which to start the search
+	 * @param endVertex   the vertex to which the shortest path should lead
+	 * @return the shortest paths from the start vertex to all other vertices in the
+	 *         graph
+	 */
 
 	public static ShortestPaths dijkstra(Graph graph, Vertex startVertex, Vertex endVertex) {
 		ProcessedVertexes processedVertexes = new ProcessedVertexesImpl();
