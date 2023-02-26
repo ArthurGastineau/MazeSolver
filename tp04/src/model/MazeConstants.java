@@ -6,7 +6,7 @@ package model;
 /**
  * @author arthur
  *
- * Constants for maze construction
+ *         Constants for maze construction
  */
 public class MazeConstants {
 	public static final int DEFAULT_NUM_ROWS = 18;

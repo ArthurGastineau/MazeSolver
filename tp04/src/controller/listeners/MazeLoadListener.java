@@ -26,7 +26,6 @@ public class MazeLoadListener extends MazeActionListener {
 		int result = fileChooser.showOpenDialog(null);
 		if (result == JFileChooser.APPROVE_OPTION) {
 			File selectedFile = fileChooser.getSelectedFile();
-			System.out.println(selectedFile.getAbsolutePath());
 			mazeController.load(selectedFile.getAbsolutePath());
 		}
 	}

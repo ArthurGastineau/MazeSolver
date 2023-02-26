@@ -43,7 +43,7 @@ public class MazeDrawable {
 	public static int getBoxSize() {
 		return BOX_SIZE;
 	}
-	
+
 	public static void setBoxSize(int size) {
 		BOX_SIZE = size;
 	}

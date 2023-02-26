@@ -25,7 +25,7 @@ public class MazeSaveListener extends MazeActionListener {
 		JFileChooser fileChooser = new JFileChooser("data/");
 		int returnVal = fileChooser.showSaveDialog(null);
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
-			File fileToSave = new File(fileChooser.getSelectedFile()+".maze");
+			File fileToSave = new File(fileChooser.getSelectedFile() + ".maze");
 			mazeController.save(fileToSave.getAbsolutePath());
 		}
 	}

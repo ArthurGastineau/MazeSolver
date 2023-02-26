@@ -20,7 +20,6 @@ public class Maze implements Graph {
 
 	private MazeBox selectedBox;
 
-
 	private String fileName;
 
 	public Maze(int length, int width) {
@@ -31,6 +30,7 @@ public class Maze implements Graph {
 	public Maze(String fileName) {
 		initFromTextFile(fileName);
 	}
+
 	public Maze() {
 		setSize(MazeConstants.MAX_NUM_ROWS, MazeConstants.MAX_NUM_COLS);
 		initEmptyMaze(length, width);
@@ -147,8 +147,7 @@ public class Maze implements Graph {
 	public final void initFromTextFile(String fileName) {
 		if (fileName == null || !fileName.endsWith(".maze")) {
 			return;
-		}
-		else {
+		} else {
 			try {
 				int[] vals = fromFileGetMazeSize(fileName);
 				setSize(vals[0], vals[1]);
@@ -169,7 +168,8 @@ public class Maze implements Graph {
 					for (int col = 0; col < this.width; col++) {
 						char c = line.charAt(col);
 						if (c != 'A' && c != 'D' && c != 'E' && c != 'W') {
-							throw new MazeReadingException(fileName, lineNumber, "Invalid character in maze definition");
+							throw new MazeReadingException(fileName, lineNumber,
+									"Invalid character in maze definition");
 						}
 						int row = lineNumber - 1;
 						switch (c) {
@@ -191,11 +191,10 @@ public class Maze implements Graph {
 
 				this.fileName = fileName;
 				reader.close();
-			}
-			catch (MazeReadingException e) {
+			} catch (MazeReadingException e) {
 				System.out.println(e.getMessage());
-				System.out.println(
-						"Error reading file " + e.getFileName() + " at line " + e.getLineNumber() + ": " + e.getMessage());
+				System.out.println("Error reading file " + e.getFileName() + " at line " + e.getLineNumber() + ": "
+						+ e.getMessage());
 			} catch (IOException e) {
 				System.out.println(e.getStackTrace());
 				System.out.println("Error reading file " + fileName + ": " + e.getMessage());
@@ -393,7 +392,7 @@ public class Maze implements Graph {
 	public boolean hasArrivalBox() {
 		// Iterate through the boxes in the maze
 		for (int row = 0; row < length; row++) {
-			for (int col = 0; col< width; col++) {
+			for (int col = 0; col < width; col++) {
 				// Check if the current box is a departure box
 				if (maze[row][col].isArrival()) {
 					// Return the departure box

@@ -32,7 +32,7 @@ public class MazeController {
 	private MazeState state;
 	// View
 	private final MazeView view;
-	////Custom Maze Dimensions
+	//// Custom Maze Dimensions
 	private final MazeCustomNumRowsListener mazeCustomNumRowsListener;
 	private final MazeCustomNumColsListener mazeCustomNumColsListener;
 	//// Buttons
@@ -53,7 +53,7 @@ public class MazeController {
 
 		this.maze = new Maze(labyrinthFileName);
 		this.boxType = null;
-		
+
 		this.mazeCustomNumRowsListener = new MazeCustomNumRowsListener(this);
 		this.mazeCustomNumColsListener = new MazeCustomNumColsListener(this);
 
@@ -89,7 +89,7 @@ public class MazeController {
 	public void setMazeNumCols(int numCols) {
 		this.numCols = numCols;
 	}
-	
+
 	public MazeGeneratorListener getMazeGeneratorListener() {
 		return mazeGeneratorListener;
 	}
@@ -109,11 +109,11 @@ public class MazeController {
 	public MazeLoadListener getMazeLoadListener() {
 		return mazeLoadListener;
 	}
-	
+
 	public MazeSaveListener getMazeSaveListener() {
 		return mazeSaveListener;
 	}
-	
+
 	public MazeCustomNumRowsListener getMazeCustomNumRowsListener() {
 		return mazeCustomNumRowsListener;
 	}
@@ -134,14 +134,14 @@ public class MazeController {
 		view.repaintMaze(maze);
 		view.resize();
 	}
-	
+
 	public void save(String fileName) {
 		maze.saveToTextFile(fileName);
 	}
-	
+
 	public void generate() {
 		maze.setSize(numRows, numCols);
-		maze.initEmptyMaze(numRows,  numCols);
+		maze.initEmptyMaze(numRows, numCols);
 		view.resize();
 	}
 
