@@ -25,12 +25,14 @@ public class MazeSolver {
 	}
 
 	public void initMazeSolver() {
-		maze.displayMaze();
-		Vertex startVertex = maze.getStartVertex();
-		Vertex endVertex = maze.getEndVertex();
-		ShortestPaths shortestPaths = Dijkstra.dijkstra(maze, startVertex, endVertex);
-		List<Vertex> path = shortestPaths.getShortestPath(endVertex);
-		maze.markShortestPath(path);
-		maze.displayMaze();
+		if (maze.hasArrivalBox() && maze.hasDepartureBox()) {
+			//maze.displayMaze();
+			Vertex startVertex = maze.getStartVertex();
+			Vertex endVertex = maze.getEndVertex();
+			ShortestPaths shortestPaths = Dijkstra.dijkstra(maze, startVertex, endVertex);
+			List<Vertex> path = shortestPaths.getShortestPath(endVertex);
+			maze.markShortestPath(path);
+			//maze.displayMaze();
+		}
 	}
 }
