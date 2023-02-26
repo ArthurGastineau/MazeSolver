@@ -1,10 +1,10 @@
 package controller;
 
-import java.awt.event.ActionListener;
-
+import controller.listeners.MazeBoxSelectionRadioListener;
 import controller.listeners.MazeResetListener;
 import controller.listeners.MazeSolverListener;
 import model.maze.Maze;
+import model.BoxType;
 import model.MazeSolver;
 import model.MazeState;
 import view.MazeView;
@@ -25,6 +25,7 @@ public class MazeController {
 	// View
 	private final MazeView view;
 	// Buttons
+	private final MazeBoxSelectionRadioListener mazeBoxSelectionRadioListener;
 	private final MazeSolverListener mazeSolverListener;
 	private final MazeResetListener mazeResetListener;
 	//
@@ -33,6 +34,7 @@ public class MazeController {
 	private MazeSolver solver;
 	private int numRows;
 	private int numCols;
+	private BoxType boxType;
 
 	public MazeController() {
 		this.state = MazeState.INIT;
@@ -41,7 +43,9 @@ public class MazeController {
 		int[] vals = maze.fromFileGetMazeSize(labyrinthFileName);
 		maze.setSize(vals[0], vals[1]);
 		maze.initFromTextFile(labyrinthFileName);
-
+		this.boxType = null;
+		
+		this.mazeBoxSelectionRadioListener = new MazeBoxSelectionRadioListener(this);
 		this.mazeSolverListener = new MazeSolverListener(this);
 		this.mazeResetListener = new MazeResetListener(this);
 
@@ -49,6 +53,18 @@ public class MazeController {
 
 		this.numRows = maze.getLength();
 		this.numCols = maze.getWidth();
+	}
+	
+	public MazeState getState() {
+		return state;
+	}
+	
+	public BoxType getBoxType() {
+		return boxType;
+	}
+	
+	public void setBoxType(BoxType boxType) {
+		this.boxType = boxType;
 	}
 
 	public void setMazeNumRows(int numRows) {
@@ -58,9 +74,17 @@ public class MazeController {
 	public void setMazeNumCols(int numCols) {
 		this.numCols = numCols;
 	}
+	
+	public MazeBoxSelectionRadioListener getMazeBoxSelectionRadioListener() {
+		return mazeBoxSelectionRadioListener;
+	}
 
 	public MazeSolverListener getMazeSolverListener() {
 		return mazeSolverListener;
+	}
+	
+	public MazeResetListener getMazeResetListener() {
+		return mazeResetListener;
 	}
 
 	public void solveMaze() {
@@ -81,14 +105,6 @@ public class MazeController {
 
 		maze.resetMaze();
 		view.resetView();
-	}
-
-	/**
-	 * @return
-	 */
-	public ActionListener getMazeResetListener() {
-		// TODO Auto-generated method stub
-		return mazeResetListener;
 	}
 
 }

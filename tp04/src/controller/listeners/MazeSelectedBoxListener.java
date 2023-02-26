@@ -3,9 +3,7 @@
  */
 package controller.listeners;
 
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
 
 import controller.MazeController;
 import controller.MazeMotionListener;
