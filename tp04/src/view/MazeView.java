@@ -10,6 +10,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import controller.MazeController;
@@ -72,6 +73,10 @@ public class MazeView extends JFrame {
 	 */
 	public void resetView() {
 		mazePanel.repaint();
+	}
+	
+	public JPanel getGuiPanel() {
+		return guiPanel;
 	}
 
 	/**

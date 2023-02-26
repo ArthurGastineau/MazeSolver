@@ -79,7 +79,6 @@ public class MazePanel extends JPanel {
 	}
 
 	public void repaintMaze(Maze maze) {
-		System.out.println("Repaint");
 		this.maze = maze;
 		repaint();
 	}

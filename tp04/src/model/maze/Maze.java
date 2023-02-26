@@ -30,8 +30,6 @@ public class Maze implements Graph {
 	}
 	
 	public Maze (String fileName) {
-		int[] vals = fromFileGetMazeSize(fileName);
-		setSize(vals[0], vals[1]);
 		initFromTextFile(fileName);
 	}
 
@@ -148,6 +146,8 @@ public class Maze implements Graph {
 
 	public final void initFromTextFile(String fileName) {
 		try {
+			int[] vals = fromFileGetMazeSize(fileName);
+			setSize(vals[0], vals[1]);
 
 			Path path = Paths.get(fileName);
 

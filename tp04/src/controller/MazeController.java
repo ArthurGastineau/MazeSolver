@@ -1,6 +1,9 @@
 package controller;
 
+import java.awt.event.ActionListener;
+
 import controller.listeners.MazeBoxSelectionRadioListener;
+import controller.listeners.MazeLoadListener;
 import controller.listeners.MazeResetListener;
 import controller.listeners.MazeSolverListener;
 import model.maze.Maze;
@@ -28,6 +31,7 @@ public class MazeController {
 	private final MazeBoxSelectionRadioListener mazeBoxSelectionRadioListener;
 	private final MazeSolverListener mazeSolverListener;
 	private final MazeResetListener mazeResetListener;
+	private final MazeLoadListener mazeLoadListener;
 	//
 	private MazeState state;
 	// Listeners
@@ -45,6 +49,7 @@ public class MazeController {
 		this.mazeBoxSelectionRadioListener = new MazeBoxSelectionRadioListener(this);
 		this.mazeSolverListener = new MazeSolverListener(this);
 		this.mazeResetListener = new MazeResetListener(this);
+		this.mazeLoadListener = new MazeLoadListener(this);
 
 		this.view = new MazeView(maze, this);
 
@@ -84,11 +89,21 @@ public class MazeController {
 		return mazeResetListener;
 	}
 
+	public MazeLoadListener getMazeLoadListener() {
+		return mazeLoadListener;
+	}
+
 	public void solveMaze() {
 		solver = new MazeSolver(maze, this);
 		solver.initMazeSolver();
 		view.repaintMaze(maze);
 		state = MazeState.SOLVED;
+	}
+	
+	public void load(String fileName) {
+		System.out.println("Loading");
+		maze.initFromTextFile(fileName);
+		view.repaintMaze(maze);
 	}
 
 	/**
