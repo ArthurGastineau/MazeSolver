@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.*;
 
+import model.MazeConstants;
 import model.graph.*;
 
 public class Maze implements Graph {
@@ -19,8 +20,6 @@ public class Maze implements Graph {
 
 	private MazeBox selectedBox;
 
-	public static final int MAX_LENGTH = 50;
-	public static final int MAX_WIDTH = 50;
 
 	private String fileName;
 
@@ -32,9 +31,8 @@ public class Maze implements Graph {
 	public Maze(String fileName) {
 		initFromTextFile(fileName);
 	}
-
 	public Maze() {
-		setSize(MAX_LENGTH, MAX_WIDTH);
+		setSize(MazeConstants.MAX_NUM_ROWS, MazeConstants.MAX_NUM_COLS);
 		initEmptyMaze(length, width);
 	}
 
@@ -45,25 +43,27 @@ public class Maze implements Graph {
 	}
 
 	public void addEmptyBox(int row, int col) {
-		// test if in the maze
-		maze[row][col] = new EmptyBox(this, row, col);
+		if (row >= 0 && row < length && col >= 0 && col < width)
+			maze[row][col] = new EmptyBox(this, row, col);
 	}
 
 	public void addArrivalBox(int row, int col) {
-		// test if in the maze
-		maze[row][col] = new ArrivalBox(this, row, col);
-		endVertex = (Vertex) maze[row][col];
+		if (row >= 0 && row < length && col >= 0 && col < width) {
+			maze[row][col] = new ArrivalBox(this, row, col);
+			endVertex = (Vertex) maze[row][col];
+		}
 	}
 
 	public void addDepartureBox(int row, int col) {
-		// test if in the maze
-		maze[row][col] = new DepartureBox(this, row, col);
-		startVertex = (Vertex) maze[row][col];
+		if (row >= 0 && row < length && col >= 0 && col < width) {
+			maze[row][col] = new DepartureBox(this, row, col);
+			startVertex = (Vertex) maze[row][col];
+		}
 	}
 
 	public void addWallBox(int row, int col) {
-		// test if in the maze
-		maze[row][col] = new WallBox(this, row, col);
+		if (row >= 0 && row < length && col >= 0 && col < width)
+			maze[row][col] = new WallBox(this, row, col);
 	}
 
 	// get successors of a vertex
@@ -211,10 +211,8 @@ public class Maze implements Graph {
 					MazeBox box = this.getMaze()[row][col];
 					if (box.isArrival()) {
 						writer.print('A');
-
 					} else if (box.isDeparture()) {
 						writer.print('D');
-
 					} else if (box.isEmpty()) {
 						writer.print('E');
 					} else if (box.isWall()) {
@@ -238,10 +236,8 @@ public class Maze implements Graph {
 					MazeBox box = this.getMaze()[row][col];
 					if (box.isArrival()) {
 						writer.print('A');
-
 					} else if (box.isDeparture()) {
 						writer.print('D');
-
 					} else if (shortestPath.contains((Vertex) box)) {
 						writer.print('.');
 					} else if (box.isEmpty()) {
@@ -293,12 +289,11 @@ public class Maze implements Graph {
 	}
 
 	public void displayMaze() {
-		for (int r = 0; r < getLength(); r++) {
-			for (int c = 0; c < getWidth(); c++) {
-				MazeBox box = this.getBox(r, c);
+		for (int row = 0; row < getLength(); row++) {
+			for (int col = 0; col < getWidth(); col++) {
+				MazeBox box = this.getBox(row, col);
 				if (box.isArrival()) {
 					System.out.print('A');
-
 				} else if (box.isDeparture()) {
 					System.out.print('D');
 
@@ -364,22 +359,6 @@ public class Maze implements Graph {
 		return null;
 	}
 
-	public void modifyBox(int col, int row, char c) {
-		switch (c) {
-		/*
-		 * case 'A': addArrivalBox(row, col); endVertex = (Vertex) getMaze()[row][col];
-		 * break; case 'D': addDepartureBox(row, col); startVertex = (Vertex)
-		 * getMaze()[row][col]; break;
-		 */
-		case 'E':
-			addEmptyBox(row, col);
-			break;
-		case 'W':
-			addWallBox(row, col);
-			break;
-		}
-	}
-
 	public int getLength() {
 		return length;
 	}
@@ -388,20 +367,20 @@ public class Maze implements Graph {
 		return width;
 	}
 
-	public void initEmptyMaze(int row, int col) {
-		for (int i = 0; i < row; i++) {
-			for (int j = 0; j < col; j++) {
-				addEmptyBox(i, j);
+	public void initEmptyMaze(int rows, int cols) {
+		for (int row = 0; row < rows; row++) {
+			for (int col = 0; col < cols; col++) {
+				addEmptyBox(row, col);
 			}
 		}
 	}
 
 	public boolean hasDepartureBox() {
 		// Iterate through the boxes in the maze
-		for (int i = 0; i < length; i++) {
-			for (int j = 0; j < width; j++) {
+		for (int row = 0; row < length; row++) {
+			for (int col = 0; col < width; col++) {
 				// Check if the current box is a departure box
-				if (maze[i][j].isDeparture()) {
+				if (maze[row][col].isDeparture()) {
 					// Return the departure box
 					return true;
 				}
@@ -413,10 +392,10 @@ public class Maze implements Graph {
 
 	public boolean hasArrivalBox() {
 		// Iterate through the boxes in the maze
-		for (int i = 0; i < length; i++) {
-			for (int j = 0; j < width; j++) {
+		for (int row = 0; row < length; row++) {
+			for (int col = 0; col< width; col++) {
 				// Check if the current box is a departure box
-				if (maze[i][j].isArrival()) {
+				if (maze[row][col].isArrival()) {
 					// Return the departure box
 					return true;
 				}

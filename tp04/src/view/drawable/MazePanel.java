@@ -168,8 +168,8 @@ public class MazePanel extends JPanel {
 	 * enables the user to be able to customize the dimensions of the maze.
 	 */
 	public void resize() {
-		int mazeWidth = (int) (maze.getWidth() * MazeDrawable.getBoxSize() * SQRT_3);
-		int mazeLength = (int) (maze.getLength() * MazeDrawable.getBoxSize() * 1.5);
+		int mazeWidth = (int) (maze.getWidth() * MazeDrawable.getBoxSize() * SQRT_3 + xOffset * 1.5);
+		int mazeLength = (int) (maze.getLength() * MazeDrawable.getBoxSize() * 1.5 + yOffset * 1.3);
 
 		mazeDimension = new Dimension(mazeWidth, mazeLength);
 		setMinimumSize(mazeDimension);

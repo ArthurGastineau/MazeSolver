@@ -47,20 +47,24 @@ public class GUIPanel extends JPanel implements ActionListener {
 		addComponent(this, customMazeSizeInputs, 0, 2, 1, 1,
 				GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, insets);
 
-		// Solve Method Radio
+		// Generate Maze Button
+		initButton(new JButton("Generate"), "generate", 3,
+				mazeController.getMazeGeneratorListener(), insets);
+				
+		// Box Selection Radio
 		JPanel boxSelectionRadio = new BoxTypeRadioPanel(mazeController.getMazeBoxSelectionRadioListener(),
 				mazeController.getBoxType());
-		addComponent(this, boxSelectionRadio, 0, 3, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
+		addComponent(this, boxSelectionRadio, 0, 4, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
 				insets);
 
 		// Solve Maze Button
-		initButton(new JButton("Solve"), "solve", 4, mazeController.getMazeSolverListener(), insets);
+		initButton(new JButton("Solve"), "solve", 5, mazeController.getMazeSolverListener(), insets);
 
 		// Reset Maze Button
-		initButton(new JButton("Reset"), "reset", 5, mazeController.getMazeResetListener(), insets);
+		initButton(new JButton("Reset"), "reset", 6, mazeController.getMazeResetListener(), insets);
 
 		// Exit Button
-		initButton(new JButton("Exit"), "exit", 6, this, insets);
+		initButton(new JButton("Exit"), "exit", 7, this, insets);
 	}
 
 	/**

@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import controller.listeners.MazeBoxSelectionRadioListener;
 import controller.listeners.MazeCustomNumColsListener;
 import controller.listeners.MazeCustomNumRowsListener;
+import controller.listeners.MazeGeneratorListener;
 import controller.listeners.MazeLoadListener;
 import controller.listeners.MazeResetListener;
 import controller.listeners.MazeSaveListener;
@@ -35,6 +36,7 @@ public class MazeController {
 	private final MazeCustomNumRowsListener mazeCustomNumRowsListener;
 	private final MazeCustomNumColsListener mazeCustomNumColsListener;
 	//// Buttons
+	private final MazeGeneratorListener mazeGeneratorListener;
 	private final MazeBoxSelectionRadioListener mazeBoxSelectionRadioListener;
 	private final MazeSolverListener mazeSolverListener;
 	private final MazeResetListener mazeResetListener;
@@ -55,6 +57,7 @@ public class MazeController {
 		this.mazeCustomNumRowsListener = new MazeCustomNumRowsListener(this);
 		this.mazeCustomNumColsListener = new MazeCustomNumColsListener(this);
 
+		this.mazeGeneratorListener = new MazeGeneratorListener(this);
 		this.mazeBoxSelectionRadioListener = new MazeBoxSelectionRadioListener(this);
 		this.mazeSolverListener = new MazeSolverListener(this);
 		this.mazeResetListener = new MazeResetListener(this);
@@ -81,10 +84,16 @@ public class MazeController {
 
 	public void setMazeNumRows(int numRows) {
 		this.numRows = numRows;
+		System.out.println("row = " + numRows);
 	}
 
 	public void setMazeNumCols(int numCols) {
 		this.numCols = numCols;
+		System.out.println("col = " + numCols);
+	}
+	
+	public MazeGeneratorListener getMazeGeneratorListener() {
+		return mazeGeneratorListener;
 	}
 
 	public MazeBoxSelectionRadioListener getMazeBoxSelectionRadioListener() {
@@ -129,6 +138,12 @@ public class MazeController {
 	
 	public void save(String fileName) {
 		maze.saveToTextFile(fileName);
+	}
+	
+	public void generate() {
+		maze.setSize(numRows, numCols);
+		maze.initEmptyMaze(numRows,  numCols);
+		view.resize();
 	}
 
 	/**
