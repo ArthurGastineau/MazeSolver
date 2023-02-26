@@ -25,16 +25,18 @@ public class Maze implements Graph {
 	private String fileName;
 
 	public Maze(int length, int width) {
-		this.length = length;
-		this.width = width;
-		maze = new MazeBox[length][width];
+		setSize(length, width);
 		initEmptyMaze(length, width);
+	}
+	
+	public Maze (String fileName) {
+		int[] vals = fromFileGetMazeSize(fileName);
+		setSize(vals[0], vals[1]);
+		initFromTextFile(fileName);
 	}
 
 	public Maze() {
-		length = MAX_LENGTH;
-		width = MAX_WIDTH;
-		maze = new MazeBox[length][width];
+		setSize(MAX_LENGTH, MAX_WIDTH);
 		initEmptyMaze(length, width);
 	}
 

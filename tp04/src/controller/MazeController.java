@@ -39,10 +39,7 @@ public class MazeController {
 	public MazeController() {
 		this.state = MazeState.INIT;
 
-		this.maze = new Maze();
-		int[] vals = maze.fromFileGetMazeSize(labyrinthFileName);
-		maze.setSize(vals[0], vals[1]);
-		maze.initFromTextFile(labyrinthFileName);
+		this.maze = new Maze(labyrinthFileName);
 		this.boxType = null;
 		
 		this.mazeBoxSelectionRadioListener = new MazeBoxSelectionRadioListener(this);

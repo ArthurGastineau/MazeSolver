@@ -40,7 +40,7 @@ public class BoxTypeRadioPanel extends JPanel{
 			JRadioButton boxTypeOption = new JRadioButton(boxType.getName());
 			boxTypeOption.addActionListener(boxSelectionRadioListener);
 	
-			if (boxType == mazeBoxType) { // Defaults to the initial maze SolverType set by the controller
+			if (boxType == mazeBoxType) {
 				boxTypeOption.setSelected(true);
 			}
 	
