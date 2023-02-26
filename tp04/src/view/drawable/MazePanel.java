@@ -27,6 +27,7 @@ public class MazePanel extends JPanel {
 	private Maze maze;
 	private int yOffset, xOffset;
 	private Dimension mazeDimension;
+	private boolean outOfMaze = true;
 	private static final double SQRT_3 = Math.sqrt(3);
 
 	public MazePanel(Maze maze, MazeController mazeController) {
@@ -113,11 +114,13 @@ public class MazePanel extends JPanel {
 		}
 		// Check if the mouse is in the maze
 		if (closestDistance < size) {
+			outOfMaze = false;
 			// Store the new selected row and column in the model
 			maze.setSelected(rowClosest, colClosest);
 			// Repaint the maze to show the new selected box color
 			repaint();
 		} else {
+			outOfMaze = true;
 			// Store the new selected row and column in the model
 			maze.setSelected(-1, -1);
 			// Repaint the maze to show the new selected box color
@@ -126,25 +129,36 @@ public class MazePanel extends JPanel {
 	}
 
 	public void setMazeBox() {
-		int row = maze.getSelected().getRow();
-		int col = maze.getSelected().getCol();
+		if (!outOfMaze) {
+			int row = maze.getSelected().getRow();
+			int col = maze.getSelected().getCol();
 
-		if (row >= 0 && row < maze.getLength() && col >= 0 && col < maze.getWidth()) {
-			// test the state of radio button
-			if (mazeController.getBoxType() == BoxType.EMPTY) {
-				maze.addEmptyBox(row, col);
-			} else if (mazeController.getBoxType() == BoxType.WALL) {
-				maze.addWallBox(row, col);
-			} else if (mazeController.getBoxType() == BoxType.DEPARTURE) {
-				if (!maze.hasDepartureBox()) {
-					maze.addDepartureBox(row, col);
+			if (row >= 0 && row < maze.getLength() && col >= 0 && col < maze.getWidth()) {
+				System.out.println(row + " : " + col);
+				// test the state of radio button
+				if (mazeController.getBoxType() == BoxType.EMPTY) {
+					maze.addEmptyBox(row, col);
+				} else if (mazeController.getBoxType() == BoxType.WALL) {
+					maze.addWallBox(row, col);
+				} else if (mazeController.getBoxType() == BoxType.DEPARTURE) {
+					if (!maze.hasDepartureBox()) {
+						maze.addDepartureBox(row, col);
+					}
+					else {
+						maze.addEmptyBox(maze.getStartVertex().getRow(), maze.getStartVertex().getCol());
+						maze.addDepartureBox(row, col);
+					}
+				} else if (mazeController.getBoxType() == BoxType.ARRIVAL) {
+					if (!maze.hasArrivalBox()) {
+						maze.addArrivalBox(row, col);
+					}
+					else {
+						maze.addEmptyBox(maze.getEndVertex().getRow(), maze.getEndVertex().getCol());
+						maze.addArrivalBox(row, col);
+					}
 				}
-			} else if (mazeController.getBoxType() == BoxType.ARRIVAL) {
-				if (!maze.hasArrivalBox()) {
-					maze.addArrivalBox(row, col);
-				}
+				repaint();
 			}
-			repaint();
 		}
 	}
 

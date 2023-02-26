@@ -145,56 +145,61 @@ public class Maze implements Graph {
 	}
 
 	public final void initFromTextFile(String fileName) {
-		try {
-			int[] vals = fromFileGetMazeSize(fileName);
-			setSize(vals[0], vals[1]);
-
-			Path path = Paths.get(fileName);
-
-			BufferedReader reader = Files.newBufferedReader(path);
-
-			String line = null;
-
-			int lineNumber = 0;
-
-			while ((line = reader.readLine()) != null) {
-				lineNumber++;
-				if (line.length() != this.length) {
-					throw new MazeReadingException(fileName, lineNumber, "Incorrect number of columns");
-				}
-				for (int col = 0; col < this.width; col++) {
-					char c = line.charAt(col);
-					if (c != 'A' && c != 'D' && c != 'E' && c != 'W') {
-						throw new MazeReadingException(fileName, lineNumber, "Invalid character in maze definition");
-					}
-					int row = lineNumber - 1;
-					switch (c) {
-					case 'A':
-						addArrivalBox(row, col);
-						break;
-					case 'D':
-						addDepartureBox(row, col);
-						break;
-					case 'E':
-						addEmptyBox(row, col);
-						break;
-					case 'W':
-						addWallBox(row, col);
-						break;
-					}
-				}
-			}
-			this.fileName = fileName;
-			reader.close();
+		if (fileName == null || !fileName.endsWith(".maze")) {
+			return;
 		}
+		else {
+			try {
+				int[] vals = fromFileGetMazeSize(fileName);
+				setSize(vals[0], vals[1]);
 
-		catch (MazeReadingException e) {
-			System.out.println(e.getMessage());
-			System.out.println(
-					"Error reading file " + e.getFileName() + " at line " + e.getLineNumber() + ": " + e.getMessage());
-		} catch (IOException e) {
-			System.out.println(e.getStackTrace());
-			System.out.println("Error reading file " + fileName + ": " + e.getMessage());
+				Path path = Paths.get(fileName);
+
+				BufferedReader reader = Files.newBufferedReader(path);
+
+				String line = null;
+
+				int lineNumber = 0;
+
+				while ((line = reader.readLine()) != null) {
+					lineNumber++;
+					if (line.length() != this.length) {
+						throw new MazeReadingException(fileName, lineNumber, "Incorrect number of columns");
+					}
+					for (int col = 0; col < this.width; col++) {
+						char c = line.charAt(col);
+						if (c != 'A' && c != 'D' && c != 'E' && c != 'W') {
+							throw new MazeReadingException(fileName, lineNumber, "Invalid character in maze definition");
+						}
+						int row = lineNumber - 1;
+						switch (c) {
+						case 'A':
+							addArrivalBox(row, col);
+							break;
+						case 'D':
+							addDepartureBox(row, col);
+							break;
+						case 'E':
+							addEmptyBox(row, col);
+							break;
+						case 'W':
+							addWallBox(row, col);
+							break;
+						}
+					}
+				}
+
+				this.fileName = fileName;
+				reader.close();
+			}
+			catch (MazeReadingException e) {
+				System.out.println(e.getMessage());
+				System.out.println(
+						"Error reading file " + e.getFileName() + " at line " + e.getLineNumber() + ": " + e.getMessage());
+			} catch (IOException e) {
+				System.out.println(e.getStackTrace());
+				System.out.println("Error reading file " + fileName + ": " + e.getMessage());
+			}
 		}
 	}
 
@@ -255,7 +260,7 @@ public class Maze implements Graph {
 	}
 
 	public void markShortestPath(List<Vertex> shortestPath) {
-
+		deleteShortestPath();
 		// Iterating through the shortest path
 		for (Vertex v : shortestPath) {
 			this.maze[v.getRow()][v.getCol()].setHasCrossed(true);
