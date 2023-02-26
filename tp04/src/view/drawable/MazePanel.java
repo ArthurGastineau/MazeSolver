@@ -10,7 +10,9 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 
 import controller.MazeController;
+import controller.listeners.MazeBoxClickListener;
 import controller.listeners.MazeSelectedBoxListener;
+import model.BoxType;
 import model.maze.Maze;
 
 /**
@@ -47,6 +49,7 @@ public class MazePanel extends JPanel {
 		setBackground(BACKGROUND);
 
 		addMouseMotionListener(new MazeSelectedBoxListener(this, mazeController));
+		addMouseListener(new MazeBoxClickListener(this, mazeController));
 
 		repaint();
 	}
@@ -120,6 +123,32 @@ public class MazePanel extends JPanel {
 			// Store the new selected row and column in the model
 			maze.setSelected(-1, -1);
 			// Repaint the maze to show the new selected box color
+			repaint();
+		}
+	}
+	
+	public void setMazeBox() {
+		int row = maze.getSelected().getRow();
+		int col = maze.getSelected().getCol();
+		
+		if (row >= 0 && row < maze.getLength() && col >= 0 && col < maze.getWidth()) {
+			// test the state of radio button
+			if (mazeController.getBoxType() == BoxType.EMPTY) {
+				maze.addEmptyBox(row, col);
+			}
+			else if (mazeController.getBoxType() == BoxType.WALL) {
+				maze.addWallBox(row, col);
+			}
+			else if (mazeController.getBoxType() == BoxType.DEPARTURE) {
+				if (!maze.hasDepartureBox()) {
+					maze.addDepartureBox(row, col);
+				}
+			}
+			else if (mazeController.getBoxType() == BoxType.ARRIVAL) {
+				if (!maze.hasArrivalBox()) {
+					maze.addArrivalBox(row, col);
+				}
+			}
 			repaint();
 		}
 	}
