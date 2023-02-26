@@ -1,6 +1,11 @@
 package model.maze;
 
-@SuppressWarnings("serial")
+/**
+ * 
+ *
+ * @author Arthur Gastineau
+ */
+
 public class MazeReadingException extends Exception {
 
 	String fileName;

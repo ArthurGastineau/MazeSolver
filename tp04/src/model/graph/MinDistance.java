@@ -1,5 +1,11 @@
 package model.graph;
 
+/**
+ * 
+ *
+ * @author Arthur Gastineau
+ */
+
 public interface MinDistance {
 	// initialization of the valuations of the vertexes different from root
 	public void initValuations(Graph graph);

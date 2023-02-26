@@ -1,5 +1,11 @@
 package model.graph;
 
+/**
+ * 
+ *
+ * @author Arthur Gastineau
+ */
+
 public interface Vertex {
 	//
 	public int getRow();

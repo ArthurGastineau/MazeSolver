@@ -17,8 +17,10 @@ import model.BoxType;
 import model.maze.Maze;
 
 /**
- * @author arthur A JPanel of the maze. This panel is where the maze is drawn,
- *         and where the user can pick the start and end points.
+ * A JPanel of the maze. This panel is where the maze is drawn, and where the
+ * user can pick the start and end points.
+ * 
+ * @author Arthur Gastineau
  */
 @SuppressWarnings("serial")
 public class MazePanel extends JPanel {
@@ -135,24 +137,23 @@ public class MazePanel extends JPanel {
 			int col = maze.getSelected().getCol();
 
 			if (row >= 0 && row < maze.getLength() && col >= 0 && col < maze.getWidth()) {
-				System.out.println(row + " : " + col);
 				// test the state of radio button
 				if (mazeController.getBoxType() == BoxType.EMPTY) {
 					maze.addEmptyBox(row, col);
 				} else if (mazeController.getBoxType() == BoxType.WALL) {
 					maze.addWallBox(row, col);
 				} else if (mazeController.getBoxType() == BoxType.DEPARTURE) {
-					if (!maze.hasDepartureBox()) {
+					if (maze.hasDepartureBox()) {
+						maze.addEmptyBox(maze.getStartVertex().getRow(), maze.getStartVertex().getCol());
 						maze.addDepartureBox(row, col);
 					} else {
-						maze.addEmptyBox(maze.getStartVertex().getRow(), maze.getStartVertex().getCol());
 						maze.addDepartureBox(row, col);
 					}
 				} else if (mazeController.getBoxType() == BoxType.ARRIVAL) {
 					if (!maze.hasArrivalBox()) {
+						maze.addEmptyBox(maze.getEndVertex().getRow(), maze.getEndVertex().getCol());
 						maze.addArrivalBox(row, col);
 					} else {
-						maze.addEmptyBox(maze.getEndVertex().getRow(), maze.getEndVertex().getCol());
 						maze.addArrivalBox(row, col);
 					}
 				}

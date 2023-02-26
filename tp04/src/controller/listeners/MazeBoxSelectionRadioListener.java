@@ -10,11 +10,12 @@ import controller.MazeController;
 import model.BoxType;
 
 /**
- * @author arthur
  *
- *         An ActionListener (extending MazeActionListener) that is registered
- *         and listens for changes in the box type radio, and updates the maze
- *         accordingly on change.
+ * An ActionListener (extending MazeActionListener) that is registered and
+ * listens for changes in the box type radio, and updates the maze accordingly
+ * on change.
+ * 
+ * @author Arthur Gastineau
  */
 public class MazeBoxSelectionRadioListener extends MazeActionListener {
 

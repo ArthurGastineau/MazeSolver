@@ -20,9 +20,9 @@ import model.BoxType;
 import static view.drawable.DrawableHelper.addComponent;
 
 /**
- * @author arthur
- *
- *         A JPanel of box options radio
+ * A JPanel of box options radio
+ * 
+ * @author Arthur Gastineau
  */
 @SuppressWarnings("serial")
 public class BoxTypeRadioPanel extends JPanel {

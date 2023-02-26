@@ -9,9 +9,10 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
 /**
- * @author arthur
  *
- *         A helper class available to all classes in the view.
+ * A helper class available to all classes in the view.
+ * 
+ * @author Arthur Gastineau
  */
 
 class DrawableHelper {

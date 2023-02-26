@@ -1,15 +1,13 @@
-/**
- * 
- */
 package controller;
 
 import java.awt.event.ActionListener;
 
 /**
- * @author arthur
  * 
- *         An abstract ActionListener class. All ActionListeners extend this
- *         class to gain access to the maze controller.
+ * An abstract ActionListener class. All ActionListeners extend this class to
+ * gain access to the maze controller.
+ * 
+ * @author Arthur Gastineau
  */
 public abstract class MazeActionListener implements ActionListener {
 	protected final MazeController mazeController;

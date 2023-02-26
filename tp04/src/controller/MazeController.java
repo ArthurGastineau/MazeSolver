@@ -1,7 +1,5 @@
 package controller;
 
-import java.awt.event.ActionListener;
-
 import controller.listeners.MazeBoxSelectionRadioListener;
 import controller.listeners.MazeCustomNumColsListener;
 import controller.listeners.MazeCustomNumRowsListener;
@@ -17,18 +15,18 @@ import model.MazeState;
 import view.MazeView;
 
 /**
- * @author arthur
  * 
- *         The controller of the maze (i.e. the controller in the MVC design
- *         pattern). This is the main orchestrator of the application,
- *         initializing and controlling the maze and the maze view, handling GUI
- *         interactions,
+ * The controller of the maze (i.e. the controller in the MVC design pattern).
+ * This is the main orchestrator of the application, initializing and
+ * controlling the maze and the maze view, handling GUI interactions,
+ * 
+ * @author Arthur Gastineau
  */
 
 public class MazeController {
 	private final static String labyrinthFileName = "data/labyrinthe2.maze";
 	// Model
-	private Maze maze;
+	private final Maze maze;
 	private MazeState state;
 	// View
 	private final MazeView view;

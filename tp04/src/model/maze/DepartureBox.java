@@ -2,6 +2,12 @@ package model.maze;
 
 import java.awt.Color;
 
+/**
+ * 
+ *
+ * @author Arthur Gastineau
+ */
+
 public class DepartureBox extends MazeBox {
 
 	public DepartureBox(Maze maze, int row, int col) {

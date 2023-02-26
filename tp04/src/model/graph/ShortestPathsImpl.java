@@ -1,6 +1,12 @@
 package model.graph;
 
 import java.util.ArrayList;
+
+/**
+ * 
+ *
+ *		@author Arthur Gastineau 
+ */
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -8,7 +14,7 @@ import java.util.Map;
 
 public class ShortestPathsImpl implements ShortestPaths {
 
-	private Map<Vertex, Vertex> predecessors;
+	private final Map<Vertex, Vertex> predecessors;
 
 	public ShortestPathsImpl() {
 		this.predecessors = new HashMap<Vertex, Vertex>();

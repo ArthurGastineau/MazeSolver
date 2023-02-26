@@ -2,6 +2,12 @@ package model.graph;
 
 import java.util.List;
 
+/**
+ * 
+ *
+ * @author Arthur Gastineau
+ */
+
 public interface Graph {
 	// get successors of a vertex
 	public List<Vertex> getSuccessor(Vertex vertex);

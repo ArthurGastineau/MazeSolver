@@ -3,10 +3,16 @@ package model.graph;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 
+ *
+ * @author Arthur Gastineau
+ */
+
 public class MinDistanceImpl implements MinDistance {
 
-	private Map<Vertex, Integer> distanceMap;
-	private Vertex root;
+	private final Map<Vertex, Integer> distanceMap;
+	private final Vertex root;
 
 	public MinDistanceImpl(Vertex startVertex) {
 		distanceMap = new HashMap<Vertex, Integer>();

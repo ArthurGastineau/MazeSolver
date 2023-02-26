@@ -4,6 +4,12 @@ import java.awt.Color;
 
 import model.graph.Vertex;
 
+/**
+ * 
+ *
+ * @author Arthur Gastineau
+ */
+
 public abstract class MazeBox implements Vertex {
 
 	private boolean hasCrossed;
@@ -16,7 +22,7 @@ public abstract class MazeBox implements Vertex {
 		this.row = row;
 		this.col = col;
 		hasCrossed = false;
-		this.setMaze(maze);
+		this.maze = maze;
 	}
 
 	public void setHasCrossed(boolean state) {

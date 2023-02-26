@@ -4,9 +4,10 @@
 package model;
 
 /**
- * @author arthur
  *
- *         The potential states for the maze to be in.
+ * The potential states for the maze to be in.
+ * 
+ * @author Arthur Gastineau
  */
 
 public enum MazeState {

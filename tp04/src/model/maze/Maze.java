@@ -11,6 +11,12 @@ import java.nio.file.*;
 import model.MazeConstants;
 import model.graph.*;
 
+/**
+ * 
+ *
+ * @author Arthur Gastineau
+ */
+
 public class Maze implements Graph {
 	private MazeBox[][] maze;
 	private int length;
@@ -74,44 +80,44 @@ public class Maze implements Graph {
 		List<Vertex> neighbors = new ArrayList<Vertex>();
 
 		// check top-left neighbor
-		if ((row - 1) >= 0 && (col - 1) >= 0 && row % 2 == 0 && (maze[row - 1][col - 1].isWall()) == false) {
+		if ((row - 1) >= 0 && (col - 1) >= 0 && row % 2 == 0 && !maze[row - 1][col - 1].isWall()) {
 			neighbors.add(maze[row - 1][col - 1]);
 		}
-		if ((row - 1) >= 0 && (col) >= 0 && row % 2 == 1 && (maze[row - 1][col].isWall() == false)) {
+		if ((row - 1) >= 0 && (col) >= 0 && row % 2 == 1 && !maze[row - 1][col].isWall()) {
 			neighbors.add(maze[row - 1][col]);
 		}
 
 		// check top-right neighbor
-		if ((row - 1) >= 0 && (col) < width && row % 2 == 0 && (maze[row - 1][col].isWall() == false)) {
+		if ((row - 1) >= 0 && (col) < width && row % 2 == 0 && !maze[row - 1][col].isWall()) {
 			neighbors.add(maze[row - 1][col]);
 		}
-		if ((row - 1) >= 0 && (col + 1) < width && row % 2 == 1 && (maze[row - 1][col + 1].isWall() == false)) {
+		if ((row - 1) >= 0 && (col + 1) < width && row % 2 == 1 && !maze[row - 1][col + 1].isWall()) {
 			neighbors.add(maze[row - 1][col + 1]);
 		}
 
 		// check left neighbor
-		if ((col - 1) >= 0 && (maze[row][col - 1].isWall() == false)) {
+		if ((col - 1) >= 0 && !maze[row][col - 1].isWall()) {
 			neighbors.add(maze[row][col - 1]);
 		}
 
 		// check right neighbor
-		if ((col + 1) < width && (maze[row][col + 1].isWall() == false)) {
+		if ((col + 1) < width && !maze[row][col + 1].isWall()) {
 			neighbors.add(maze[row][col + 1]);
 		}
 
 		// check bottom-left neighbor
-		if ((row + 1) < length && (col - 1) >= 0 && row % 2 == 0 && (maze[row + 1][col - 1].isWall() == false)) {
+		if ((row + 1) < length && (col - 1) >= 0 && row % 2 == 0 && !maze[row + 1][col - 1].isWall()) {
 			neighbors.add(maze[row + 1][col - 1]);
 		}
-		if ((row + 1) < length && (col) >= 0 && row % 2 == 1 && (maze[row + 1][col].isWall() == false)) {
+		if ((row + 1) < length && (col) >= 0 && row % 2 == 1 && !maze[row + 1][col].isWall()) {
 			neighbors.add(maze[row + 1][col]);
 		}
 
 		// check bottom-right neighbor
-		if ((row + 1) < length && (col) < width && row % 2 == 0 && (maze[row + 1][col].isWall() == false)) {
+		if ((row + 1) < length && (col) < width && row % 2 == 0 && !maze[row + 1][col].isWall()) {
 			neighbors.add(maze[row + 1][col]);
 		}
-		if ((row + 1) < length && (col + 1) < width && row % 2 == 1 && (maze[row + 1][col + 1].isWall() == false)) {
+		if ((row + 1) < length && (col + 1) < width && row % 2 == 1 && !maze[row + 1][col + 1].isWall()) {
 			neighbors.add(maze[row + 1][col + 1]);
 		}
 
@@ -184,6 +190,8 @@ public class Maze implements Graph {
 							break;
 						case 'W':
 							addWallBox(row, col);
+							break;
+						default:
 							break;
 						}
 					}
@@ -350,8 +358,7 @@ public class Maze implements Graph {
 					sizeMaxLine = line.length();
 			}
 			reader.close();
-			int[] size = { lineNumber, sizeMaxLine };
-			return size;
+			return new int[] { lineNumber, sizeMaxLine };
 		} catch (IOException e) {
 			System.out.println("Error reading file " + fileName + ": " + e.getMessage());
 		}

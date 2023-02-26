@@ -2,6 +2,12 @@ package model.graph;
 
 import java.util.List;
 
+/**
+ * 
+ *
+ * @author Arthur Gastineau
+ */
+
 public interface ShortestPaths {
 	// set the vertex son having the lowest valuation of his arc going to father
 	public void setPrevious(Vertex son, Vertex father);

@@ -9,7 +9,9 @@ import java.awt.Graphics;
 import model.maze.MazeBox;
 
 /**
- * @author arthur Class responsible for drawing an individual box in the maze.
+ * Class responsible for drawing an individual box in the maze.
+ * 
+ * @author Arthur Gastineau
  */
 public class MazeBoxDrawable {
 

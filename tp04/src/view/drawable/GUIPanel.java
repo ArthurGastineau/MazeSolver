@@ -3,7 +3,6 @@
  */
 package view.drawable;
 
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -18,8 +17,9 @@ import controller.MazeController;
 import static view.drawable.DrawableHelper.addComponent;
 
 /**
- * @author arthur
+ * 
  *
+ * @author Arthur Gastineau
  */
 
 @SuppressWarnings("serial")
@@ -95,7 +95,7 @@ public class GUIPanel extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent mazeGuiButtonClick) {
 		String buttonIntention = mazeGuiButtonClick.getActionCommand();
 
-		if (buttonIntention.equals("exit")) {
+		if ("exit".equals(buttonIntention)) {
 			System.exit(0);
 		}
 	}

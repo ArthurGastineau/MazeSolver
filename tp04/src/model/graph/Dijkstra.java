@@ -1,5 +1,11 @@
 package model.graph;
 
+/**
+ * 
+ *
+ * @author Arthur Gastineau
+ */
+
 public class Dijkstra {
 	public static ShortestPaths dijkstra(Graph graph, Vertex startVertex, Vertex endVertex,
 			ProcessedVertexes processedVertexes, MinDistance minDistance, Distance distance,
@@ -11,9 +17,9 @@ public class Dijkstra {
 
 		// for all vertexes except the start one we have minDistance(vertex) = infinity
 		minDistance.initValuations(graph);
-		while (processedVertexes.present(endVertex) == false) {
+		while (!processedVertexes.present(endVertex)) {
 			for (Vertex succVertex : graph.getSuccessor(pivotVertex)) {
-				if (processedVertexes.present(succVertex) == false) {
+				if (!processedVertexes.present(succVertex)) {
 					if ((minDistance.getShortestPath(pivotVertex)
 							+ distance.getValuation(pivotVertex, succVertex)) < (minDistance
 									.getShortestPath(succVertex))) {
@@ -27,8 +33,7 @@ public class Dijkstra {
 
 			double temp = Double.POSITIVE_INFINITY;
 			for (Vertex nextVertex : graph.getAllVertexes()) {
-				if (processedVertexes.present(nextVertex) == false
-						&& (minDistance.getShortestPath(nextVertex) < temp)) {
+				if (!processedVertexes.present(nextVertex) && (minDistance.getShortestPath(nextVertex) < temp)) {
 					temp = minDistance.getShortestPath(nextVertex);
 					pivotVertex = nextVertex;
 				}

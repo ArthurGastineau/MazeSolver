@@ -9,9 +9,10 @@ import controller.MazeController;
 
 /*
 *
-* @arthur
-* A ChangeListener (extending MazeChangeListener) that listens for changes in the number of columns spinner and sets
-* the number of columns to be used in the next maze generation accordingly.
+* 		A ChangeListener (extending MazeChangeListener) that listens for changes in the number of columns spinner and sets
+* 		the number of columns to be used in the next maze generation accordingly.
+* 		
+* 		@author Arthur Gastineau 
 */
 public class MazeCustomNumColsListener extends MazeChangeListener {
 	public MazeCustomNumColsListener(MazeController mazeController) {

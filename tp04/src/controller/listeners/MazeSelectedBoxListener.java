@@ -10,8 +10,9 @@ import controller.MazeMotionListener;
 import view.drawable.MazePanel;
 
 /**
- * @author arthur
  *
+ *
+ * @author Arthur Gastineau
  */
 public class MazeSelectedBoxListener extends MazeMotionListener {
 	private final MazePanel mazePanel;

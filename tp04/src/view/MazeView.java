@@ -16,15 +16,17 @@ import javax.swing.WindowConstants;
 import controller.MazeController;
 
 /**
- * @author arthur
  *
- *         The view of the maze (i.e. the view in the MVC design pattern). This
- *         is a JPanel that contains both the maze panel (the JPanel containing
- *         the maze) and the GUI panel (the panel containing all the UI
- *         elements). This class also acts as an intermediary between the
- *         controller and between each of the its child panels.
+ * The view of the maze (i.e. the view in the MVC design pattern). This is a
+ * JPanel that contains both the maze panel (the JPanel containing the maze) and
+ * the GUI panel (the panel containing all the UI elements). This class also
+ * acts as an intermediary between the controller and between each of the its
+ * child panels.
+ * 
+ * @author Arthur Gastineau
+ * 
  */
-@SuppressWarnings("serial")
+
 public class MazeView extends JFrame {
 	private final MazeController mazeController;
 	private final MazePanel mazePanel;
@@ -41,7 +43,7 @@ public class MazeView extends JFrame {
 
 	private void initDisplay() {
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		// setResizable(false);
+		setResizable(false);
 		setLayout(new GridBagLayout());
 
 		Insets insets = new Insets(5, 5, 5, 5);

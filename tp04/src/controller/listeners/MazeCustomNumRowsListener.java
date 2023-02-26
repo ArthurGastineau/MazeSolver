@@ -11,11 +11,12 @@ import controller.MazeChangeListener;
 import controller.MazeController;
 
 /**
- * @author arthur
  *
- *         A ChangeListener (extending MazeChangeListener) that listens for
- *         changes in the number of rows spinner and sets the number of rows to
- *         be used in the next maze generation accordingly.
+ * A ChangeListener (extending MazeChangeListener) that listens for changes in
+ * the number of rows spinner and sets the number of rows to be used in the next
+ * maze generation accordingly.
+ * 
+ * @author Arthur Gastineau
  */
 public class MazeCustomNumRowsListener extends MazeChangeListener {
 	public MazeCustomNumRowsListener(MazeController mazeController) {

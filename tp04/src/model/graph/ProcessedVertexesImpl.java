@@ -3,9 +3,15 @@ package model.graph;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * 
+ *
+ * @author Arthur Gastineau
+ */
+
 public class ProcessedVertexesImpl implements ProcessedVertexes {
 
-	private Set<Vertex> vertexes;
+	private final Set<Vertex> vertexes;
 
 	public ProcessedVertexesImpl() {
 		this.vertexes = new HashSet<Vertex>();

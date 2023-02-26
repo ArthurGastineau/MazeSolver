@@ -2,6 +2,12 @@ package model.maze;
 
 import java.awt.Color;
 
+/**
+ * 
+ *
+ * @author Arthur Gastineau
+ */
+
 public class WallBox extends MazeBox {
 
 	public WallBox(Maze maze, int row, int col) {

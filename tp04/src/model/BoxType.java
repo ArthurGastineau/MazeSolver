@@ -4,9 +4,10 @@
 package model;
 
 /**
- * @author arthur
  *
- *         All of the different maze box types.
+ * All of the different maze box types.
+ * 
+ * @author Arthur Gastineau
  */
 public enum BoxType {
 	EMPTY("EMPTY"), WALL("WALL"), DEPARTURE("DEPARTURE"), ARRIVAL("ARRIVAL");

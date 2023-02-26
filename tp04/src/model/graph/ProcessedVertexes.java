@@ -1,5 +1,11 @@
 package model.graph;
 
+/**
+ * 
+ *
+ * @author Arthur Gastineau
+ */
+
 public interface ProcessedVertexes {
 	// add a vertex in the set
 	public void add(Vertex vertex);

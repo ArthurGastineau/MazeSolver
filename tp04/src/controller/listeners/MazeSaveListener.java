@@ -12,8 +12,9 @@ import controller.MazeActionListener;
 import controller.MazeController;
 
 /**
- * @author arthur
+ * 
  *
+ * @author Arthur Gastineau
  */
 public class MazeSaveListener extends MazeActionListener {
 	public MazeSaveListener(MazeController mazeController) {

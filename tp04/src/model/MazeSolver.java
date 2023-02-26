@@ -12,8 +12,9 @@ import model.graph.Vertex;
 import model.maze.Maze;
 
 /**
- * @author arthur
- *
+ * 
+ * 
+ * @author Arthur Gastineau
  */
 public class MazeSolver {
 	private final Maze maze;

@@ -9,10 +9,11 @@ import model.maze.Maze;
 import model.maze.MazeBox;
 
 /**
- * @author arthur
  *
- *         Class responsible for the drawing of the maze. The maze is drawn by
- *         iterating through each cell, and drawing each cell.
+ * Class responsible for the drawing of the maze. The maze is drawn by iterating
+ * through each cell, and drawing each cell.
+ * 
+ * @author Arthur Gastineau
  */
 public class MazeDrawable {
 	private static final double SQRT_3 = Math.sqrt(3);

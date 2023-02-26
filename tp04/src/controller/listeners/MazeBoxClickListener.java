@@ -10,8 +10,10 @@ import controller.MazeController;
 import view.drawable.MazePanel;
 
 /**
- * @author arthur A MouseAdapter that listens for clicks on a generated maze to
- *         modify some of the boxes.
+ * A MouseAdapter that listens for clicks on a generated maze to modify some of
+ * the boxes.
+ *
+ * @author Arthur Gastineau
  * 
  */
 public class MazeBoxClickListener extends MouseAdapter {

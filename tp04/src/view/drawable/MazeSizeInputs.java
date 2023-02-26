@@ -23,10 +23,11 @@ import model.MazeConstants;
 import static view.drawable.DrawableHelper.addComponent;
 
 /**
- * @author arthur
  *
- *         A JPanel of the two custom maze dimension spinners, the number of
- *         rows spinner and the number of columns spinner.
+ * A JPanel of the two custom maze dimension spinners, the number of rows
+ * spinner and the number of columns spinner.
+ * 
+ * @author Arthur Gastineau
  */
 @SuppressWarnings("serial")
 public class MazeSizeInputs extends JPanel {
