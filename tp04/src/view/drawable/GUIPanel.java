@@ -3,6 +3,7 @@
  */
 package view.drawable;
 
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -31,6 +32,7 @@ public class GUIPanel extends JPanel implements ActionListener {
 	}
 
 	private void initGUIPanel() {
+		
 		setLayout(new GridBagLayout());
 
 		Insets insets = new Insets(5, 0, 0, 0);

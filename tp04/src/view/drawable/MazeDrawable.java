@@ -16,7 +16,8 @@ import model.maze.MazeBox;
  */
 public class MazeDrawable {
 	private static final double SQRT_3 = Math.sqrt(3);
-	private static int BOX_SIZE = 30;
+	public static final int DEFAULT_BOX_SIZE = 30;
+	private static int BOX_SIZE = DEFAULT_BOX_SIZE;
 
 	/**
 	 * Iterates through and draws individual cells of the maze to draw the entire
@@ -43,7 +44,7 @@ public class MazeDrawable {
 		return BOX_SIZE;
 	}
 	
-	public void setBoxSize(int size) {
+	public static void setBoxSize(int size) {
 		BOX_SIZE = size;
 	}
 }

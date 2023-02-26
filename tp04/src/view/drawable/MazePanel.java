@@ -6,6 +6,7 @@ package view.drawable;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Toolkit;
 
 import javax.swing.JPanel;
 
@@ -143,16 +144,14 @@ public class MazePanel extends JPanel {
 				} else if (mazeController.getBoxType() == BoxType.DEPARTURE) {
 					if (!maze.hasDepartureBox()) {
 						maze.addDepartureBox(row, col);
-					}
-					else {
+					} else {
 						maze.addEmptyBox(maze.getStartVertex().getRow(), maze.getStartVertex().getCol());
 						maze.addDepartureBox(row, col);
 					}
 				} else if (mazeController.getBoxType() == BoxType.ARRIVAL) {
 					if (!maze.hasArrivalBox()) {
 						maze.addArrivalBox(row, col);
-					}
-					else {
+					} else {
 						maze.addEmptyBox(maze.getEndVertex().getRow(), maze.getEndVertex().getCol());
 						maze.addArrivalBox(row, col);
 					}
@@ -168,12 +167,36 @@ public class MazePanel extends JPanel {
 	 * enables the user to be able to customize the dimensions of the maze.
 	 */
 	public void resize() {
-		int mazeWidth = (int) (maze.getWidth() * MazeDrawable.getBoxSize() * SQRT_3 + xOffset * 1.5);
-		int mazeLength = (int) (maze.getLength() * MazeDrawable.getBoxSize() * 1.5 + yOffset * 1.3);
+		MazeDrawable.setBoxSize(MazeDrawable.DEFAULT_BOX_SIZE);
 
-		mazeDimension = new Dimension(mazeWidth, mazeLength);
+		double boxSize = MazeDrawable.getBoxSize();
+		double widthFactor = boxSize * SQRT_3;
+		double heightFactor = boxSize * 1.5;
+
+		int mazeWidth = (int) (maze.getWidth() * widthFactor + xOffset * 1.5);
+		int mazeLength = (int) (maze.getLength() * heightFactor + yOffset * 1.3);
+
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
+		int widthSize = (int) (screenSize.getWidth() - 300);
+		int heightSize = (int) (screenSize.getHeight());
+
+		// If the size needed is bigger than the screen we reduce it
+		if (mazeWidth >= widthSize || mazeLength >= heightSize) {
+			MazeDrawable.setBoxSize((int) (Math.min(heightSize - 100, widthSize)
+					/ (Math.max(maze.getLength() * 1.5, maze.getWidth() * 1.1))));
+			boxSize = MazeDrawable.getBoxSize();
+			widthFactor = boxSize * SQRT_3;
+			heightFactor = boxSize * 1.5;
+			mazeWidth = (int) (maze.getWidth() * widthFactor + xOffset * 1.5);
+			mazeLength = (int) (maze.getLength() * heightFactor + yOffset * 1.3);
+		}
+
+		// Take the smallest dimensions between the screen and the ideal panel's size
+		mazeDimension = new Dimension((int) Math.min(mazeWidth, screenSize.getWidth() - 300),
+				(int) Math.min(mazeLength, screenSize.getHeight()));
+
 		setMinimumSize(mazeDimension);
 		setPreferredSize(mazeDimension);
 	}
-
 }

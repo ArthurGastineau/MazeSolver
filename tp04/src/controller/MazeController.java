@@ -84,12 +84,10 @@ public class MazeController {
 
 	public void setMazeNumRows(int numRows) {
 		this.numRows = numRows;
-		System.out.println("row = " + numRows);
 	}
 
 	public void setMazeNumCols(int numCols) {
 		this.numCols = numCols;
-		System.out.println("col = " + numCols);
 	}
 	
 	public MazeGeneratorListener getMazeGeneratorListener() {
@@ -134,6 +132,7 @@ public class MazeController {
 	public void load(String fileName) {
 		maze.initFromTextFile(fileName);
 		view.repaintMaze(maze);
+		view.resize();
 	}
 	
 	public void save(String fileName) {
