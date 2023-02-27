@@ -3,19 +3,22 @@ package model.maze;
 import java.awt.Color;
 
 /**
- * 
+ * The DepartureBox class represents a type of {@link MazeBox} that represents
+ * the arrival point in a maze. It extends the {@link MazeBox} class and
+ * overrides some of its methods to provide specific behavior.
  *
  * @author Arthur Gastineau
  */
 
 public class DepartureBox extends MazeBox {
-	
+
 	/**
-	 * Constructor for creating a DepartureBox object with a given maze, row, and column.
+	 * Constructor for creating a DepartureBox object with a given maze, row, and
+	 * column.
 	 * 
 	 * @param maze The maze the DepartureBox is in.
-	 * @param row The row number of the DepartureBox in the maze.
-	 * @param col The column number of the DepartureBox in the maze.
+	 * @param row  The row number of the DepartureBox in the maze.
+	 * @param col  The column number of the DepartureBox in the maze.
 	 */
 	public DepartureBox(Maze maze, int row, int col) {
 		super(maze, row, col);
@@ -29,7 +32,7 @@ public class DepartureBox extends MazeBox {
 	public boolean isWall() {
 		return false;
 	}
-	
+
 	/**
 	 * Determines if the box is empty.
 	 * 
@@ -56,9 +59,10 @@ public class DepartureBox extends MazeBox {
 	public boolean isDeparture() {
 		return true;
 	}
-	
+
 	/**
 	 * Retrieves the color of the box based on whether it is selected or not.
+	 * 
 	 * @return The color of the box (blue if not selected, gray if selected).
 	 */
 	public final Color getColor() {

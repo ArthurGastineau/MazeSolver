@@ -2,8 +2,6 @@ package controller;
 
 import java.awt.event.ActionListener;
 
-import javax.swing.event.ChangeListener;
-
 /**
  * An abstract {@link ActionListener} class that extends this class to gain
  * access to the maze controller.

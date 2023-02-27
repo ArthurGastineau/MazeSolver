@@ -96,7 +96,7 @@ public class GUIPanel extends JPanel implements ActionListener {
 		initButton(new JButton("Solve"), "solve", 5, mazeController.getMazeSolverListener(), insets);
 
 		// Reset Maze Button
-		initButton(new JButton("Reset"), "reset", 6, mazeController.getMazeResetListener(), insets);
+		//initButton(new JButton("Reset"), "reset", 6, mazeController.getMazeResetListener(), insets);
 
 		// Exit Button
 		initButton(new JButton("Exit"), "exit", 7, this, insets);

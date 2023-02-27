@@ -2,6 +2,8 @@ package controller;
 
 import java.awt.event.MouseMotionListener;
 
+import javax.swing.event.ChangeListener;
+
 /**
  * 
  * An abstract {@link MouseMotionListener} class. All
@@ -13,7 +15,7 @@ import java.awt.event.MouseMotionListener;
  * 
  * @author Arthur Gastineau
  */
-public abstract class MazeMotionListener implements MouseMotionListener {
+public abstract class MazeMotionListener implements MouseMotionListener{
 
 	/**
 	 * The {@link MazeController} instance used to gain access to the maze
