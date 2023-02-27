@@ -2,6 +2,7 @@ package view;
 
 import model.maze.Maze;
 import view.drawable.GUIPanel;
+import view.drawable.InstructionsPanel;
 import view.drawable.MazePanel;
 
 import java.awt.Component;
@@ -23,20 +24,28 @@ import controller.MazeController;
  * acts as an intermediary between the controller and between each of the its
  * child panels.
  * 
- * @author Arthur Gastineau
+ * @see Maze
+ * @see MazeController
+ * @see GUIPanel
+ * @see InstructionsPanel
+ * @see Insets
+ * @see GridBagConstraints
  * 
+ * @author Arthur Gastineau
  */
 
 public class MazeView extends JFrame {
 	private final MazeController mazeController;
 	private final MazePanel mazePanel;
 	private final GUIPanel guiPanel;
+	private final InstructionsPanel instructionsPanel;
 
 	public MazeView(Maze maze, MazeController mazeController) {
 		super("Maze Solver - Arthur Gastineau");
 		this.mazeController = mazeController;
 		this.mazePanel = new MazePanel(maze, mazeController);
 		this.guiPanel = new GUIPanel(mazeController);
+		this.instructionsPanel = new InstructionsPanel();
 
 		initDisplay();
 	}
@@ -50,8 +59,20 @@ public class MazeView extends JFrame {
 
 		addComponent(mazePanel, 0, 0, 2, 1, GridBagConstraints.CENTER, GridBagConstraints.BOTH, insets);
 		addComponent(guiPanel, 2, 0, 1, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets);
+		addComponent(instructionsPanel, 0, 1, 2, 1, GridBagConstraints.CENTER, GridBagConstraints.BOTH, insets);
+		
+		setInstructions();
 
 		setVisible(true);
+		pack();
+	}
+	
+	/**
+	 * Sets the maze instructions (based on maze state) and adjusts the view size to account for changes in text.
+	 */
+	
+	public void setInstructions() {
+		instructionsPanel.setInstructions(mazeController.getState().getInstruction());
 		pack();
 	}
 

@@ -1,5 +1,7 @@
 package controller;
 
+import javax.swing.SwingUtilities;
+
 import controller.listeners.MazeBoxSelectionRadioListener;
 import controller.listeners.MazeCustomNumColsListener;
 import controller.listeners.MazeCustomNumRowsListener;
@@ -253,6 +255,7 @@ public class MazeController {
 		solver.initMazeSolver();
 		view.repaintMaze(maze);
 		state = MazeState.SOLVED;
+		setInstructions();
 	}
 
 	/**
@@ -264,6 +267,8 @@ public class MazeController {
 		maze.initFromTextFile(fileName);
 		view.repaintMaze(maze);
 		view.resize();
+		state = MazeState.LOADED;
+		setInstructions();
 	}
 
 	/**
@@ -285,6 +290,8 @@ public class MazeController {
 		maze.setSize(numRows, numCols);
 		maze.initEmptyMaze(numRows, numCols);
 		view.resize();
+		state = MazeState.GENERATED;
+		setInstructions();
 	}
 
 	/**
@@ -293,11 +300,17 @@ public class MazeController {
 	 * 
 	 */
 	public void reset() {
-
-		state = MazeState.INIT;
-
 		maze.resetMaze();
 		view.resetView();
+		state = MazeState.RESET;
+		setInstructions();
+	}
+	
+	/**
+	 * Updates instructions for maze on the GUI (based on the maze state) asynchronously.
+	 */
+	public void setInstructions() {
+		SwingUtilities.invokeLater(view::setInstructions);
 	}
 
 }

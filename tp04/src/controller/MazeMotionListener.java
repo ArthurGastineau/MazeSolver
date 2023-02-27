@@ -15,7 +15,7 @@ import javax.swing.event.ChangeListener;
  * 
  * @author Arthur Gastineau
  */
-public abstract class MazeMotionListener implements MouseMotionListener{
+public abstract class MazeMotionListener implements MouseMotionListener {
 
 	/**
 	 * The {@link MazeController} instance used to gain access to the maze

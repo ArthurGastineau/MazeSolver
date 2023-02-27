@@ -14,6 +14,7 @@ import controller.MazeController;
 import controller.listeners.MazeBoxClickListener;
 import controller.listeners.MazeSelectedBoxListener;
 import model.BoxType;
+import model.MazeState;
 import model.maze.Maze;
 
 /**
@@ -203,7 +204,10 @@ public class MazePanel extends JPanel {
 				}
 				repaint();
 			}
-			// mazeController.solveMaze();
+			// if we have now a different shortest path display it
+			if (mazeController.getState() == MazeState.SOLVED) {
+				mazeController.solveMaze();
+			}
 		}
 	}
 
