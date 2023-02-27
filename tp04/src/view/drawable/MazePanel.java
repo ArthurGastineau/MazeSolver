@@ -22,7 +22,7 @@ import model.maze.Maze;
  * 
  * @author Arthur Gastineau
  */
-@SuppressWarnings("serial")
+
 public class MazePanel extends JPanel {
 	private static final Color BACKGROUND = new Color(0, 100, 0);
 	private final MazeController mazeController;

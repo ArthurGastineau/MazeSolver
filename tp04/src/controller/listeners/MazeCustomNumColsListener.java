@@ -21,9 +21,23 @@ import controller.MazeController;
  * @author Arthur Gastineau
  */
 public class MazeCustomNumColsListener extends MazeChangeListener {
+	
+	/**
+     * Constructs a new {@link MazeCustomNumColsListener} with the given {@link MazeController}.
+     * 
+     * @param mazeController the {@link MazeController} to use
+     */
+	
 	public MazeCustomNumColsListener(MazeController mazeController) {
 		super(mazeController);
 	}
+	
+	/**
+     * Listens for changes in the number of columns spinner and sets the number of columns to be used in the 
+     * next maze generation accordingly.
+     * 
+     * @param e the {@link ChangeEvent} to handle
+     */
 
 	@Override
 	public void stateChanged(ChangeEvent e) {

@@ -13,12 +13,27 @@ package model;
 public enum MazeState {
 	INIT(MazeInstructionConstants.INIT), SOLVED(MazeInstructionConstants.SOLVED);
 
+	/**
+     * The instruction associated with this maze state.
+     */
 	public final String instruction;
-
+	
+	/**
+     * Constructs a new {@link MazeState} with the given instruction.
+     * 
+     * @param instruction The instruction associated with this maze state.
+     */
+	
 	MazeState(String instruction) {
 		this.instruction = instruction;
 	}
 
+	/**
+     * Returns the instruction associated with this maze state.
+     * 
+     * @return The instruction associated with this maze state.
+     */
+	
 	public String getInstruction() {
 		return instruction;
 	}

@@ -24,7 +24,7 @@ import static view.drawable.DrawableHelper.addComponent;
  * 
  * @author Arthur Gastineau
  */
-@SuppressWarnings("serial")
+
 public class BoxTypeRadioPanel extends JPanel {
 	public BoxTypeRadioPanel(MazeBoxSelectionRadioListener boxSelectionRadioListener, BoxType mazeBoxType) {
 		setLayout(new GridBagLayout());

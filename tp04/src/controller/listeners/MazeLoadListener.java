@@ -1,6 +1,3 @@
-/**
- * 
- */
 package controller.listeners;
 
 import java.awt.event.ActionEvent;
@@ -13,7 +10,7 @@ import controller.MazeController;
 
 /**
  * 
- * An ActionListener (extending {@link MazeActionListener}) that is registered
+ * An {@link ActionListener} (extending {@link MazeActionListener}) that is registered
  * and listens for clicks from the 'Load' button, allow the user to choose a
  * file and triggers maze loading.
  * 
@@ -24,10 +21,25 @@ import controller.MazeController;
  * 
  * @author Arthur Gastineau
  */
+
 public class MazeLoadListener extends MazeActionListener {
+	
+	/**
+     * Constructs a {@link MazeLoadListener} with the specified {@link MazeController}.
+     *
+     * @param mazeController The {@link MazeController} to associate with this {@link MazeLoadListener}.
+     */
+	
 	public MazeLoadListener(MazeController mazeController) {
 		super(mazeController);
 	}
+	
+	/**
+     * Performs the action associated with this {@link MazeLoadListener} when the 'Load' button is clicked.
+     * Allows the user to choose a file and triggers maze loading.
+     *
+     * @param e The {@link ActionEvent} that triggered this listener.
+     */
 
 	@Override
 	public void actionPerformed(ActionEvent e) {

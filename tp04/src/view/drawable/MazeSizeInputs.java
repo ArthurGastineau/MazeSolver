@@ -29,7 +29,7 @@ import static view.drawable.DrawableHelper.addComponent;
  * 
  * @author Arthur Gastineau
  */
-@SuppressWarnings("serial")
+
 public class MazeSizeInputs extends JPanel {
 	public MazeSizeInputs(MazeCustomNumRowsListener mazeCustomNumRowsListener,
 			MazeCustomNumColsListener mazeCustomNumColsListener) {

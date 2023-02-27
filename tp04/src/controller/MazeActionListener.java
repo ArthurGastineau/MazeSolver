@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
  * access to the maze controller.
  * 
  * <p>
- * This class serves as a base class for all ActionListener classes that need
+ * This class serves as a base class for all {@link ActionListener} classes that need
  * access to the maze controller. It contains a reference to the maze controller
  * that can be accessed by subclasses.
  * </p>
@@ -29,7 +29,7 @@ public abstract class MazeActionListener implements ActionListener {
 	 * Constructs a new {@link MazeActionListener} with the given
 	 * {@link MazeController} instance.
 	 * 
-	 * @param mazeController the MazeController instance to use
+	 * @param mazeController the {@link MazeController} instance to use
 	 */
 
 	protected MazeActionListener(MazeController mazeController) {

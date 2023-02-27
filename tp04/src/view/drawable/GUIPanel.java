@@ -22,7 +22,6 @@ import static view.drawable.DrawableHelper.addComponent;
  * @author Arthur Gastineau
  */
 
-@SuppressWarnings("serial")
 public class GUIPanel extends JPanel implements ActionListener {
 	private final MazeController mazeController;
 

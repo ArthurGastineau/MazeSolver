@@ -1,19 +1,24 @@
-/**
- * 
- */
 package model;
 
 /**
  *
- * All of the different maze box types.
+ * Represents all of the different maze box types.
+ * Each BoxType can be EMPTY, WALL, DEPARTURE or ARRIVAL.
  * 
  * @author Arthur Gastineau
  */
+
 public enum BoxType {
 	EMPTY("EMPTY"), WALL("WALL"), DEPARTURE("DEPARTURE"), ARRIVAL("ARRIVAL");
 
 	private final String name;
 
+	/**
+     * Constructs a {@link BoxType} object with the specified name.
+     *
+     * @param name The name of the box type.
+     */
+	
 	BoxType(String name) {
 		this.name = name;
 	}
@@ -33,6 +38,12 @@ public enum BoxType {
 		}
 		return null;
 	}
+	
+	/**
+     * Returns the name of this box type.
+     *
+     * @return The name of this box type.
+     */
 
 	public String getName() {
 		return name;

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package controller.listeners;
 
 import java.awt.event.MouseEvent;
@@ -15,15 +12,32 @@ import view.drawable.MazePanel;
  * and listens for mouse movements, allow the user to select an hexagon of the
  * maze.
  *
+ * @see MazeMotionListener
+ * @see MazeController
+ * @see MazePanel
+ *
  * @author Arthur Gastineau
  */
 public class MazeSelectedBoxListener extends MazeMotionListener {
 	private final MazePanel mazePanel;
+	
+	/**
+	 * Constructor for the {@link MazeSelectedBoxListener} class.
+	 * 
+	 * @param mazePanel the {@link MazePanel} associated with the listener
+	 * @param mazeController the {@link MazeController} associated with the listener
+	 */
 
 	public MazeSelectedBoxListener(MazePanel mazePanel, MazeController mazeController) {
 		super(mazeController);
 		this.mazePanel = mazePanel;
 	}
+	
+	/**
+	 * Method called when the mouse is moved. Updates the selected hexagon of the maze.
+	 * 
+	 * @param mouseEvent the {@link MouseEvent} associated with the mouse movement
+	 */
 
 	public void mouseMoved(MouseEvent mouseEvent) {
 		mazePanel.setSelected(mouseEvent.getX(), mouseEvent.getY());
@@ -31,7 +45,6 @@ public class MazeSelectedBoxListener extends MazeMotionListener {
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		// TODO Auto-generated method stub
-
+		// Not implemented
 	}
 }

@@ -41,7 +41,7 @@ public class MazeBoxClickListener extends MouseAdapter {
 	 * The {@code mouseReleased} method sets the state of the clicked box in
 	 * the{@link MazePanel} to be modified by the {@link MazeController}.
 	 * 
-	 * @param mouseEvent the MouseEvent that triggered the method call
+	 * @param mouseEvent the {@link MouseEvent} that triggered the method call
 	 * 
 	 */
 

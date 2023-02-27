@@ -1,6 +1,3 @@
-/**
- * 
- */
 package controller.listeners;
 
 import java.awt.event.ActionEvent;
@@ -20,9 +17,23 @@ import controller.MazeController;
  * @author Arthur Gastineau
  */
 public class MazeGeneratorListener extends MazeActionListener {
+	
+	/**
+	 * Constructor for the {@link MazeGeneratorListener} class.
+	 * 
+	 * @param mazeController The {@link MazeController} instance used to generate the maze.
+	 */
+	
 	public MazeGeneratorListener(MazeController mazeController) {
 		super(mazeController);
 	}
+	
+	/**
+	 * Called when the 'Generate' button is clicked. Calls the {@link MazeController#generate()}
+	 * method to generate the maze.
+	 * 
+	 * @param e The {@link ActionEvent} instance representing the action event that occurred.
+	 */
 
 	@Override
 	public void actionPerformed(ActionEvent e) {

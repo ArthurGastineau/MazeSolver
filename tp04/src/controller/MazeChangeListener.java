@@ -1,13 +1,10 @@
-/**
- * 
- */
 package controller;
 
 import javax.swing.event.ChangeListener;
 
 /**
  * 
- * An abstract {@link ChangeListener} class. All ChangeListeners extend this
+ * An abstract {@link ChangeListener} class. All {@link ChangeListeners} extend this
  * class to gain access to the maze controller.
  * 
  * @see MazeController

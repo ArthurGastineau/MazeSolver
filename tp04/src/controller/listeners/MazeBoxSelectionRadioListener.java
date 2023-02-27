@@ -1,6 +1,3 @@
-/**
- * 
- */
 package controller.listeners;
 
 import java.awt.event.ActionEvent;
@@ -46,7 +43,7 @@ public class MazeBoxSelectionRadioListener extends MazeActionListener {
 	 * Invoked when an action occurs. This method determines which box type was
 	 * selected and updates the maze controller with the new box type.
 	 *
-	 * @param e the event to be processed
+	 * @param e the {@link ActionEvent} to be processed
 	 */
 
 	@Override
