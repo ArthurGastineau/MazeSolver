@@ -2,8 +2,8 @@ package model;
 
 /**
  *
- * Represents all of the different maze box types.
- * Each BoxType can be EMPTY, WALL, DEPARTURE or ARRIVAL.
+ * Represents all of the different maze box types. Each BoxType can be EMPTY,
+ * WALL, DEPARTURE or ARRIVAL.
  * 
  * @author Arthur Gastineau
  */
@@ -14,11 +14,11 @@ public enum BoxType {
 	private final String name;
 
 	/**
-     * Constructs a {@link BoxType} object with the specified name.
-     *
-     * @param name The name of the box type.
-     */
-	
+	 * Constructs a {@link BoxType} object with the specified name.
+	 *
+	 * @param name The name of the box type.
+	 */
+
 	BoxType(String name) {
 		this.name = name;
 	}
@@ -26,7 +26,8 @@ public enum BoxType {
 	/**
 	 * Returns the enum value corresponding to the input string (if it exists).
 	 *
-	 * @param name A string
+	 * @param name A string corresponding to a box type
+	 * 
 	 * @return The BoxType with the name corresponding to the input string (if it
 	 *         exists).
 	 */
@@ -38,12 +39,12 @@ public enum BoxType {
 		}
 		return null;
 	}
-	
+
 	/**
-     * Returns the name of this box type.
-     *
-     * @return The name of this box type.
-     */
+	 * Returns the name of this box type.
+	 *
+	 * @return The name of this box type.
+	 */
 
 	public String getName() {
 		return name;

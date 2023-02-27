@@ -22,26 +22,28 @@ import model.maze.Maze;
  * @author Arthur Gastineau
  */
 public class MazeSolver {
-	
+
 	private final Maze maze;
 	private final MazeController mazeController;
-	
+
 	/**
-     * Constructs a {@link MazeSolver} object with the specified maze and maze controller.
-     * 
-     * @param maze The {@link Maze} to be solved.
-     * @param mazeController The {@link MazeController} that controls the maze.
-     */
+	 * Constructs a {@link MazeSolver} object with the specified maze and maze
+	 * controller.
+	 * 
+	 * @param maze           the maze to be solved.
+	 * @param mazeController the maze controller that controls the maze.
+	 */
 
 	public MazeSolver(Maze maze, MazeController mazeController) {
 		this.maze = maze;
 		this.mazeController = mazeController;
 	}
-	
+
 	/**
-     * Initializes the maze solver to solve the maze, and draws the solution path on the maze panel.
-     * 
-     */
+	 * Initializes the maze solver to solve the maze, and draws the solution path on
+	 * the maze panel.
+	 * 
+	 */
 
 	public void initMazeSolver() {
 		if (maze.hasArrivalBox() && maze.hasDepartureBox()) {

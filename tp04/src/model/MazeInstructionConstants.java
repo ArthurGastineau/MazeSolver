@@ -8,12 +8,12 @@ package model;
  */
 
 public class MazeInstructionConstants {
-	
+
 	/**
 	 * The initial instruction displayed when the maze is generated.
 	 */
 	static final String INIT = "Maze successfully generated! Click the \\\"Solve\\\" button to solve the maze.\";";
-	
+
 	/**
 	 * The instruction displayed when the maze is solved.
 	 */

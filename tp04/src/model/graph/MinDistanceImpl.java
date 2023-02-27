@@ -11,6 +11,10 @@ import java.util.Map;
  * 
  * The shortest distance from the root vertex to a vertex that has not been
  * visited yet is set to {@code Integer.MAX_VALUE} at initialization.
+ * 
+ * @see MinDistance
+ * @see Vertex
+ * @see Graph
  *
  * @author Arthur Gastineau
  */
@@ -43,10 +47,7 @@ public class MinDistanceImpl implements MinDistance {
 	}
 
 	/**
-	 * Initializes the valuations of all the vertices in the graph except the root
-	 * vertex to {@code Integer.MAX_VALUE}.
-	 * 
-	 * @param graph the graph
+	 * {@inheritDoc}
 	 */
 
 	public void initValuations(Graph graph) {
@@ -58,10 +59,7 @@ public class MinDistanceImpl implements MinDistance {
 	}
 
 	/**
-	 * Returns the shortest path from the root vertex to the given pivot vertex.
-	 * 
-	 * @param pivot the pivot vertex
-	 * @return the shortest path from the root vertex to the pivot vertex
+	 * {@inheritDoc}
 	 */
 
 	public double getShortestPath(Vertex pivot) {
@@ -69,10 +67,7 @@ public class MinDistanceImpl implements MinDistance {
 	}
 
 	/**
-	 * Sets the shortest path from the root vertex to the given pivot vertex.
-	 * 
-	 * @param pivot the pivot vertex
-	 * @param value the shortest path from the root vertex to the pivot vertex
+	 * {@inheritDoc}
 	 */
 
 	public void setShortestPath(Vertex pivot, double value) {

@@ -4,7 +4,14 @@ import java.util.List;
 
 /**
  * 
- * A graph interface that defines operations on a graph.
+ * A graph interface that defines operations on a graph, including getting
+ * successor vertices, returning all vertices, and getting the distance between
+ * two vertices.
+ * 
+ * Implementations of this interface should represent a graph data structure
+ * where vertices are connected by edges.
+ * 
+ * @see Vertex
  *
  * @author Arthur Gastineau
  */
@@ -14,6 +21,7 @@ public interface Graph {
 	 * Gets the successor vertices of a given vertex in the graph.
 	 * 
 	 * @param vertex the vertex to get the successors of
+	 * 
 	 * @return a list of the successor vertices of the given vertex
 	 */
 
@@ -32,6 +40,7 @@ public interface Graph {
 	 * 
 	 * @param src the source vertex
 	 * @param dst the destination vertex
+	 * 
 	 * @return the distance between the source and destination vertices
 	 */
 

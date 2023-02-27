@@ -17,22 +17,24 @@ import controller.MazeController;
  * @author Arthur Gastineau
  */
 public class MazeGeneratorListener extends MazeActionListener {
-	
+
 	/**
 	 * Constructor for the {@link MazeGeneratorListener} class.
 	 * 
-	 * @param mazeController The {@link MazeController} instance used to generate the maze.
+	 * @param mazeController the maze controler instance associated with this
+	 *                       listener
 	 */
-	
+
 	public MazeGeneratorListener(MazeController mazeController) {
 		super(mazeController);
 	}
-	
+
 	/**
-	 * Called when the 'Generate' button is clicked. Calls the {@link MazeController#generate()}
-	 * method to generate the maze.
+	 * Called when the 'Generate' button is clicked. Allows the user to generate a
+	 * new maze with custom size
 	 * 
-	 * @param e The {@link ActionEvent} instance representing the action event that occurred.
+	 * @param e the action event instance representing the action event that
+	 *          occurred.
 	 */
 
 	@Override

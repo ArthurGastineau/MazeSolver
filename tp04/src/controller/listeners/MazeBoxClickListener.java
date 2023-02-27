@@ -26,8 +26,8 @@ public class MazeBoxClickListener extends MouseAdapter {
 	 * Constructor for the {@link MazeBoxClickListener} class. Initializes the maze
 	 * controller and maze panel.
 	 * 
-	 * @param mazePanel      The maze panel.
-	 * @param mazeController The maze controller.
+	 * @param mazePanel      the maze panel associated with this listener
+	 * @param mazeController the maze controller controlling the application
 	 */
 
 	public MazeBoxClickListener(MazePanel mazePanel, MazeController mazeController) {
@@ -41,7 +41,7 @@ public class MazeBoxClickListener extends MouseAdapter {
 	 * The {@code mouseReleased} method sets the state of the clicked box in
 	 * the{@link MazePanel} to be modified by the {@link MazeController}.
 	 * 
-	 * @param mouseEvent the {@link MouseEvent} that triggered the method call
+	 * @param mouseEvent the mouse event that triggered the method call
 	 * 
 	 */
 

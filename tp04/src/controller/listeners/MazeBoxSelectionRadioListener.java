@@ -32,7 +32,7 @@ public class MazeBoxSelectionRadioListener extends MazeActionListener {
 	 * Constructor for {@link MazeBoxSelectionRadioListener}. Initializes the maze
 	 * controller.
 	 *
-	 * @param mazeController the maze controller
+	 * @param mazeController the maze controller associated with this listener
 	 */
 
 	public MazeBoxSelectionRadioListener(MazeController mazeController) {
@@ -43,7 +43,7 @@ public class MazeBoxSelectionRadioListener extends MazeActionListener {
 	 * Invoked when an action occurs. This method determines which box type was
 	 * selected and updates the maze controller with the new box type.
 	 *
-	 * @param e the {@link ActionEvent} to be processed
+	 * @param e the action event to be processed
 	 */
 
 	@Override

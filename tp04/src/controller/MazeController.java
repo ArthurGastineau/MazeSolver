@@ -117,7 +117,7 @@ public class MazeController {
 	/**
 	 * Returns the current state of the maze game.
 	 * 
-	 * @return The current state of the maze game.
+	 * @return the current state of the maze game.
 	 */
 
 	public MazeState getState() {
@@ -127,7 +127,7 @@ public class MazeController {
 	/**
 	 * Returns the type of box being used.
 	 * 
-	 * @return The type of box being used.
+	 * @return the type of box being used.
 	 */
 
 	public BoxType getBoxType() {
@@ -137,7 +137,7 @@ public class MazeController {
 	/**
 	 * Sets the type of box being used.
 	 * 
-	 * @param boxType The type of box to set.
+	 * @param boxType the type of box to set.
 	 */
 
 	public void setBoxType(BoxType boxType) {

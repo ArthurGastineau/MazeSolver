@@ -20,23 +20,24 @@ import view.drawable.MazePanel;
  */
 public class MazeSelectedBoxListener extends MazeMotionListener {
 	private final MazePanel mazePanel;
-	
+
 	/**
 	 * Constructor for the {@link MazeSelectedBoxListener} class.
 	 * 
-	 * @param mazePanel the {@link MazePanel} associated with the listener
-	 * @param mazeController the {@link MazeController} associated with the listener
+	 * @param mazePanel      the maze panel associated with the listener
+	 * @param mazeController the maze controller associated with the listener
 	 */
 
 	public MazeSelectedBoxListener(MazePanel mazePanel, MazeController mazeController) {
 		super(mazeController);
 		this.mazePanel = mazePanel;
 	}
-	
+
 	/**
-	 * Method called when the mouse is moved. Updates the selected hexagon of the maze.
+	 * Method called when the mouse is moved. Updates the selected hexagon of the
+	 * maze.
 	 * 
-	 * @param mouseEvent the {@link MouseEvent} associated with the mouse movement
+	 * @param mouseEvent the mouse event associated with the mouse movement
 	 */
 
 	public void mouseMoved(MouseEvent mouseEvent) {

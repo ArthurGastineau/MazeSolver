@@ -4,8 +4,8 @@ import javax.swing.event.ChangeListener;
 
 /**
  * 
- * An abstract {@link ChangeListener} class. All {@link ChangeListeners} extend this
- * class to gain access to the maze controller.
+ * An abstract {@link ChangeListener} class. All {@link ChangeListeners} extend
+ * this class to gain access to the maze controller.
  * 
  * @see MazeController
  * 
@@ -23,7 +23,8 @@ public abstract class MazeChangeListener implements ChangeListener {
 	 * Constructs a new {@code MazeChangeListener} with the specified
 	 * {@code MazeController}.
 	 * 
-	 * @param mazeController the {@code MazeController} instance to use
+	 * @param mazeController the maze controller instance associated with this
+	 *                       listener
 	 */
 
 	protected MazeChangeListener(MazeController mazeController) {
