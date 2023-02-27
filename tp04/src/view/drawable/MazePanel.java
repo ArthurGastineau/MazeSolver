@@ -58,30 +58,6 @@ public class MazePanel extends JPanel {
 		repaint();
 	}
 
-	/**
-	 * Calculate the x and y offsets to account for a change in the number of rows
-	 * and columns.
-	 *
-	 * @param panelWidth  The maze panel width
-	 * @param panelHeight The maze panel height
-	 */
-	public void setOffset(int panelWidth, int panelHeight) {
-		int widthDifference = (int) (panelWidth - mazeDimension.getWidth());
-		int heightDifference = (int) (panelHeight - mazeDimension.getHeight());
-
-		if (widthDifference > 0) {
-			xOffset = widthDifference / 2;
-		} else {
-			xOffset = 0;
-		}
-
-		if (heightDifference > 0) {
-			yOffset = heightDifference / 2;
-		} else {
-			yOffset = 0;
-		}
-	}
-
 	public void repaintMaze(Maze maze) {
 		this.maze = maze;
 		repaint();
@@ -159,6 +135,7 @@ public class MazePanel extends JPanel {
 				}
 				repaint();
 			}
+			//mazeController.solveMaze();
 		}
 	}
 

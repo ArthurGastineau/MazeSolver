@@ -11,12 +11,12 @@ public class MazeConstants {
 	/**
 	 * Default number of rows for a new maze.
 	 */
-	public static final int DEFAULT_NUM_ROWS = 18;
+	public static final int DEFAULT_NUM_ROWS = 20;
 
 	/**
 	 * Default number of cols for a new maze.
 	 */
-	public static final int DEFAULT_NUM_COLS = 18;
+	public static final int DEFAULT_NUM_COLS = 20;
 
 	/**
 	 * Minimum number of rows allowed for a maze.

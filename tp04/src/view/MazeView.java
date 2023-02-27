@@ -62,7 +62,6 @@ public class MazeView extends JFrame {
 	public void resize() {
 		mazePanel.resize();
 		pack();
-		// mazePanel.setOffset(mazePanel.getWidth(), mazePanel.getHeight());
 		mazePanel.repaint();
 	}
 
@@ -74,6 +73,8 @@ public class MazeView extends JFrame {
 	 * Resets the view after the reset action is triggered.
 	 */
 	public void resetView() {
+		mazePanel.resize();
+		pack();
 		mazePanel.repaint();
 	}
 
