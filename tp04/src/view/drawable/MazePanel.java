@@ -227,9 +227,9 @@ public class MazePanel extends JPanel {
 		int mazeLength = (int) (maze.getLength() * heightFactor + yOffset * 1.3);
 
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-
+		
 		int widthSize = (int) (screenSize.getWidth() - 300);
-		int heightSize = (int) (screenSize.getHeight());
+		int heightSize = (int) (screenSize.getHeight() - 30);
 
 		// If the size needed is bigger than the screen we reduce it
 		if (mazeWidth >= widthSize || mazeLength >= heightSize) {
