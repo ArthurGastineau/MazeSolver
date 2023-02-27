@@ -3,8 +3,9 @@ package model.maze;
 import java.awt.Color;
 
 /**
- * The ArrivalBox class represents a type of {@link MazeBox} that represents the arrival point in a maze.
- * It extends the {@link MazeBox} class and overrides some of its methods to provide specific behavior. 
+ * The ArrivalBox class represents a type of {@link MazeBox} that represents the
+ * arrival point in a maze. It extends the {@link MazeBox} class and overrides
+ * some of its methods to provide specific behavior.
  * 
  * @see MazeBox
  * @see Color
@@ -13,13 +14,13 @@ import java.awt.Color;
  */
 
 public class ArrivalBox extends MazeBox {
-	
+
 	/**
 	 * Constructs an ArrivalBox object with the specified maze, row, and column.
 	 * 
 	 * @param maze the Maze object that contains the box
-	 * @param row the row of the box in the maze
-	 * @param col the column of the box in the maze
+	 * @param row  the row of the box in the maze
+	 * @param col  the column of the box in the maze
 	 */
 	public ArrivalBox(Maze maze, int row, int col) {
 		super(maze, row, col);
@@ -42,7 +43,7 @@ public class ArrivalBox extends MazeBox {
 	public boolean isEmpty() {
 		return false;
 	}
-	
+
 	/**
 	 * Determines whether the box is the arrival point.
 	 * 
@@ -51,7 +52,7 @@ public class ArrivalBox extends MazeBox {
 	public boolean isArrival() {
 		return true;
 	}
-	
+
 	/**
 	 * Determines whether the box is the departure point.
 	 * 
@@ -60,7 +61,7 @@ public class ArrivalBox extends MazeBox {
 	public boolean isDeparture() {
 		return false;
 	}
-	
+
 	/**
 	 * Returns the color of the box based on whether it is selected or not.
 	 * 

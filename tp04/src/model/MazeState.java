@@ -16,7 +16,7 @@ public enum MazeState {
 	/**
 	 * The instruction associated with this maze state.
 	 */
-	
+
 	public final String instruction;
 
 	/**

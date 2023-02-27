@@ -24,13 +24,36 @@ import static view.drawable.DrawableHelper.addComponent;
 
 /**
  *
- * A JPanel of the two custom maze dimension spinners, the number of rows
- * spinner and the number of columns spinner.
+ * A {@link JPanel} of the two custom maze dimension spinners, the number of
+ * rows spinner and the number of columns spinner.
+ * 
+ * Provides two spinners for inputting the number of rows and columns for a
+ * custom maze. The user can specify a range of valid values for the number of
+ * rows and columns.
+ * 
+ * This class is intended to be used as a component of the {@link GUIPanel}
+ * class.
+ * 
+ * @see JPanel
+ * @see MazeCustomNumRowsListener
+ * @see MazeCustomNumColsListener
+ * @see SPinnerModel
+ * @see Insets
  * 
  * @author Arthur Gastineau
  */
 
 public class MazeSizeInputs extends JPanel {
+
+	/**
+	 * Creates a new MazeSizeInputs panel with the specified listeners for the
+	 * number of rows and columns spinners.
+	 *
+	 * @param mazeCustomNumRowsListener A MazeCustomNumRowsListener instance to
+	 *                                  attach to the number of rows spinner
+	 * @param mazeCustomNumColsListener A MazeCustomNumColsListener instance to
+	 *                                  attach to the number of columns spinner
+	 */
 	public MazeSizeInputs(MazeCustomNumRowsListener mazeCustomNumRowsListener,
 			MazeCustomNumColsListener mazeCustomNumColsListener) {
 		setLayout(new GridBagLayout());

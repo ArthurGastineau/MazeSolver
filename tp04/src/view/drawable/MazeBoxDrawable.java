@@ -1,6 +1,3 @@
-/**
- * 
- */
 package view.drawable;
 
 import java.awt.Color;
@@ -10,6 +7,9 @@ import model.maze.MazeBox;
 
 /**
  * Class responsible for drawing an individual box in the maze.
+ * 
+ * @see MazeBox
+ * @see Graphics
  * 
  * @author Arthur Gastineau
  */
@@ -26,6 +26,7 @@ public class MazeBoxDrawable {
 	 * @param mazeState  The current state of the maze
 	 * @param xOffset    The x offset
 	 * @param yOffset    The y offset
+	 * @param size       The size of the box to be drawn
 	 */
 	public static void drawMazeBox(MazeBox box, Graphics g, int xOffset, int yOffset, int size) {
 

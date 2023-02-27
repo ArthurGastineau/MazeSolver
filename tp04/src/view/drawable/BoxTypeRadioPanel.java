@@ -1,6 +1,3 @@
-/**
- * 
- */
 package view.drawable;
 
 import java.awt.Dimension;
@@ -20,12 +17,33 @@ import model.BoxType;
 import static view.drawable.DrawableHelper.addComponent;
 
 /**
- * A JPanel of box options radio
+ * A {@link JPanel} that displays a set of radio buttons representing the
+ * different types of MazeBox that can be selected in the maze editor.
+ * 
+ * @see MazeBoxSelectionRadioListener
+ * @see BoxType
+ * @see DrawableHelper
+ * @see JPanel
+ * @see ButtonGroup
+ * @see JRadioButton
+ * @see GridBagLayout
+ * @see GridBagConstraints
+ * @see Insets
+ * @see Dimension
  * 
  * @author Arthur Gastineau
  */
 
 public class BoxTypeRadioPanel extends JPanel {
+
+	/**
+	 * Creates a new BoxTypeRadioPanel object with radio buttons for all possible
+	 * BoxType values.
+	 * 
+	 * @param boxSelectionRadioListener the listener to notify when the user selects
+	 *                                  a new box type
+	 * @param mazeBoxType               the initial box type to select
+	 */
 	public BoxTypeRadioPanel(MazeBoxSelectionRadioListener boxSelectionRadioListener, BoxType mazeBoxType) {
 		setLayout(new GridBagLayout());
 		setBorder(BorderFactory.createTitledBorder("Box Selector"));

@@ -12,6 +12,19 @@ import model.maze.MazeBox;
  *
  * Class responsible for the drawing of the maze. The maze is drawn by iterating
  * through each cell, and drawing each cell.
+ * </p>
+ * This class provides functionality to draw the entire maze by iterating over
+ * each cell of the maze and calling the {@link drawMazeBox()} method from the
+ * {@link MazeBoxDrawable} class.
+ * <p>
+ * The size of each box can be set using the setBoxSize() method, and its value
+ * can be retrieved using the getBoxSize() method.
+ * 
+ * @see Maze
+ * @see Graphics
+ * @see MazeBox
+ * @see MazeBoxDrawable
+ * 
  * 
  * @author Arthur Gastineau
  */
@@ -41,10 +54,20 @@ public class MazeDrawable {
 		}
 	}
 
+	/**
+	 * Returns the current size of each box in the maze.
+	 *
+	 * @return The current size of each box
+	 */
 	public static int getBoxSize() {
 		return BOX_SIZE;
 	}
 
+	/**
+	 * Sets the size of each box in the maze.
+	 *
+	 * @param size The new size of each box
+	 */
 	public static void setBoxSize(int size) {
 		BOX_SIZE = size;
 	}

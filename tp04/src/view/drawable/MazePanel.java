@@ -17,22 +17,66 @@ import model.BoxType;
 import model.maze.Maze;
 
 /**
- * A JPanel of the maze. This panel is where the maze is drawn, and where the
- * user can pick the start and end points.
+ * A {@link JPanel} of the maze. This panel is where the maze is drawn, and
+ * where the user can pick the start and end points.
+ * 
+ * @see Color
+ * @see MazeController
+ * @see MazeDrawable
+ * @see Maze
+ * @see Dimension
  * 
  * @author Arthur Gastineau
  */
 
 public class MazePanel extends JPanel {
+
+	/**
+	 * The background color of the maze panel.
+	 */
 	private static final Color BACKGROUND = new Color(0, 100, 0);
+
+	/**
+	 * The maze controller for the maze.
+	 */
 	private final MazeController mazeController;
+
+	/**
+	 * The maze drawable object used to draw the maze.
+	 */
 	private final MazeDrawable mazeDrawable;
+
+	/**
+	 * The maze model for the maze.
+	 */
 	private Maze maze;
+
+	/**
+	 * The x and y offset of the maze.
+	 */
 	private int yOffset, xOffset;
+
+	/**
+	 * The dimension of the maze panel.
+	 */
 	private Dimension mazeDimension;
+
+	/**
+	 * Flag indicating whether the mouse is out of the maze.
+	 */
 	private boolean outOfMaze = true;
+
+	/**
+	 * The square root of 3.
+	 */
 	private static final double SQRT_3 = Math.sqrt(3);
 
+	/**
+	 * Constructs a MazePanel with the given maze model and maze controller.
+	 * 
+	 * @param maze           the maze model for the maze
+	 * @param mazeController the maze controller for the maze
+	 */
 	public MazePanel(Maze maze, MazeController mazeController) {
 		this.maze = maze;
 		this.mazeController = mazeController;
@@ -43,6 +87,9 @@ public class MazePanel extends JPanel {
 		initMazePanel();
 	}
 
+	/**
+	 * Initializes the MazePanel.
+	 */
 	private void initMazePanel() {
 		int mazeWidth = (int) (maze.getWidth() * MazeDrawable.getBoxSize() * SQRT_3 + xOffset * 1.5);
 		int mazeLength = (int) (maze.getLength() * MazeDrawable.getBoxSize() * 1.5 + yOffset * 1.3);
@@ -58,11 +105,19 @@ public class MazePanel extends JPanel {
 		repaint();
 	}
 
+	/**
+	 * Repaints the maze with the given maze model.
+	 * 
+	 * @param maze the maze model to use
+	 */
 	public void repaintMaze(Maze maze) {
 		this.maze = maze;
 		repaint();
 	}
 
+	/**
+	 * Draws the maze on the panel.
+	 */
 	@Override
 	public void paintComponent(Graphics graphics) {
 		super.paintComponent(graphics);
@@ -70,6 +125,12 @@ public class MazePanel extends JPanel {
 		mazeDrawable.drawMaze(maze, graphics, xOffset, yOffset);
 	}
 
+	/**
+	 * Sets the selected box based on the given mouse coordinates.
+	 * 
+	 * @param mouseX the x coordinate of the mouse
+	 * @param mouseY the y coordinate of the mouse
+	 */
 	public void setSelected(int mouseX, int mouseY) {
 		double closestDistance = Double.MAX_VALUE;
 
@@ -107,6 +168,13 @@ public class MazePanel extends JPanel {
 		}
 	}
 
+	/**
+	 * Sets the type of box in the maze grid based on the current state of the radio
+	 * button in the GUI. If the user has not clicked outside of the maze, the
+	 * method gets the selected row and column, checks if they are within the maze
+	 * bounds, and adds the appropriate type of box to the maze (empty, wall,
+	 * departure or arrival). The method then calls repaint() to update the view.
+	 */
 	public void setMazeBox() {
 		if (!outOfMaze) {
 			int row = maze.getSelected().getRow();
@@ -135,7 +203,7 @@ public class MazePanel extends JPanel {
 				}
 				repaint();
 			}
-			//mazeController.solveMaze();
+			// mazeController.solveMaze();
 		}
 	}
 
@@ -176,5 +244,7 @@ public class MazePanel extends JPanel {
 
 		setMinimumSize(mazeDimension);
 		setPreferredSize(mazeDimension);
+
+		repaint();
 	}
 }

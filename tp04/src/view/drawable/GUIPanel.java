@@ -1,6 +1,3 @@
-/**
- * 
- */
 package view.drawable;
 
 import java.awt.GridBagConstraints;
@@ -17,19 +14,57 @@ import controller.MazeController;
 import static view.drawable.DrawableHelper.addComponent;
 
 /**
+ * GUIPanel is a {@link JPanel} used to display and manage the GUI elements and
+ * layout of the application. It is initialized with a {@link MazeController}
+ * object to provide event listeners for the GUI elements.
+ * <p>
+ * The GUIPanel has a {@link GridBagLayout} and contains various GUI elements
+ * such as buttons, input fields, and radio buttons to manipulate the maze
+ * display and functionality.
+ * <p>
+ * The class provides a public constructor that initializes the panel with a
+ * MazeController object and a private initGUIPanel method to create and add the
+ * GUI elements to the panel. It also provides a private initButton method to
+ * initialize and add a button to the panel and a private actionPerformed method
+ * to handle button clicks.
+ * <p>
+ * This class also uses the {@link DrawableHelper} class, a helper class
+ * available to all classes in the view, to assist in adding components to the
+ * panel.
+ * <p>
+ * This class implements the {@link ActionListener} interface to handle button
+ * clicks.
  * 
- *
+ * @see MazeController
+ * @see DrawableHelper
+ * @see ActionListener
+ * @see JPanel
+ * @see JButton
+ * @see MazeSizeInputs
+ * @see BoxTypeRadioPanel
+ * @see GridBagConstraints
+ * @see GridBagLayout
+ * 
  * @author Arthur Gastineau
  */
 
 public class GUIPanel extends JPanel implements ActionListener {
 	private final MazeController mazeController;
 
+	/**
+	 * Constructor for GUIPanel.
+	 * 
+	 * @param mazeController the MazeController object controlling the application
+	 */
+
 	public GUIPanel(MazeController mazeController) {
 		this.mazeController = mazeController;
 		initGUIPanel();
 	}
 
+	/**
+	 * Initializes the GUIPanel.
+	 */
 	private void initGUIPanel() {
 
 		setLayout(new GridBagLayout());

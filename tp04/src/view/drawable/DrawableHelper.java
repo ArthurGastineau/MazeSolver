@@ -1,6 +1,3 @@
-/**
- * 
- */
 package view.drawable;
 
 import java.awt.Component;
@@ -10,7 +7,12 @@ import java.awt.Insets;
 
 /**
  *
- * A helper class available to all classes in the view.
+ * A helper class available to all classes in the view. This class provides a
+ * static method to add a component to a container with GridBagLayout.
+ * 
+ * @see Container
+ * @see Component
+ * @see Insets
  * 
  * @author Arthur Gastineau
  */

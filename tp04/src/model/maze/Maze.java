@@ -13,20 +13,32 @@ import model.graph.*;
 
 /**
  * 
- * The Maze class represents a maze as a 2D grid of MazeBoxes. The Maze class implements the {@link Graph} interface, making it
- * possible to apply graph algorithms, such as Dijkstra, to find paths in the maze.
+ * The Maze class represents a maze as a 2D grid of MazeBoxes. The Maze class
+ * implements the {@link Graph} interface, making it possible to apply graph
+ * algorithms, such as Dijkstra, to find paths in the maze.
  * <p>
- * The Maze class provides methods to load a maze from a text file, to create a new, empty maze, and to add various types
- * of MazeBoxes to the maze (walls, empty boxes, departure boxes, and arrival boxes).
+ * The Maze class provides methods to load a maze from a text file, to create a
+ * new, empty maze, and to add various types of MazeBoxes to the maze (walls,
+ * empty boxes, departure boxes, and arrival boxes).
  * </p>
  * <p>
- * A Maze object can also remember the start and end vertices of the maze as Vertex objects, making it easy to run path
- * finding algorithms on the maze.
+ * A Maze object can also remember the start and end vertices of the maze as
+ * Vertex objects, making it easy to run path finding algorithms on the maze.
  * </p>
  * <p>
- * Finally, the Maze class provides a setSelectedBox() method to select a specific MazeBox in the maze. This feature is
- * useful in the maze editor.
+ * Finally, the Maze class provides a {@link setSelectedBox()} method to select
+ * a specific {@link MazeBox} in the maze. This feature is useful in the maze
+ * editor.
  *
+ * @see Graph
+ * @see Vertex
+ * @see MazeBox
+ * @see EmptyBox
+ * @see Wallbox
+ * @see EmptyBox
+ * @see DepartureBox
+ * @see ArrivalBox
+ * 
  * @author Arthur Gastineau
  */
 
@@ -40,73 +52,74 @@ public class Maze implements Graph {
 	private MazeBox selectedBox;
 
 	private String fileName;
-	
+
 	/**
-     * Creates a new, empty maze of the specified size.
-     *
-     * @param length the number of rows in the maze.
-     * @param width  the number of columns in the maze.
-     */
+	 * Creates a new, empty maze of the specified size.
+	 *
+	 * @param length the number of rows in the maze.
+	 * @param width  the number of columns in the maze.
+	 */
 	public Maze(int length, int width) {
 		setSize(length, width);
 		initEmptyMaze(length, width);
 	}
-	
-	 /**
-     * Creates a new maze by loading it from a text file.
-     *
-     * @param fileName the name of the text file containing the maze.
-     */
+
+	/**
+	 * Creates a new maze by loading it from a text file.
+	 *
+	 * @param fileName the name of the text file containing the maze.
+	 */
 	public Maze(String fileName) {
 		initFromTextFile(fileName);
 	}
-	
+
 	/**
-     * Creates a new, empty maze with the default size (see {@link MazeConstants}).
-     */
+	 * Creates a new, empty maze with the default size (see {@link MazeConstants}).
+	 */
 	public Maze() {
 		setSize(MazeConstants.MAX_NUM_ROWS, MazeConstants.MAX_NUM_COLS);
 		initEmptyMaze(length, width);
 	}
-	
+
 	/**
-     * Sets the size of the maze.
-     *
-     * @param length the number of rows in the maze.
-     * @param width  the number of columns in the maze.
-     */
+	 * Sets the size of the maze.
+	 *
+	 * @param length the number of rows in the maze.
+	 * @param width  the number of columns in the maze.
+	 */
 	public void setSize(int length, int width) {
 		this.length = length;
 		this.width = width;
 		this.maze = new MazeBox[length][width];
 	}
-	
+
 	/**
-     * Adds an empty box to the maze at the specified position.
-     *
-     * @param row the row in which to add the box.
-     * @param col the column in which to add the box.
-     */
+	 * Adds an empty box to the maze at the specified position.
+	 *
+	 * @param row the row in which to add the box.
+	 * @param col the column in which to add the box.
+	 */
 	public void addEmptyBox(int row, int col) {
 		if (row >= 0 && row < length && col >= 0 && col < width)
 			maze[row][col] = new EmptyBox(this, row, col);
 	}
-	
+
 	/**
-     * Adds an arrival box to the maze at the specified position.
-     *
-     * @param row the row in which to add the box.
-     * @param col the column in which to add the box.
-     */
+	 * Adds an arrival box to the maze at the specified position.
+	 *
+	 * @param row the row in which to add the box.
+	 * @param col the column in which to add the box.
+	 */
 	public void addArrivalBox(int row, int col) {
 		if (row >= 0 && row < length && col >= 0 && col < width) {
 			maze[row][col] = new ArrivalBox(this, row, col);
 			endVertex = (Vertex) maze[row][col];
 		}
 	}
-	
+
 	/**
-	 * Adds a departure box at the specified location and sets it as the start vertex.
+	 * Adds a departure box at the specified location and sets it as the start
+	 * vertex.
 	 * 
 	 * @param row the row in which to add the box.
 	 * @param col the column in which to add the box.
@@ -117,7 +130,7 @@ public class Maze implements Graph {
 			startVertex = (Vertex) maze[row][col];
 		}
 	}
-	
+
 	/**
 	 * Adds a wall box at the specified location.
 	 * 
@@ -214,7 +227,7 @@ public class Maze implements Graph {
 	public int getDistance(Vertex src, Vertex dst) {
 		return 0;
 	}
-	
+
 	/**
 	 * Returns the start vertex of the maze.
 	 * 
@@ -223,7 +236,7 @@ public class Maze implements Graph {
 	public Vertex getStartVertex() {
 		return startVertex;
 	}
-	
+
 	/**
 	 * Returns the end vertex of the maze.
 	 * 
@@ -232,7 +245,7 @@ public class Maze implements Graph {
 	public Vertex getEndVertex() {
 		return endVertex;
 	}
-	
+
 	/**
 	 * Initializes the maze from a text file.
 	 * 
@@ -296,7 +309,7 @@ public class Maze implements Graph {
 			}
 		}
 	}
-	
+
 	/**
 	 * Saves the maze to a text file.
 	 * 
@@ -326,7 +339,7 @@ public class Maze implements Graph {
 			System.out.println("Error saving file " + fileName + ": " + e.getMessage());
 		}
 	}
-	
+
 	/**
 	 * Marks the shortest path found in the maze.
 	 * 
@@ -339,7 +352,7 @@ public class Maze implements Graph {
 			this.maze[v.getRow()][v.getCol()].setHasCrossed(true);
 		}
 	}
-	
+
 	/**
 	 * Deletes the marked shortest path in the maze.
 	 */
@@ -351,7 +364,7 @@ public class Maze implements Graph {
 			}
 		}
 	}
-	
+
 	/**
 	 * Displays the maze stored in a text file.
 	 * 
@@ -372,7 +385,7 @@ public class Maze implements Graph {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Displays the maze in the console
 	 */
@@ -397,7 +410,7 @@ public class Maze implements Graph {
 		}
 		System.out.println("\n");
 	}
-	
+
 	/**
 	 * Selects a box in the maze.
 	 * 
@@ -414,7 +427,7 @@ public class Maze implements Graph {
 			selectedBox.setSelected(true);
 		}
 	}
-	
+
 	/**
 	 * Gets the currently selected box in the maze.
 	 * 
@@ -423,7 +436,7 @@ public class Maze implements Graph {
 	public MazeBox getSelected() {
 		return selectedBox;
 	}
-	
+
 	/**
 	 * Gets the maze as a 2D array of MazeBoxes.
 	 * 
@@ -432,7 +445,7 @@ public class Maze implements Graph {
 	public MazeBox[][] getMaze() {
 		return maze;
 	}
-	
+
 	/**
 	 * Gets a box from the maze.
 	 * 
@@ -443,7 +456,7 @@ public class Maze implements Graph {
 	public MazeBox getBox(int row, int col) {
 		return maze[row][col];
 	}
-	
+
 	/**
 	 * Gets the size of the maze stored in a text file.
 	 * 
@@ -474,7 +487,7 @@ public class Maze implements Graph {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Gets the length of the maze.
 	 * 
@@ -483,7 +496,7 @@ public class Maze implements Graph {
 	public int getLength() {
 		return length;
 	}
-	
+
 	/**
 	 * Gets the width of the maze.
 	 * 
@@ -492,7 +505,7 @@ public class Maze implements Graph {
 	public int getWidth() {
 		return width;
 	}
-	
+
 	/**
 	 * Initializes an empty maze.
 	 * 
@@ -506,9 +519,10 @@ public class Maze implements Graph {
 			}
 		}
 	}
-	
+
 	/**
-	 * Returns true if there is at least one departure box in the maze, false otherwise.
+	 * Returns true if there is at least one departure box in the maze, false
+	 * otherwise.
 	 *
 	 * @return true if there is a departure box, false otherwise
 	 */
@@ -525,9 +539,10 @@ public class Maze implements Graph {
 		// If no departure box was found, return null
 		return false;
 	}
-	
+
 	/**
-	 * Returns true if there is at least one arrival box in the maze, false otherwise.
+	 * Returns true if there is at least one arrival box in the maze, false
+	 * otherwise.
 	 *
 	 * @return true if there is an arrival box, false otherwise
 	 */
