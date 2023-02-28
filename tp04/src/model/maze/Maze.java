@@ -65,20 +65,20 @@ public class Maze implements Graph {
 	}
 
 	/**
+	 * Creates a new, empty maze with the default size (see {@link MazeConstants}).
+	 */
+	public Maze() {
+		setSize(MazeConstants.MAX_NUM_ROWS, MazeConstants.MAX_NUM_COLS);
+		initEmptyMaze(length, width);
+	}
+
+	/**
 	 * Creates a new maze by loading it from a text file.
 	 *
 	 * @param fileName the name of the text file containing the maze.
 	 */
 	public Maze(String fileName) {
 		initFromTextFile(fileName);
-	}
-
-	/**
-	 * Creates a new, empty maze with the default size (see {@link MazeConstants}).
-	 */
-	public Maze() {
-		setSize(MazeConstants.MAX_NUM_ROWS, MazeConstants.MAX_NUM_COLS);
-		initEmptyMaze(length, width);
 	}
 
 	/**
@@ -150,50 +150,24 @@ public class Maze implements Graph {
 	 * @return a list of vertices adjacent to the specified vertex
 	 */
 	public List<Vertex> getSuccessor(Vertex vertex) {
+
 		int row = vertex.getRow();
 		int col = vertex.getCol();
 		List<Vertex> neighbors = new ArrayList<Vertex>();
 
-		// check top-left neighbor
-		if ((row - 1) >= 0 && (col - 1) >= 0 && row % 2 == 0 && !maze[row - 1][col - 1].isWall()) {
-			neighbors.add(maze[row - 1][col - 1]);
-		}
-		if ((row - 1) >= 0 && (col) >= 0 && row % 2 == 1 && !maze[row - 1][col].isWall()) {
-			neighbors.add(maze[row - 1][col]);
-		}
+		// Use the possibleNeighbors matrix to check for valid neighbors
+		// top left, top right, left, right, bottom left, bottom right
+		int[][] possibleNeighbors = (row % 2 == 0)
+				? new int[][] { { -1, -1 }, { -1, 0 }, { 0, -1 }, { 0, 1 }, { 1, -1 }, { 1, 0 } }
+				: new int[][] { { -1, 0 }, { -1, 1 }, { 0, -1 }, { 0, 1 }, { 1, 0 }, { 1, 1 } };
 
-		// check top-right neighbor
-		if ((row - 1) >= 0 && (col) < width && row % 2 == 0 && !maze[row - 1][col].isWall()) {
-			neighbors.add(maze[row - 1][col]);
-		}
-		if ((row - 1) >= 0 && (col + 1) < width && row % 2 == 1 && !maze[row - 1][col + 1].isWall()) {
-			neighbors.add(maze[row - 1][col + 1]);
-		}
-
-		// check left neighbor
-		if ((col - 1) >= 0 && !maze[row][col - 1].isWall()) {
-			neighbors.add(maze[row][col - 1]);
-		}
-
-		// check right neighbor
-		if ((col + 1) < width && !maze[row][col + 1].isWall()) {
-			neighbors.add(maze[row][col + 1]);
-		}
-
-		// check bottom-left neighbor
-		if ((row + 1) < length && (col - 1) >= 0 && row % 2 == 0 && !maze[row + 1][col - 1].isWall()) {
-			neighbors.add(maze[row + 1][col - 1]);
-		}
-		if ((row + 1) < length && (col) >= 0 && row % 2 == 1 && !maze[row + 1][col].isWall()) {
-			neighbors.add(maze[row + 1][col]);
-		}
-
-		// check bottom-right neighbor
-		if ((row + 1) < length && (col) < width && row % 2 == 0 && !maze[row + 1][col].isWall()) {
-			neighbors.add(maze[row + 1][col]);
-		}
-		if ((row + 1) < length && (col + 1) < width && row % 2 == 1 && !maze[row + 1][col + 1].isWall()) {
-			neighbors.add(maze[row + 1][col + 1]);
+		// Check if the new row and column are valid and not a wall
+		for (int[] pos : possibleNeighbors) {
+			int r = row + pos[0];
+			int c = col + pos[1];
+			if (r >= 0 && r < length && c >= 0 && c < width && !maze[r][c].isWall()) {
+				neighbors.add(maze[r][c]);
+			}
 		}
 
 		return neighbors;
@@ -208,8 +182,8 @@ public class Maze implements Graph {
 		List<Vertex> allVertexes = new ArrayList<Vertex>();
 		for (int row = 0; row < length; row++) {
 			for (int col = 0; col < width; col++) {
-				if (getMaze()[row][col] != null) {
-					allVertexes.add(getMaze()[row][col]);
+				if (getBox(row, col) != null) {
+					allVertexes.add(getBox(row, col));
 				}
 			}
 		}
@@ -298,7 +272,7 @@ public class Maze implements Graph {
 					}
 				}
 				this.fileName = fileName;
-				reader.close();
+				// reader.close();
 			} catch (MazeReadingException e) {
 				System.out.println(e.getMessage());
 				System.out.println("Error reading file " + e.getFileName() + " at line " + e.getLineNumber() + ": "
@@ -320,7 +294,7 @@ public class Maze implements Graph {
 			PrintWriter writer = new PrintWriter(fileName, "UTF-8");
 			for (int row = 0; row < this.length; row++) {
 				for (int col = 0; col < this.width; col++) {
-					MazeBox box = this.getMaze()[row][col];
+					MazeBox box = this.getBox(row, col);
 					if (box.isArrival()) {
 						writer.print('A');
 					} else if (box.isDeparture()) {

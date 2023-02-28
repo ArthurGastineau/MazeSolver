@@ -181,7 +181,7 @@ public class MazePanel extends JPanel {
 			int col = maze.getSelected().getCol();
 
 			if (row >= 0 && row < maze.getLength() && col >= 0 && col < maze.getWidth()) {
-				// test the state of radio button
+				// test the state of the radio button
 				if (mazeController.getBoxType() == BoxType.EMPTY) {
 					maze.addEmptyBox(row, col);
 				} else if (mazeController.getBoxType() == BoxType.WALL) {
@@ -194,11 +194,15 @@ public class MazePanel extends JPanel {
 						maze.addDepartureBox(row, col);
 					}
 				} else if (mazeController.getBoxType() == BoxType.ARRIVAL) {
-					if (!maze.hasArrivalBox()) {
+					if (maze.hasArrivalBox()) {
+						System.out.println(maze.hasArrivalBox());
 						maze.addEmptyBox(maze.getEndVertex().getRow(), maze.getEndVertex().getCol());
+						System.out.println(maze.hasArrivalBox());
 						maze.addArrivalBox(row, col);
 					} else {
+						System.out.println("Nope " + maze.hasArrivalBox());
 						maze.addArrivalBox(row, col);
+						System.out.println("Nope " + maze.hasArrivalBox());
 					}
 				}
 				repaint();
@@ -219,7 +223,6 @@ public class MazePanel extends JPanel {
 	 * @param windowHeight The height of the window
 	 * @param windowWidth  The width of the window
 	 */
-
 	public void resize(int borderHeight, int borderWidth, int windowHeight, int windowWidth) {
 
 		System.out.println(
