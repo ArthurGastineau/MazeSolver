@@ -3,6 +3,7 @@ package view;
 import model.maze.Maze;
 import view.drawable.GUIPanel;
 import view.drawable.InstructionsPanel;
+
 import view.drawable.MazePanel;
 
 import java.awt.Component;
@@ -87,6 +88,7 @@ public class MazeView extends JFrame {
 	 */
 	private void initDisplay() {
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		setResizable(false);
 		setLayout(new GridBagLayout());
 
 		Insets insets = new Insets(5, 5, 5, 5);

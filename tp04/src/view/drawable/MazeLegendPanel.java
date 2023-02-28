@@ -9,9 +9,20 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 
 /**
- * @author Arthur Gastineau
- *
+ * MazeLegendPanel class is a custom JPanel that displays a legend of colors and
+ * labels for the elements in the Maze. It consists of a series of hexagons,
+ * each representing a different element of the maze, with a label for each one.
+ * The hexagons are filled with different colors to represent each element. The
+ * size of the panel is calculated based on the number of hexagons to be
+ * displayed.
  * 
+ * @see JPanel
+ * @see Color
+ * @see FOnt
+ * @see FontMetrics
+ * @see Graphics
+ * 
+ * @author Arthur Gastineau
  */
 public class MazeLegendPanel extends JPanel {
 	private static final Color[] COLORS = { Color.RED, Color.BLUE, Color.WHITE, Color.BLACK, Color.YELLOW, Color.GRAY };
@@ -24,13 +35,19 @@ public class MazeLegendPanel extends JPanel {
 	private static final int PADDING = 10;
 	private static final int NUM_HEXAGONS = COLORS.length;
 
+	/**
+	 * Constructor that sets the preferred size of the panel based on the number of
+	 * hexagons to be displayed.
+	 */
 	public MazeLegendPanel() {
-		// Set preferred size based on the number of hexagons to be displayed
 		int width = (int) (NUM_HEXAGONS * (SQRT_3 * HEXAGON_SIZE + PADDING) + PADDING);
 		int height = 4 * HEXAGON_SIZE + PADDING;
 		setPreferredSize(new Dimension(width, height));
 	}
 
+	/**
+	 * Paints the panel by drawing each hexagon and its corresponding label.
+	 */
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 

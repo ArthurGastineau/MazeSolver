@@ -12,8 +12,8 @@ import javax.swing.border.EtchedBorder;
 
 /**
  * 
- * A {@link JPanel} of the instructions for the maze at each stage to give the user guidance on what to do and what features
- * are available to them.
+ * A {@link JPanel} of the instructions for the maze at each stage to give the
+ * user guidance on what to do and what features are available to them.
  * 
  * @see JPanel
  * @see JTextArea
@@ -23,15 +23,17 @@ import javax.swing.border.EtchedBorder;
  * 
  * @author Arthur Gastineau
  */
-public class InstructionsPanel extends JPanel{
-	
+public class InstructionsPanel extends JPanel {
+
 	// The JTextArea used to display the instructions
 	private final JTextArea instructions;
-	
+
 	/**
-	 * Creates a new InstructionsPanel with an etched border and a margin of 5 pixels.
+	 * Creates a new InstructionsPanel with an etched border and a margin of 5
+	 * pixels.
 	 * 
-	 * Initializes the JTextArea to be used to display the instructions and sets its formatting.
+	 * Initializes the JTextArea to be used to display the instructions and sets its
+	 * formatting.
 	 * 
 	 * The panel is not focusable.
 	 */
@@ -46,12 +48,12 @@ public class InstructionsPanel extends JPanel{
 
 		setVisible(true);
 	}
-	
+
 	/**
 	 * Initializes the JTextArea used to display the instructions.
 	 * 
-	 * The JTextArea has a gray background and is not editable, not focusable, and opaque.
-	 * It has a wrap style word and a line wrap to automatically wrap text.
+	 * The JTextArea has a gray background and is not editable, not focusable, and
+	 * opaque. It has a wrap style word and a line wrap to automatically wrap text.
 	 */
 	private void initInstructionTextArea() {
 		instructions.setBackground(new Color(238, 238, 238));
@@ -62,7 +64,7 @@ public class InstructionsPanel extends JPanel{
 		instructions.setWrapStyleWord(true);
 		instructions.setLineWrap(true);
 	}
-	
+
 	/**
 	 * Sets the instructions to be displayed in the JTextArea.
 	 * 

@@ -2,8 +2,6 @@ package controller;
 
 import java.awt.event.MouseMotionListener;
 
-import javax.swing.event.ChangeListener;
-
 /**
  * 
  * An abstract {@link MouseMotionListener} class. All

@@ -195,14 +195,10 @@ public class MazePanel extends JPanel {
 					}
 				} else if (mazeController.getBoxType() == BoxType.ARRIVAL) {
 					if (maze.hasArrivalBox()) {
-						System.out.println(maze.hasArrivalBox());
 						maze.addEmptyBox(maze.getEndVertex().getRow(), maze.getEndVertex().getCol());
-						System.out.println(maze.hasArrivalBox());
 						maze.addArrivalBox(row, col);
 					} else {
-						System.out.println("Nope " + maze.hasArrivalBox());
 						maze.addArrivalBox(row, col);
-						System.out.println("Nope " + maze.hasArrivalBox());
 					}
 				}
 				repaint();
@@ -224,9 +220,6 @@ public class MazePanel extends JPanel {
 	 * @param windowWidth  The width of the window
 	 */
 	public void resize(int borderHeight, int borderWidth, int windowHeight, int windowWidth) {
-
-		System.out.println(
-				"Window = " + windowWidth + " x " + windowHeight + " borders = " + borderWidth + " x " + borderHeight);
 
 		int widthSize = (int) ((windowWidth - borderWidth) / ((maze.getWidth() + 2) * SQRT_3));
 		int heightSize = (int) ((windowHeight - borderHeight) / ((maze.getLength() + 2) * 1.5));
