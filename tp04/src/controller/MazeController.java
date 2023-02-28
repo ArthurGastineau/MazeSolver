@@ -7,7 +7,6 @@ import controller.listeners.MazeCustomNumColsListener;
 import controller.listeners.MazeCustomNumRowsListener;
 import controller.listeners.MazeGeneratorListener;
 import controller.listeners.MazeLoadListener;
-import controller.listeners.MazeResetListener;
 import controller.listeners.MazeSaveListener;
 import controller.listeners.MazeSolverListener;
 import model.maze.Maze;
@@ -49,7 +48,6 @@ import view.MazeView;
  * @see MazeGeneratorListener
  * @see MazeBoxSelectionRadioListener
  * @see MazeSolverListener
- * @see MazeResetListener
  * @see MazeLoadListener
  * @see MazeSaveListener
  * @see MazeCustomNumRowsListener
@@ -77,7 +75,6 @@ public class MazeController {
 	private final MazeGeneratorListener mazeGeneratorListener;
 	private final MazeBoxSelectionRadioListener mazeBoxSelectionRadioListener;
 	private final MazeSolverListener mazeSolverListener;
-	private final MazeResetListener mazeResetListener;
 	private final MazeLoadListener mazeLoadListener;
 	private final MazeSaveListener mazeSaveListener;
 
@@ -106,7 +103,6 @@ public class MazeController {
 		this.mazeGeneratorListener = new MazeGeneratorListener(this);
 		this.mazeBoxSelectionRadioListener = new MazeBoxSelectionRadioListener(this);
 		this.mazeSolverListener = new MazeSolverListener(this);
-		this.mazeResetListener = new MazeResetListener(this);
 		this.mazeLoadListener = new MazeLoadListener(this);
 		this.mazeSaveListener = new MazeSaveListener(this);
 
@@ -197,16 +193,6 @@ public class MazeController {
 	}
 
 	/**
-	 * Returns the maze reset listener.
-	 * 
-	 * @return the maze reset listener
-	 */
-
-	public MazeResetListener getMazeResetListener() {
-		return mazeResetListener;
-	}
-
-	/**
 	 * Returns the maze load listener.
 	 * 
 	 * @return the maze load listener
@@ -265,7 +251,7 @@ public class MazeController {
 	 */
 	public void load(String fileName) {
 		maze.initFromTextFile(fileName);
-		view.repaintMaze(maze);
+		//view.repaintMaze(maze);
 		view.resize();
 		state = MazeState.LOADED;
 		setInstructions();
@@ -291,18 +277,6 @@ public class MazeController {
 		maze.initEmptyMaze(numRows, numCols);
 		view.resize();
 		state = MazeState.GENERATED;
-		setInstructions();
-	}
-
-	/**
-	 * Resets the maze to its initial state. This includes resetting the maze cells,
-	 * and repainting the view.
-	 * 
-	 */
-	public void reset() {
-		maze.resetMaze();
-		view.resetView();
-		state = MazeState.RESET;
 		setInstructions();
 	}
 	

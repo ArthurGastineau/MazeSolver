@@ -74,7 +74,7 @@ public class GUIPanel extends JPanel implements ActionListener {
 		// Load Maze Button
 		initButton(new JButton("Load"), "load", 0, mazeController.getMazeLoadListener(), insets);
 
-		// Load Maze Button
+		// Save Maze Button
 		initButton(new JButton("Save"), "save", 1, mazeController.getMazeSaveListener(), insets);
 
 		// Maze Size Inputs
@@ -95,12 +95,8 @@ public class GUIPanel extends JPanel implements ActionListener {
 		// Solve Maze Button
 		initButton(new JButton("Solve"), "solve", 5, mazeController.getMazeSolverListener(), insets);
 
-		// Reset Maze Button
-		// initButton(new JButton("Reset"), "reset", 6,
-		// mazeController.getMazeResetListener(), insets);
-
 		// Exit Button
-		initButton(new JButton("Exit"), "exit", 7, this, insets);
+		initButton(new JButton("Exit"), "exit", 6, this, insets);
 	}
 
 	/**

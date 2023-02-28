@@ -12,8 +12,7 @@ package model;
 
 public enum MazeState {
 	INIT(MazeInstructionConstants.INIT), SOLVED(MazeInstructionConstants.SOLVED),
-	GENERATED(MazeInstructionConstants.GENERATED), LOADED(MazeInstructionConstants.LOADED),
-	RESET(MazeInstructionConstants.RESET);
+	GENERATED(MazeInstructionConstants.GENERATED), LOADED(MazeInstructionConstants.LOADED);
 
 	/**
 	 * The instruction associated with this maze state.

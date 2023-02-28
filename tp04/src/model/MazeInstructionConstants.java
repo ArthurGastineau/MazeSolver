@@ -28,9 +28,4 @@ public class MazeInstructionConstants {
 	 * The instruction displayed when the maze is loaded by the user.
 	 */
 	static final String LOADED = "Maze successfully loaded! You can modify it if you desire! Click the \"Solve\" button to solve the maze.";
-
-	/**
-	 * The instruction displayed when the maze is reset by the user.
-	 */
-	static final String RESET = "Maze has been reset!";
 }

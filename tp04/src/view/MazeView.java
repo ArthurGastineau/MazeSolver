@@ -90,15 +90,6 @@ public class MazeView extends JFrame {
 		mazePanel.repaintMaze(maze);
 	}
 
-	/**
-	 * Resets the view after the reset action is triggered.
-	 */
-	public void resetView() {
-		mazePanel.resize();
-		pack();
-		mazePanel.repaint();
-	}
-
 	public JPanel getGuiPanel() {
 		return guiPanel;
 	}
