@@ -9,18 +9,18 @@ import controller.listeners.MazeGeneratorListener;
 import controller.listeners.MazeLoadListener;
 import controller.listeners.MazeSaveListener;
 import controller.listeners.MazeSolverListener;
-import model.maze.Maze;
 import model.BoxType;
 import model.MazeSolver;
 import model.MazeState;
+import model.maze.Maze;
 import view.MazeView;
 
 /**
- * 
+ *
  * The controller of the maze (i.e. the controller in the MVC design pattern).
  * This is the main orchestrator of the application, initializing and
  * controlling the maze and the maze view, handling GUI interactions,
- * 
+ *
  * <p>
  * This class holds references to the model and view components of the maze, as
  * well as various listeners for the GUI buttons and components. It is
@@ -28,18 +28,18 @@ import view.MazeView;
  * interactions, such as generating and solving the maze, and updating the
  * dimensions of the maze.
  * </p>
- * 
+ *
  * <p>
  * This class also holds the state of the maze, such as whether it has been
  * generated, or solved, and the type of boxes used in the maze.
  * </p>
- * 
+ *
  * <p>
  * The main public methods of this class are used for generating and solving the
  * maze, loading and saving the maze from/to a file, and resetting the maze to
  * its initial state.
  * </p>
- * 
+ *
  * @see Maze
  * @see MazeView
  * @see MazeSolver
@@ -52,7 +52,7 @@ import view.MazeView;
  * @see MazeSaveListener
  * @see MazeCustomNumRowsListener
  * @see MazeCustomNumColsListener
- * 
+ *
  * @author Arthur Gastineau
  */
 
@@ -87,7 +87,7 @@ public class MazeController {
 	/**
 	 * Constructor for the {@link MazeController} class. Initializes the state,
 	 * maze, and other components such as listeners and views.
-	 * 
+	 *
 	 */
 
 	public MazeController() {
@@ -114,7 +114,7 @@ public class MazeController {
 
 	/**
 	 * Returns the current state of the maze game.
-	 * 
+	 *
 	 * @return the current state of the maze game.
 	 */
 
@@ -124,7 +124,7 @@ public class MazeController {
 
 	/**
 	 * Returns the type of box being used.
-	 * 
+	 *
 	 * @return the type of box being used.
 	 */
 
@@ -134,7 +134,7 @@ public class MazeController {
 
 	/**
 	 * Sets the type of box being used.
-	 * 
+	 *
 	 * @param boxType the type of box to set.
 	 */
 
@@ -144,7 +144,7 @@ public class MazeController {
 
 	/**
 	 * Sets the number of rows for the maze.
-	 * 
+	 *
 	 * @param numRows the number of rows to set
 	 */
 
@@ -154,7 +154,7 @@ public class MazeController {
 
 	/**
 	 * Sets the number of columns for the maze.
-	 * 
+	 *
 	 * @param numCols the number of columns to set
 	 */
 
@@ -164,7 +164,7 @@ public class MazeController {
 
 	/**
 	 * Returns the maze generator listener.
-	 * 
+	 *
 	 * @return the maze generator listener
 	 */
 
@@ -174,7 +174,7 @@ public class MazeController {
 
 	/**
 	 * Returns the maze box selection radio listener.
-	 * 
+	 *
 	 * @return the maze box selection radio listener
 	 */
 
@@ -184,7 +184,7 @@ public class MazeController {
 
 	/**
 	 * Returns the maze solver listener.
-	 * 
+	 *
 	 * @return the maze solver listener
 	 */
 
@@ -194,7 +194,7 @@ public class MazeController {
 
 	/**
 	 * Returns the maze load listener.
-	 * 
+	 *
 	 * @return the maze load listener
 	 */
 
@@ -204,7 +204,7 @@ public class MazeController {
 
 	/**
 	 * Returns the maze save listener.
-	 * 
+	 *
 	 * @return the maze save listener
 	 */
 
@@ -214,7 +214,7 @@ public class MazeController {
 
 	/**
 	 * Returns the maze custom number of rows listener.
-	 * 
+	 *
 	 * @return the maze custom number of rows listener
 	 */
 
@@ -224,7 +224,7 @@ public class MazeController {
 
 	/**
 	 * Returns the maze custom number of columns listener.
-	 * 
+	 *
 	 * @return the maze custom number of columns listener
 	 */
 

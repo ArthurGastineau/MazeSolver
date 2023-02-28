@@ -23,7 +23,7 @@ public class MazeSelectedBoxListener extends MazeMotionListener {
 
 	/**
 	 * Constructor for the {@link MazeSelectedBoxListener} class.
-	 * 
+	 *
 	 * @param mazePanel      the maze panel associated with the listener
 	 * @param mazeController the maze controller associated with the listener
 	 */
@@ -36,10 +36,11 @@ public class MazeSelectedBoxListener extends MazeMotionListener {
 	/**
 	 * Method called when the mouse is moved. Updates the selected hexagon of the
 	 * maze.
-	 * 
+	 *
 	 * @param mouseEvent the mouse event associated with the mouse movement
 	 */
 
+	@Override
 	public void mouseMoved(MouseEvent mouseEvent) {
 		mazePanel.setSelected(mouseEvent.getX(), mouseEvent.getY());
 	}

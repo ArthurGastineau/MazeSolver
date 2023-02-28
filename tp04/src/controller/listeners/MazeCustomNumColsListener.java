@@ -8,16 +8,16 @@ import controller.MazeChangeListener;
 import controller.MazeController;
 
 /**
- * 
+ *
  * A ChangeListener (extending {@link MazeChangeListener}) that listens for
  * changes in the number of columns spinner and sets the number of columns to be
  * used in the next maze generation accordingly.
- * 
+ *
  * @see MazeChangeListener
  * @see MazeController
  * @see JSpinner
  * @see SpinnerNumberModel
- * 
+ *
  * @author Arthur Gastineau
  */
 public class MazeCustomNumColsListener extends MazeChangeListener {
@@ -25,7 +25,7 @@ public class MazeCustomNumColsListener extends MazeChangeListener {
 	/**
 	 * Constructs a new {@link MazeCustomNumColsListener} with the given
 	 * {@link MazeController}.
-	 * 
+	 *
 	 * @param mazeController the maze controller associated with this listener
 	 */
 
@@ -36,7 +36,7 @@ public class MazeCustomNumColsListener extends MazeChangeListener {
 	/**
 	 * Listens for changes in the number of columns spinner and sets the number of
 	 * columns to be used in the next maze generation accordingly.
-	 * 
+	 *
 	 * @param e the change event to handle
 	 */
 

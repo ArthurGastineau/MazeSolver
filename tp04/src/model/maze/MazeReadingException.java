@@ -1,15 +1,15 @@
 package model.maze;
 
 /**
- * 
+ *
  * The MazeReadingException class represents an exception that can occur during
  * maze reading. It extends the Exception class and provides additional
  * information about the file name, line number, and error message.
  *
  * @author Arthur Gastineau
- * 
+ *
  * @see Exception
- * 
+ *
  */
 
 public class MazeReadingException extends Exception {
@@ -26,7 +26,7 @@ public class MazeReadingException extends Exception {
 	/**
 	 * Constructor for creating a MazeReadingException object with a given file
 	 * name, line number, and error message.
-	 * 
+	 *
 	 * @param fileName     The file name that caused the exception.
 	 * @param lineNumber   The line number in the file that caused the exception.
 	 * @param messageError The error message associated with the exception.
@@ -41,7 +41,7 @@ public class MazeReadingException extends Exception {
 
 	/**
 	 * Retrieves the file name that caused the exception.
-	 * 
+	 *
 	 * @return The file name that caused the exception.
 	 */
 	public String getFileName() {
@@ -50,7 +50,7 @@ public class MazeReadingException extends Exception {
 
 	/**
 	 * Retrieves the line number in the file that caused the exception.
-	 * 
+	 *
 	 * @return The line number in the file that caused the exception.
 	 */
 	public int getLineNumber() {
@@ -59,7 +59,7 @@ public class MazeReadingException extends Exception {
 
 	/**
 	 * Retrieves the error message associated with the exception.
-	 * 
+	 *
 	 * @return The error message associated with the exception.
 	 */
 	public String getMessageError() {

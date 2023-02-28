@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package view.drawable;
 
@@ -19,13 +19,13 @@ import model.maze.MazeBox;
  * <p>
  * The size of each box can be set using the setBoxSize() method, and its value
  * can be retrieved using the getBoxSize() method.
- * 
+ *
  * @see Maze
  * @see Graphics
  * @see MazeBox
  * @see MazeBoxDrawable
- * 
- * 
+ *
+ *
  * @author Arthur Gastineau
  */
 public class MazeDrawable {
@@ -43,7 +43,7 @@ public class MazeDrawable {
 	 * @param yOffset The y offset
 	 */
 	public void drawMaze(Maze maze, Graphics g, int xOffset, int yOffset) {
-		Graphics graphics = (Graphics) g;
+		Graphics graphics = g;
 		for (int r = 0; r < maze.getLength(); r++) {
 			for (int c = 0; c < maze.getWidth(); c++) {
 				int xCenter = xOffset + (int) ((c * SQRT_3 * BOX_SIZE) + ((r % 2) * BOX_SIZE * SQRT_3 / 2));

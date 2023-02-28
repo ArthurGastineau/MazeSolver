@@ -3,7 +3,7 @@ package model;
 /**
  *
  * Constants for maze construction
- * 
+ *
  * @author Arthur Gastineau
  */
 

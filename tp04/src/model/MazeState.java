@@ -1,12 +1,12 @@
 /**
- * 
+ *
  */
 package model;
 
 /**
  *
  * The potential states for the maze to be in.
- * 
+ *
  * @author Arthur Gastineau
  */
 
@@ -22,7 +22,7 @@ public enum MazeState {
 
 	/**
 	 * Constructs a new {@link MazeState} with the given instruction.
-	 * 
+	 *
 	 * @param instruction The instruction associated with this maze state.
 	 */
 
@@ -32,7 +32,7 @@ public enum MazeState {
 
 	/**
 	 * Returns the instruction associated with this maze state.
-	 * 
+	 *
 	 * @return the instruction associated with this maze state.
 	 */
 

@@ -3,14 +3,14 @@ package controller;
 import java.awt.event.MouseMotionListener;
 
 /**
- * 
+ *
  * An abstract {@link MouseMotionListener} class. All
  * {@link MouseMotionListener} extend this class to gain access to the maze
  * controller.
- * 
+ *
  * @see MazeController
  * @see MouseMotionListener
- * 
+ *
  * @author Arthur Gastineau
  */
 public abstract class MazeMotionListener implements MouseMotionListener {
@@ -25,7 +25,7 @@ public abstract class MazeMotionListener implements MouseMotionListener {
 	/**
 	 * Constructs a new {@link MazeMotionListener} with the given
 	 * {@link MazeController} instance.
-	 * 
+	 *
 	 * @param mazeController the maze controller instance associated with this
 	 *                       listener
 	 */

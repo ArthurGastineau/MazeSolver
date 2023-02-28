@@ -1,11 +1,11 @@
 package model.graph;
 
 /**
- * 
+ *
  * Dijkstra's algorithm implementation for finding the shortest path in a graph.
  * This class provides two static methods to calculate the shortest path in a
  * graph between two given vertices using Dijkstra's algorithm.
- * 
+ *
  * @see Graph
  * @see Vertex
  * @see ProcessedVertexes
@@ -21,7 +21,7 @@ public class Dijkstra {
 	/**
 	 * Finds the shortest path between two vertices in a graph using Dijkstra's
 	 * algorithm.
-	 * 
+	 *
 	 * @param graph             the graph in which to search for the shortest path
 	 * @param startVertex       the vertex from which to start the search
 	 * @param endVertex         the vertex to which the shortest path should lead
@@ -31,7 +31,7 @@ public class Dijkstra {
 	 * @param distance          the distance between each pair of vertices in the
 	 *                          graph
 	 * @param shortestPaths     the current set of shortest paths
-	 * 
+	 *
 	 * @return the shortest paths from the start vertex to all other vertices in the
 	 *         graph
 	 */
@@ -75,11 +75,11 @@ public class Dijkstra {
 	/**
 	 * Finds the shortest path between two vertices in a graph using Dijkstra's
 	 * algorithm.
-	 * 
+	 *
 	 * @param graph       the graph in which to search for the shortest path
 	 * @param startVertex the vertex from which to start the search
 	 * @param endVertex   the vertex to which the shortest path should lead
-	 * 
+	 *
 	 * @return the shortest paths from the start vertex to all other vertices in the
 	 *         graph
 	 */

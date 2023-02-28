@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package view.drawable;
 
@@ -19,13 +19,13 @@ import model.maze.Maze;
 /**
  * A {@link JPanel} of the maze. This panel is where the maze is drawn, and
  * where the user can pick the start and end points.
- * 
+ *
  * @see Color
  * @see MazeController
  * @see MazeDrawable
  * @see Maze
  * @see Dimension
- * 
+ *
  * @author Arthur Gastineau
  */
 
@@ -73,7 +73,7 @@ public class MazePanel extends JPanel {
 
 	/**
 	 * Constructs a MazePanel with the given maze model and maze controller.
-	 * 
+	 *
 	 * @param maze           the maze model for the maze
 	 * @param mazeController the maze controller for the maze
 	 */
@@ -107,7 +107,7 @@ public class MazePanel extends JPanel {
 
 	/**
 	 * Repaints the maze with the given maze model.
-	 * 
+	 *
 	 * @param maze the maze model to use
 	 */
 	public void repaintMaze(Maze maze) {
@@ -127,7 +127,7 @@ public class MazePanel extends JPanel {
 
 	/**
 	 * Sets the selected box based on the given mouse coordinates.
-	 * 
+	 *
 	 * @param mouseX the x coordinate of the mouse
 	 * @param mouseY the y coordinate of the mouse
 	 */
@@ -213,7 +213,7 @@ public class MazePanel extends JPanel {
 	/**
 	 * Resizes the maze by calculating the appropriate box size based on the window
 	 * size and maze dimensions.
-	 * 
+	 *
 	 * @param borderHeight The height of the maze border
 	 * @param borderWidth  The width of the maze border
 	 * @param windowHeight The height of the window

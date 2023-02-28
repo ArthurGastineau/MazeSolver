@@ -1,11 +1,5 @@
 package view;
 
-import model.maze.Maze;
-import view.drawable.GUIPanel;
-import view.drawable.InstructionsPanel;
-
-import view.drawable.MazePanel;
-
 import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -16,6 +10,10 @@ import javax.swing.WindowConstants;
 
 import controller.MazeController;
 import controller.listeners.WindowResizeListener;
+import model.maze.Maze;
+import view.drawable.GUIPanel;
+import view.drawable.InstructionsPanel;
+import view.drawable.MazePanel;
 
 /**
  *
@@ -24,7 +22,7 @@ import controller.listeners.WindowResizeListener;
  * containing the maze) and the {@link GUIPanel} (the panel containing all the
  * UI elements). This class also acts as an intermediary between the controller
  * and between each of the its child panels.
- * 
+ *
  * @see Maze
  * @see MazeController
  * @see GUIPanel
@@ -32,7 +30,7 @@ import controller.listeners.WindowResizeListener;
  * @see Insets
  * @see GridBagConstraints
  * @see WindowResizeListener
- * 
+ *
  * @author Arthur Gastineau
  */
 
@@ -66,7 +64,7 @@ public class MazeView extends JFrame {
 	/**
 	 * Creates a new {@code MazeView} with the given {@link Maze} and
 	 * {@link MazeController}.
-	 * 
+	 *
 	 * @param maze           The maze to be displayed.
 	 * @param mazeController The controller for the maze.
 	 */
@@ -124,7 +122,7 @@ public class MazeView extends JFrame {
 
 	/**
 	 * Repaints the maze with the given Maze object.
-	 * 
+	 *
 	 * @param maze the Maze object to be used to repaint the maze
 	 */
 	public void repaintMaze(Maze maze) {

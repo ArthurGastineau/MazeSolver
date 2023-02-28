@@ -15,13 +15,13 @@ import javax.swing.JPanel;
  * The hexagons are filled with different colors to represent each element. The
  * size of the panel is calculated based on the number of hexagons to be
  * displayed.
- * 
+ *
  * @see JPanel
  * @see Color
  * @see FOnt
  * @see FontMetrics
  * @see Graphics
- * 
+ *
  * @author Arthur Gastineau
  */
 public class MazeLegendPanel extends JPanel {
@@ -48,6 +48,7 @@ public class MazeLegendPanel extends JPanel {
 	/**
 	 * Paints the panel by drawing each hexagon and its corresponding label.
 	 */
+	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 

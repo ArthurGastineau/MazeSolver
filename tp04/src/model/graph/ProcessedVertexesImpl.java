@@ -4,10 +4,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * 
+ *
  * An implementation of the {@link ProcessedVertexes} interface using a
  * {@link HashSet} to store the set of processed vertices.
- * 
+ *
  * @see Vertex
  * @see ProcessedVertexes
  * @see HashSet
@@ -28,13 +28,14 @@ public class ProcessedVertexesImpl implements ProcessedVertexes {
 	 */
 
 	public ProcessedVertexesImpl() {
-		this.vertexes = new HashSet<Vertex>();
+		this.vertexes = new HashSet<>();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 
+	@Override
 	public void add(Vertex vertex) {
 		vertexes.add(vertex);
 	}
@@ -43,6 +44,7 @@ public class ProcessedVertexesImpl implements ProcessedVertexes {
 	 * {@inheritDoc}
 	 */
 
+	@Override
 	public boolean present(Vertex vertex) {
 		return vertexes.contains(vertex);
 	}

@@ -9,7 +9,7 @@ import controller.MazeActionListener;
 import controller.MazeController;
 
 /**
- * 
+ *
  * An ActionListener (extending {@link MazeActionListener}) that is registered
  * and listens for clicks from the 'Save' button, allow the user to choose a
  * file and triggers maze saving.
@@ -18,8 +18,8 @@ import controller.MazeController;
  * @see MazeController
  * @see JFileChooser
  * @see File
- * 
- * 
+ *
+ *
  * @author Arthur Gastineau
  */
 public class MazeSaveListener extends MazeActionListener {

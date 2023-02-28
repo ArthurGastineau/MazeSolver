@@ -7,10 +7,10 @@ import model.maze.MazeBox;
 
 /**
  * Class responsible for drawing an individual box in the maze.
- * 
+ *
  * @see MazeBox
  * @see Graphics
- * 
+ *
  * @author Arthur Gastineau
  */
 public class MazeBoxDrawable {

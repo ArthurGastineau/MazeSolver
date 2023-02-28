@@ -4,7 +4,7 @@ package model;
  *
  * Represents all of the different maze box types. Each BoxType can be EMPTY,
  * WALL, DEPARTURE or ARRIVAL.
- * 
+ *
  * @author Arthur Gastineau
  */
 
@@ -27,7 +27,7 @@ public enum BoxType {
 	 * Returns the enum value corresponding to the input string (if it exists).
 	 *
 	 * @param name A string corresponding to a box type
-	 * 
+	 *
 	 * @return The BoxType with the name corresponding to the input string (if it
 	 *         exists).
 	 */

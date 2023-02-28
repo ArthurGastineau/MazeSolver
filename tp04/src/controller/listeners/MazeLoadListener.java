@@ -1,6 +1,7 @@
 package controller.listeners;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 
 import javax.swing.JFileChooser;
@@ -9,16 +10,16 @@ import controller.MazeActionListener;
 import controller.MazeController;
 
 /**
- * 
+ *
  * An {@link ActionListener} (extending {@link MazeActionListener}) that is
  * registered and listens for clicks from the 'Load' button, allow the user to
  * choose a file and triggers maze loading.
- * 
+ *
  * @see MazeActionListener
  * @see MazeController
  * @see JFileChooser
  * @see File
- * 
+ *
  * @author Arthur Gastineau
  */
 

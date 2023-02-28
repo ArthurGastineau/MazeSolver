@@ -9,16 +9,16 @@ import model.graph.Vertex;
 import model.maze.Maze;
 
 /**
- * 
+ *
  * The maze solver that draws the solution path of the maze from the start box
  * to the end box
- * 
+ *
  * @see Maze
  * @see MazeController
  * @see Vertex
  * @see ShortestPaths
  * @see Dijkstra
- * 
+ *
  * @author Arthur Gastineau
  */
 public class MazeSolver {
@@ -29,7 +29,7 @@ public class MazeSolver {
 	/**
 	 * Constructs a {@link MazeSolver} object with the specified maze and maze
 	 * controller.
-	 * 
+	 *
 	 * @param maze           the maze to be solved.
 	 * @param mazeController the maze controller that controls the maze.
 	 */
@@ -42,7 +42,7 @@ public class MazeSolver {
 	/**
 	 * Initializes the maze solver to solve the maze, and draws the solution path on
 	 * the maze panel.
-	 * 
+	 *
 	 */
 
 	public void initMazeSolver() {

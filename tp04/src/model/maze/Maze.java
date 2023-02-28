@@ -1,18 +1,20 @@
 package model.maze;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 import model.MazeConstants;
-import model.graph.*;
+import model.graph.Graph;
+import model.graph.Vertex;
 
 /**
- * 
+ *
  * The Maze class represents a maze as a 2D grid of MazeBoxes. The Maze class
  * implements the {@link Graph} interface, making it possible to apply graph
  * algorithms, such as Dijkstra, to find paths in the maze.
@@ -38,7 +40,7 @@ import model.graph.*;
  * @see EmptyBox
  * @see DepartureBox
  * @see ArrivalBox
- * 
+ *
  * @author Arthur Gastineau
  */
 
@@ -113,27 +115,27 @@ public class Maze implements Graph {
 	public void addArrivalBox(int row, int col) {
 		if (row >= 0 && row < length && col >= 0 && col < width) {
 			maze[row][col] = new ArrivalBox(this, row, col);
-			endVertex = (Vertex) maze[row][col];
+			endVertex = maze[row][col];
 		}
 	}
 
 	/**
 	 * Adds a departure box at the specified location and sets it as the start
 	 * vertex.
-	 * 
+	 *
 	 * @param row the row in which to add the box.
 	 * @param col the column in which to add the box.
 	 */
 	public void addDepartureBox(int row, int col) {
 		if (row >= 0 && row < length && col >= 0 && col < width) {
 			maze[row][col] = new DepartureBox(this, row, col);
-			startVertex = (Vertex) maze[row][col];
+			startVertex = maze[row][col];
 		}
 	}
 
 	/**
 	 * Adds a wall box at the specified location.
-	 * 
+	 *
 	 * @param row the row in which to add the box.
 	 * @param col the column in which to add the box.
 	 */
@@ -144,16 +146,17 @@ public class Maze implements Graph {
 
 	/**
 	 * Returns a list of all vertices adjacent to the specified vertex.
-	 * 
+	 *
 	 * @param vertex the vertex to find neighbors of
-	 * 
+	 *
 	 * @return a list of vertices adjacent to the specified vertex
 	 */
+	@Override
 	public List<Vertex> getSuccessor(Vertex vertex) {
 
 		int row = vertex.getRow();
 		int col = vertex.getCol();
-		List<Vertex> neighbors = new ArrayList<Vertex>();
+		List<Vertex> neighbors = new ArrayList<>();
 
 		// Use the possibleNeighbors matrix to check for valid neighbors
 		// top left, top right, left, right, bottom left, bottom right
@@ -175,11 +178,12 @@ public class Maze implements Graph {
 
 	/**
 	 * Returns a list of all vertices in the maze.
-	 * 
+	 *
 	 * @return a list of all vertices in the maze
 	 */
+	@Override
 	public List<Vertex> getAllVertexes() {
-		List<Vertex> allVertexes = new ArrayList<Vertex>();
+		List<Vertex> allVertexes = new ArrayList<>();
 		for (int row = 0; row < length; row++) {
 			for (int col = 0; col < width; col++) {
 				if (getBox(row, col) != null) {
@@ -192,19 +196,20 @@ public class Maze implements Graph {
 
 	/**
 	 * Returns the distance between two vertices in the maze.
-	 * 
+	 *
 	 * @param src the source vertex
 	 * @param dst the destination vertex
-	 * 
+	 *
 	 * @return the distance between the two vertices
 	 */
+	@Override
 	public int getDistance(Vertex src, Vertex dst) {
 		return 0;
 	}
 
 	/**
 	 * Returns the start vertex of the maze.
-	 * 
+	 *
 	 * @return the start vertex of the maze
 	 */
 	public Vertex getStartVertex() {
@@ -213,7 +218,7 @@ public class Maze implements Graph {
 
 	/**
 	 * Returns the end vertex of the maze.
-	 * 
+	 *
 	 * @return the end vertex of the maze
 	 */
 	public Vertex getEndVertex() {
@@ -222,7 +227,7 @@ public class Maze implements Graph {
 
 	/**
 	 * Initializes the maze from a text file.
-	 * 
+	 *
 	 * @param fileName the name of the file to read the maze from
 	 */
 	public final void initFromTextFile(String fileName) {
@@ -286,7 +291,7 @@ public class Maze implements Graph {
 
 	/**
 	 * Saves the maze to a text file.
-	 * 
+	 *
 	 * @param fileName the name of the file to save the maze to
 	 */
 	public void saveToTextFile(String fileName) {
@@ -316,7 +321,7 @@ public class Maze implements Graph {
 
 	/**
 	 * Marks the shortest path found in the maze.
-	 * 
+	 *
 	 * @param shortestPath the shortest path found in the maze
 	 */
 	public void markShortestPath(List<Vertex> shortestPath) {
@@ -341,7 +346,7 @@ public class Maze implements Graph {
 
 	/**
 	 * Displays the maze stored in a text file.
-	 * 
+	 *
 	 * @param fileName the name of the file that stores the maze to display
 	 */
 	public void displayMaze(String fileName) {
@@ -387,7 +392,7 @@ public class Maze implements Graph {
 
 	/**
 	 * Selects a box in the maze.
-	 * 
+	 *
 	 * @param rowClosest the row number of the closest box to select
 	 * @param colClosest the column number of the closest box to select
 	 */
@@ -404,7 +409,7 @@ public class Maze implements Graph {
 
 	/**
 	 * Gets the currently selected box in the maze.
-	 * 
+	 *
 	 * @return the selected box
 	 */
 	public MazeBox getSelected() {
@@ -413,7 +418,7 @@ public class Maze implements Graph {
 
 	/**
 	 * Gets the maze as a 2D array of MazeBoxes.
-	 * 
+	 *
 	 * @return the maze as a 2D array of MazeBoxes
 	 */
 	public MazeBox[][] getMaze() {
@@ -422,7 +427,7 @@ public class Maze implements Graph {
 
 	/**
 	 * Gets a box from the maze.
-	 * 
+	 *
 	 * @param row the row number of the box to get
 	 * @param col the column number of the box to get
 	 * @return the box at the given position in the maze
@@ -433,7 +438,7 @@ public class Maze implements Graph {
 
 	/**
 	 * Gets the size of the maze stored in a text file.
-	 * 
+	 *
 	 * @param fileName the name of the file that stores the maze
 	 * @return an array containing the number of rows and columns in the maze
 	 */
@@ -464,7 +469,7 @@ public class Maze implements Graph {
 
 	/**
 	 * Gets the length of the maze.
-	 * 
+	 *
 	 * @return the length of the maze
 	 */
 	public int getLength() {
@@ -473,7 +478,7 @@ public class Maze implements Graph {
 
 	/**
 	 * Gets the width of the maze.
-	 * 
+	 *
 	 * @return the width of the maze
 	 */
 	public int getWidth() {
@@ -482,7 +487,7 @@ public class Maze implements Graph {
 
 	/**
 	 * Initializes an empty maze.
-	 * 
+	 *
 	 * @param rows the number of rows in the maze
 	 * @param cols the number of columns in the maze
 	 */

@@ -1,5 +1,7 @@
 package view.drawable;
 
+import static view.drawable.DrawableHelper.addComponent;
+
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -14,12 +16,10 @@ import javax.swing.JRadioButton;
 import controller.listeners.MazeBoxSelectionRadioListener;
 import model.BoxType;
 
-import static view.drawable.DrawableHelper.addComponent;
-
 /**
  * A {@link JPanel} that displays a set of radio buttons representing the
  * different types of MazeBox that can be selected in the maze editor.
- * 
+ *
  * @see MazeBoxSelectionRadioListener
  * @see BoxType
  * @see DrawableHelper
@@ -30,7 +30,7 @@ import static view.drawable.DrawableHelper.addComponent;
  * @see GridBagConstraints
  * @see Insets
  * @see Dimension
- * 
+ *
  * @author Arthur Gastineau
  */
 
@@ -39,7 +39,7 @@ public class BoxTypeRadioPanel extends JPanel {
 	/**
 	 * Creates a new BoxTypeRadioPanel object with radio buttons for all possible
 	 * BoxType values.
-	 * 
+	 *
 	 * @param boxSelectionRadioListener the listener to notify when the user selects
 	 *                                  a new box type
 	 * @param mazeBoxType               the initial box type to select

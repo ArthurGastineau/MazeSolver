@@ -1,5 +1,7 @@
 package view.drawable;
 
+import static view.drawable.DrawableHelper.addComponent;
+
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -10,8 +12,6 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import controller.MazeController;
-
-import static view.drawable.DrawableHelper.addComponent;
 
 /**
  * GUIPanel is a {@link JPanel} used to display and manage the GUI elements and
@@ -34,7 +34,7 @@ import static view.drawable.DrawableHelper.addComponent;
  * <p>
  * This class implements the {@link ActionListener} interface to handle button
  * clicks.
- * 
+ *
  * @see MazeController
  * @see DrawableHelper
  * @see ActionListener
@@ -44,7 +44,7 @@ import static view.drawable.DrawableHelper.addComponent;
  * @see BoxTypeRadioPanel
  * @see GridBagConstraints
  * @see GridBagLayout
- * 
+ *
  * @author Arthur Gastineau
  */
 
@@ -53,7 +53,7 @@ public class GUIPanel extends JPanel implements ActionListener {
 
 	/**
 	 * Constructor for GUIPanel.
-	 * 
+	 *
 	 * @param mazeController the MazeController object controlling the application
 	 */
 

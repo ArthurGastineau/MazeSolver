@@ -5,22 +5,22 @@ import java.awt.Color;
 import model.graph.Vertex;
 
 /**
- * 
+ *
  * The MazeBox class represents a single hexagon in a maze. It is an abstract
  * class that is extended by specific types of MazeBoxes such as walls, empty
  * spaces, departures, and arrivals. It implements the {@link Vertex} interface
  * from the model.graph package.
- * 
+ *
  * Each MazeBox has a boolean indicating whether it has been crossed by the maze
  * solver, whether it is currently selected, and its row and column number in
  * the maze. It also contains a reference to the maze it is a part of.
- * 
+ *
  * This class provides several abstract methods that are implemented in its
  * subclasses.
- * 
+ *
  * @see Maze
  * @see Vertex
- * 
+ *
  * @author Arthur Gastineau
  */
 
@@ -53,7 +53,7 @@ public abstract class MazeBox implements Vertex {
 
 	/**
 	 * Constructor for creating a MazeBox object with a given maze, row, and column.
-	 * 
+	 *
 	 * @param maze The maze the MazeBox is in.
 	 * @param row  The row number of the MazeBox in the maze.
 	 * @param col  The column number of the MazeBox in the maze.
@@ -67,7 +67,7 @@ public abstract class MazeBox implements Vertex {
 
 	/**
 	 * Sets whether this box has been crossed by the maze solver.
-	 * 
+	 *
 	 * @param state The new crossed state of the box.
 	 */
 	public void setHasCrossed(boolean state) {
@@ -76,7 +76,7 @@ public abstract class MazeBox implements Vertex {
 
 	/**
 	 * Gets whether this box has been crossed by the maze solver.
-	 * 
+	 *
 	 * @return Whether the box has been crossed.
 	 */
 	public boolean getHasCrossed() {
@@ -85,36 +85,40 @@ public abstract class MazeBox implements Vertex {
 
 	/**
 	 * Gets the row number of this box in the maze.
-	 * 
+	 *
 	 * @return The row number.
 	 */
+	@Override
 	public int getRow() {
 		return row;
 	}
 
 	/**
 	 * Sets the row number of this box in the maze.
-	 * 
+	 *
 	 * @param row The new row number.
 	 */
+	@Override
 	public void setRow(int row) {
 		this.row = row;
 	}
 
 	/**
 	 * Gets the column number of this box in the maze.
-	 * 
+	 *
 	 * @return The column number.
 	 */
+	@Override
 	public int getCol() {
 		return col;
 	}
 
 	/**
 	 * Sets the column number of this box in the maze.
-	 * 
+	 *
 	 * @param col The new column number.
 	 */
+	@Override
 	public void setCol(int col) {
 		this.col = col;
 	}
@@ -122,7 +126,7 @@ public abstract class MazeBox implements Vertex {
 	/**
 	 * Returns a String representation of this vertex, indicating its row and column
 	 * numbers.
-	 * 
+	 *
 	 * @return A String representation of the vertex.
 	 */
 	@Override
@@ -132,7 +136,7 @@ public abstract class MazeBox implements Vertex {
 
 	/**
 	 * Gets the maze that this box is a part of.
-	 * 
+	 *
 	 * @return The maze.
 	 */
 	public Maze getMaze() {

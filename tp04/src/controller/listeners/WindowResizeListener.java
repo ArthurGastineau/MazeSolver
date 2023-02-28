@@ -10,12 +10,12 @@ import view.MazeView;
  * This class implements a listener for resizing the window of a MazeView. When
  * the window is resized, it calls the resizeWindow method of the associated
  * MazeView object.
- * 
+ *
  * @see ComponentAdapter
  * @see ComponentEvent
  * @see MazeView
  * @see MazeController
- * 
+ *
  * @author Arthur Gastineau
  */
 public class WindowResizeListener extends ComponentAdapter {
@@ -26,7 +26,7 @@ public class WindowResizeListener extends ComponentAdapter {
 	/**
 	 * Creates a new WindowResizeListener with the given MazeController and
 	 * MazeView.
-	 * 
+	 *
 	 * @param mazeController The MazeController instance to be associated with the
 	 *                       MazeView.
 	 * @param mazeView       The MazeView instance to be associated with this
@@ -40,7 +40,7 @@ public class WindowResizeListener extends ComponentAdapter {
 	/**
 	 * Overrides the method in ComponentAdapter to call the resizeWindow method of
 	 * the associated MazeVie when the window is resized.
-	 * 
+	 *
 	 * @param e The ComponentEvent that triggered the listener.
 	 */
 	@Override

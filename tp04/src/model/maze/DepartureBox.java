@@ -15,7 +15,7 @@ public class DepartureBox extends MazeBox {
 	/**
 	 * Constructor for creating a DepartureBox object with a given maze, row, and
 	 * column.
-	 * 
+	 *
 	 * @param maze The maze the DepartureBox is in.
 	 * @param row  The row number of the DepartureBox in the maze.
 	 * @param col  The column number of the DepartureBox in the maze.
@@ -26,45 +26,50 @@ public class DepartureBox extends MazeBox {
 
 	/**
 	 * Determines if the box is a wall.
-	 * 
+	 *
 	 * @return False since the box is not a wall.
 	 */
+	@Override
 	public boolean isWall() {
 		return false;
 	}
 
 	/**
 	 * Determines if the box is empty.
-	 * 
+	 *
 	 * @return False since the box is not empty.
 	 */
+	@Override
 	public boolean isEmpty() {
 		return false;
 	}
 
 	/**
 	 * Determines if the box is an arrival box.
-	 * 
+	 *
 	 * @return False since the box is not an arrival box.
 	 */
+	@Override
 	public boolean isArrival() {
 		return false;
 	}
 
 	/**
 	 * Determines if the box is a departure box.
-	 * 
+	 *
 	 * @return True since the box is a departure box.
 	 */
+	@Override
 	public boolean isDeparture() {
 		return true;
 	}
 
 	/**
 	 * Retrieves the color of the box based on whether it is selected or not.
-	 * 
+	 *
 	 * @return The color of the box (blue if not selected, gray if selected).
 	 */
+	@Override
 	public final Color getColor() {
 		if (isSelected)
 			return Color.gray;

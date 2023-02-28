@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 
+ *
  * Implementation of the {@link ShortestPaths} interface for finding the
  * shortest path between two vertices in a graph using Dijkstra's algorithm.
  *
@@ -23,13 +23,14 @@ public class ShortestPathsImpl implements ShortestPaths {
 	 */
 
 	public ShortestPathsImpl() {
-		this.predecessors = new HashMap<Vertex, Vertex>();
+		this.predecessors = new HashMap<>();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 
+	@Override
 	public List<Vertex> getShortestPath(Vertex endVertex) {
 		List<Vertex> path = new ArrayList<>();
 		Vertex current = endVertex;
@@ -45,6 +46,7 @@ public class ShortestPathsImpl implements ShortestPaths {
 	 * {@inheritDoc}
 	 */
 
+	@Override
 	public void setPrevious(Vertex son, Vertex father) {
 		predecessors.put(son, father);
 	}
@@ -53,6 +55,7 @@ public class ShortestPathsImpl implements ShortestPaths {
 	 * {@inheritDoc}
 	 */
 
+	@Override
 	public Vertex getPrevious(Vertex father) {
 		return predecessors.get(father);
 	}
