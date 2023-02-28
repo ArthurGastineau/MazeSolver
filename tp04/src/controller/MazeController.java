@@ -236,6 +236,7 @@ public class MazeController {
 	 * Starts the maze solving algorithm, and updates the maze state to SOLVED upon
 	 * completion.
 	 */
+
 	public void solveMaze() {
 		solver = new MazeSolver(maze, this);
 		solver.initMazeSolver();
@@ -249,9 +250,10 @@ public class MazeController {
 	 *
 	 * @param fileName the name of the file to load the maze from
 	 */
+
 	public void load(String fileName) {
 		maze.initFromTextFile(fileName);
-		//view.repaintMaze(maze);
+		view.repaintMaze(maze);
 		view.resize();
 		state = MazeState.LOADED;
 		setInstructions();
@@ -279,10 +281,11 @@ public class MazeController {
 		state = MazeState.GENERATED;
 		setInstructions();
 	}
-	
+
 	/**
-	 * Updates instructions for maze on the GUI (based on the maze state) asynchronously.
+	 * Updates instructions for maze on the GUI (based on the maze state).
 	 */
+
 	public void setInstructions() {
 		SwingUtilities.invokeLater(view::setInstructions);
 	}

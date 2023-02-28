@@ -68,7 +68,7 @@ public class MazeDrawable {
 	 *
 	 * @param size The new size of each box
 	 */
-	public static void setBoxSize(int size) {
+	public void setBoxSize(int size) {
 		BOX_SIZE = size;
 	}
 }

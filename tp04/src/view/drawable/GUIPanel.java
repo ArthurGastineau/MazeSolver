@@ -59,7 +59,9 @@ public class GUIPanel extends JPanel implements ActionListener {
 
 	public GUIPanel(MazeController mazeController) {
 		this.mazeController = mazeController;
+
 		initGUIPanel();
+
 	}
 
 	/**
@@ -97,6 +99,7 @@ public class GUIPanel extends JPanel implements ActionListener {
 
 		// Exit Button
 		initButton(new JButton("Exit"), "exit", 6, this, insets);
+
 	}
 
 	/**
