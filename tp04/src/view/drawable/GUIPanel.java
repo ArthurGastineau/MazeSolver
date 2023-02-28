@@ -100,6 +100,8 @@ public class GUIPanel extends JPanel implements ActionListener {
 		// Exit Button
 		initButton(new JButton("Exit"), "exit", 6, this, insets);
 
+		addComponent(this, new MazeLegendPanel(), 0, 7, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
+				insets);
 	}
 
 	/**
