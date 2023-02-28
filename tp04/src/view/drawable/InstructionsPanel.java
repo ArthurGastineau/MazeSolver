@@ -9,6 +9,10 @@ import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
+import controller.MazeController;
 
 /**
  *
@@ -23,10 +27,12 @@ import javax.swing.border.EtchedBorder;
  *
  * @author Arthur Gastineau
  */
-public class InstructionsPanel extends JPanel {
+public class InstructionsPanel extends JPanel implements ChangeListener {
 
 	// The JTextArea used to display the instructions
 	private final JTextArea instructions;
+
+	private final MazeController mazeController;
 
 	/**
 	 * Creates a new InstructionsPanel with an etched border and a margin of 5
@@ -36,8 +42,14 @@ public class InstructionsPanel extends JPanel {
 	 * formatting.
 	 *
 	 * The panel is not focusable.
+	 * 
+	 * @param mazeController the MazeController object controlling the application
 	 */
-	public InstructionsPanel() {
+	public InstructionsPanel(MazeController mazeController) {
+
+		this.mazeController = mazeController;
+		this.mazeController.addObserver(this);
+
 		setLayout(new BorderLayout());
 		Border margin = new EmptyBorder(5, 5, 5, 5);
 		setBorder(new CompoundBorder(new EtchedBorder(), margin));
@@ -72,6 +84,23 @@ public class InstructionsPanel extends JPanel {
 	 */
 	public void setInstructions(String instruction) {
 		instructions.setText(instruction);
+	}
+
+	/**
+	 * Called when the state of the Model is changed.
+	 * 
+	 * Notifies the panel to change the instructions to display
+	 */
+	@Override
+	public void stateChanged(ChangeEvent e) {
+		notifyForUpdate();
+	}
+
+	/**
+	 * The panel to change the instructions to display
+	 */
+	public void notifyForUpdate() {
+		setInstructions(mazeController.getState().getInstruction());
 	}
 
 }

@@ -15,6 +15,7 @@ import controller.listeners.MazeSelectedBoxListener;
 import model.BoxType;
 import model.MazeState;
 import model.maze.Maze;
+import view.MazeView;
 
 /**
  * A {@link JPanel} of the maze. This panel is where the maze is drawn, and
@@ -40,6 +41,11 @@ public class MazePanel extends JPanel {
 	 * The maze controller for the maze.
 	 */
 	private final MazeController mazeController;
+
+	/**
+	 * The maze view for the maze.
+	 */
+	private final MazeView mazeView;
 
 	/**
 	 * The maze drawable object used to draw the maze.
@@ -76,10 +82,12 @@ public class MazePanel extends JPanel {
 	 *
 	 * @param maze           the maze model for the maze
 	 * @param mazeController the maze controller for the maze
+	 * @param mazeView       the maze view for the maze
 	 */
-	public MazePanel(Maze maze, MazeController mazeController) {
+	public MazePanel(Maze maze, MazeController mazeController, MazeView mazeView) {
 		this.maze = maze;
 		this.mazeController = mazeController;
+		this.mazeView = mazeView;
 		this.mazeDrawable = new MazeDrawable();
 		this.yOffset = this.xOffset = 50;
 		this.mazeDimension = new Dimension();
@@ -106,12 +114,13 @@ public class MazePanel extends JPanel {
 	}
 
 	/**
-	 * Repaints the maze with the given maze model.
-	 *
-	 * @param maze the maze model to use
+	 * Notifies the panel that it needs to be updated, and recalculates its size
+	 * based on the current size of its containing view. This method is typically
+	 * called after a change to the maze or to the size of the view.
 	 */
-	public void repaintMaze(Maze maze) {
-		this.maze = maze;
+	public void notifyForUpdate() {
+		resize(mazeView.getInstructionsPanel().getHeight(), mazeView.getGuiPanel().getWidth(), mazeView.getHeight(),
+				mazeView.getWidth());
 		repaint();
 	}
 

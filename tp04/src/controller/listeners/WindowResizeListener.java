@@ -38,13 +38,13 @@ public class WindowResizeListener extends ComponentAdapter {
 	}
 
 	/**
-	 * Overrides the method in ComponentAdapter to call the resizeWindow method of
-	 * the associated MazeVie when the window is resized.
+	 * Overrides the method in ComponentAdapter to call the notifyForUpdate method
+	 * of the associated MazeView when the window is resized.
 	 *
 	 * @param e The ComponentEvent that triggered the listener.
 	 */
 	@Override
 	public void componentResized(ComponentEvent e) {
-		mazeView.resizeWindow();
+		mazeView.notifyForUpdate();
 	}
 }

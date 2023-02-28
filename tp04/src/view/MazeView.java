@@ -7,6 +7,8 @@ import java.awt.Insets;
 
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import controller.MazeController;
 import controller.listeners.WindowResizeListener;
@@ -34,7 +36,7 @@ import view.drawable.MazePanel;
  * @author Arthur Gastineau
  */
 
-public class MazeView extends JFrame {
+public class MazeView extends JFrame implements ChangeListener {
 
 	/**
 	 * The controller for the maze.
@@ -69,24 +71,29 @@ public class MazeView extends JFrame {
 	 * @param mazeController The controller for the maze.
 	 */
 	public MazeView(Maze maze, MazeController mazeController) {
+
 		super("Maze Solver - Arthur Gastineau");
+
 		this.mazeController = mazeController;
-		this.mazePanel = new MazePanel(maze, mazeController);
+		this.mazeController.addObserver(this);
+		this.mazePanel = new MazePanel(maze, mazeController, this);
 		this.guiPanel = new GUIPanel(mazeController);
-		this.instructionsPanel = new InstructionsPanel();
+		this.instructionsPanel = new InstructionsPanel(mazeController);
 		this.windowResizeListener = new WindowResizeListener(mazeController, this);
 
 		getRootPane().addComponentListener(windowResizeListener);
 
 		initDisplay();
+
 	}
 
 	/**
 	 * Initializes the display of the maze view.
 	 */
 	private void initDisplay() {
+
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		setResizable(false);
+		// setResizable(false);
 		setLayout(new GridBagLayout());
 
 		Insets insets = new Insets(5, 5, 5, 5);
@@ -95,38 +102,29 @@ public class MazeView extends JFrame {
 		addComponent(guiPanel, 2, 0, 1, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets);
 		addComponent(instructionsPanel, 0, 1, 2, 1, GridBagConstraints.CENTER, GridBagConstraints.BOTH, insets);
 
-		setInstructions();
-
 		setVisible(true);
-		pack();
 
-	}
-
-	/**
-	 * Sets the maze instructions (based on maze state) and adjusts the view size to
-	 * account for changes in text.
-	 */
-	public void setInstructions() {
 		instructionsPanel.setInstructions(mazeController.getState().getInstruction());
+
 		pack();
+
 	}
 
 	/**
-	 * Resizes the maze panel to account for a change in the number of rows and
-	 * columns.
+	 * A method to notify the MazePanel and InstructionsPanel to update.
 	 */
-	public void resize() {
-		resizeWindow();
-		pack();
+	public void notifyForUpdate() {
+		mazePanel.notifyForUpdate();
+		instructionsPanel.notifyForUpdate();
 	}
 
 	/**
-	 * Repaints the maze with the given Maze object.
-	 *
-	 * @param maze the Maze object to be used to repaint the maze
+	 * Called when the state of the Model is changed. This method resizes the maze,
+	 * repaints the maze panel, and repaints this panel.
 	 */
-	public void repaintMaze(Maze maze) {
-		mazePanel.repaintMaze(maze);
+	@Override
+	public void stateChanged(ChangeEvent e) {
+		notifyForUpdate();
 	}
 
 	/**
@@ -154,12 +152,21 @@ public class MazeView extends JFrame {
 	}
 
 	/**
-	 * Resizes the maze panel to fit the size of the window, taking into account the
-	 * size of the GUI panel and instructions panel.
+	 * Gets the GUIPanel associated with this maze view.
+	 * 
+	 * @return the gui panel associated with this maze view.
 	 */
-	public void resizeWindow() {
-		mazePanel.resize(instructionsPanel.getSize().height, guiPanel.getSize().width, getSize().height,
-				getSize().width);
+	public GUIPanel getGuiPanel() {
+		return guiPanel;
+	}
+
+	/**
+	 * Gets the panel used for displaying the instructions
+	 * 
+	 * @return the panel used for displaying the instructions
+	 */
+	public InstructionsPanel getInstructionsPanel() {
+		return instructionsPanel;
 	}
 
 }

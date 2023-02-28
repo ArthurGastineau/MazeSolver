@@ -1,6 +1,9 @@
 package controller;
 
-import javax.swing.SwingUtilities;
+import java.util.ArrayList;
+
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import controller.listeners.MazeBoxSelectionRadioListener;
 import controller.listeners.MazeCustomNumColsListener;
@@ -85,13 +88,19 @@ public class MazeController {
 	private BoxType boxType;
 
 	/**
+	 * This field is a list of change listeners that will notify the view when the
+	 * model changes
+	 */
+	ArrayList<ChangeListener> listeners;
+
+	/**
 	 * Constructor for the {@link MazeController} class. Initializes the state,
 	 * maze, and other components such as listeners and views.
 	 *
 	 */
 
 	public MazeController() {
-
+		this.listeners = new ArrayList<>();
 		this.state = MazeState.INIT;
 
 		this.maze = new Maze(initialLabyrinthFileName);
@@ -110,6 +119,29 @@ public class MazeController {
 
 		this.numRows = maze.getLength();
 		this.numCols = maze.getWidth();
+
+	}
+
+	/**
+	 * Add an observer to the list of listeners
+	 *
+	 * @param listener added as an observer
+	 */
+
+	public void addObserver(ChangeListener listener) {
+		listeners.add(listener);
+	}
+
+	/**
+	 * Calls the method stateChanged of each observer will be notified when the
+	 * model changes Each method in the model that makes change in the view should
+	 * call this method.
+	 */
+	private void stateChanged() {
+		ChangeEvent event = new ChangeEvent(this);
+		for (ChangeListener listener : listeners) {
+			listener.stateChanged(event);
+		}
 	}
 
 	/**
@@ -240,9 +272,8 @@ public class MazeController {
 	public void solveMaze() {
 		solver = new MazeSolver(maze, this);
 		solver.initMazeSolver();
-		view.repaintMaze(maze);
 		state = MazeState.SOLVED;
-		setInstructions();
+		stateChanged();
 	}
 
 	/**
@@ -253,10 +284,8 @@ public class MazeController {
 
 	public void load(String fileName) {
 		maze.initFromTextFile(fileName);
-		view.repaintMaze(maze);
-		view.resize();
 		state = MazeState.LOADED;
-		setInstructions();
+		stateChanged();
 	}
 
 	/**
@@ -277,17 +306,8 @@ public class MazeController {
 	public void generate() {
 		maze.setSize(numRows, numCols);
 		maze.initEmptyMaze(numRows, numCols);
-		view.resize();
 		state = MazeState.GENERATED;
-		setInstructions();
-	}
-
-	/**
-	 * Updates instructions for maze on the GUI (based on the maze state).
-	 */
-
-	public void setInstructions() {
-		SwingUtilities.invokeLater(view::setInstructions);
+		stateChanged();
 	}
 
 }

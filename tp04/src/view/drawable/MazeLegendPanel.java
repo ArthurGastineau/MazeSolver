@@ -29,7 +29,7 @@ public class MazeLegendPanel extends JPanel {
 	private static final String[] STRINGS = { "Start", "End", "Empty", "Wall", "Path", "Selected" };
 	private static final Color[] STRINGS_COLOR = { Color.WHITE, Color.WHITE, Color.BLACK, Color.WHITE, Color.BLACK,
 			Color.WHITE };
-	private static final Color BACKGROUND_COLOR = Color.WHITE;
+	private static final Color BACKGROUND_COLOR = new Color(238, 238, 238);
 	private static final double SQRT_3 = Math.sqrt(3);
 	private static final int HEXAGON_SIZE = 30;
 	private static final int PADDING = 10;
