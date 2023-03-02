@@ -41,7 +41,7 @@ public class MazePanel extends JPanel {
 	 * The maze controller for the maze.
 	 */
 	private final MazeController mazeController;
-
+	
 	/**
 	 * The maze view for the maze.
 	 */
@@ -82,7 +82,7 @@ public class MazePanel extends JPanel {
 	 *
 	 * @param maze           the maze model for the maze
 	 * @param mazeController the maze controller for the maze
-	 * @param mazeView       the maze view for the maze
+	 * @param mazeView		 the maze view for the maze
 	 */
 	public MazePanel(Maze maze, MazeController mazeController, MazeView mazeView) {
 		this.maze = maze;
@@ -112,15 +112,13 @@ public class MazePanel extends JPanel {
 
 		repaint();
 	}
-
+	
 	/**
-	 * Notifies the panel that it needs to be updated, and recalculates its size
-	 * based on the current size of its containing view. This method is typically
-	 * called after a change to the maze or to the size of the view.
+	 * Notifies the panel that it needs to be updated, and recalculates its size based on the current size of its containing view.
+	 * This method is typically called after a change to the maze or to the size of the view.
 	 */
 	public void notifyForUpdate() {
-		resize(mazeView.getInstructionsPanel().getHeight(), mazeView.getGuiPanel().getWidth(), mazeView.getHeight(),
-				mazeView.getWidth());
+		resize(mazeView.getInstructionsPanel().getHeight(), mazeView.getGuiPanel().getWidth(), mazeView.getHeight(), mazeView.getWidth());
 		repaint();
 	}
 
@@ -231,7 +229,7 @@ public class MazePanel extends JPanel {
 	public void resize(int borderHeight, int borderWidth, int windowHeight, int windowWidth) {
 
 		int widthSize = (int) ((windowWidth - borderWidth) / ((maze.getWidth() + 2) * SQRT_3));
-		int heightSize = (int) ((windowHeight - borderHeight) / ((maze.getLength() + 2) * 1.5));
+		int heightSize = (int) ((windowHeight - borderHeight) / ((maze.getLength() + 3) * 1.5));
 
 		int new_size = Math.min(widthSize, heightSize);
 

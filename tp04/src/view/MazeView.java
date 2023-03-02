@@ -93,7 +93,7 @@ public class MazeView extends JFrame implements ChangeListener {
 	private void initDisplay() {
 
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		setResizable(false);
+		//setResizable(false);
 		setLayout(new GridBagLayout());
 
 		Insets insets = new Insets(5, 5, 5, 5);

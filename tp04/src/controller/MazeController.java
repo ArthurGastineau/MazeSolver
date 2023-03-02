@@ -61,7 +61,7 @@ import view.MazeView;
 
 public class MazeController {
 
-	private final static String initialLabyrinthFileName = "data/labyrinthe2.maze";
+	private final static String initialLabyrinthFileName = "data/labyrintheInit.maze";
 
 	// Model
 	private final Maze maze;
