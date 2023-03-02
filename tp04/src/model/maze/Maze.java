@@ -114,6 +114,10 @@ public class Maze implements Graph {
 	 */
 	public void addArrivalBox(int row, int col) {
 		if (row >= 0 && row < length && col >= 0 && col < width) {
+			// can only have one arrival point
+			if (hasArrivalBox()) {
+				addEmptyBox(getEndVertex().getRow(), getEndVertex().getCol());
+			}
 			maze[row][col] = new ArrivalBox(this, row, col);
 			endVertex = maze[row][col];
 		}
@@ -128,6 +132,10 @@ public class Maze implements Graph {
 	 */
 	public void addDepartureBox(int row, int col) {
 		if (row >= 0 && row < length && col >= 0 && col < width) {
+			// can only have one departure point
+			if (hasDepartureBox()) {
+				addEmptyBox(getStartVertex().getRow(), getStartVertex().getCol());
+			}
 			maze[row][col] = new DepartureBox(this, row, col);
 			startVertex = maze[row][col];
 		}
@@ -231,6 +239,12 @@ public class Maze implements Graph {
 	 * @param fileName the name of the file to read the maze from
 	 */
 	public final void initFromTextFile(String fileName) {
+		/**
+		 * Variables with the old attributes in case of an error happening
+		 */
+		MazeBox[][] oldMaze = getMaze();
+		int[] oldSize = { length, width };
+
 		if (fileName == null || !fileName.endsWith(".maze")) {
 			return;
 		} else {
@@ -249,11 +263,17 @@ public class Maze implements Graph {
 				while ((line = reader.readLine()) != null) {
 					lineNumber++;
 					if (line.length() != this.length) {
+						// Replace with the old maze
+						setSize(oldSize[0], oldSize[1]);
+						maze = oldMaze;
 						throw new MazeReadingException(fileName, lineNumber, "Incorrect number of columns");
 					}
 					for (int col = 0; col < this.width; col++) {
 						char c = line.charAt(col);
 						if (c != 'A' && c != 'D' && c != 'E' && c != 'W') {
+							// Replace with the old maze
+							setSize(oldSize[0], oldSize[1]);
+							maze = oldMaze;
 							throw new MazeReadingException(fileName, lineNumber,
 									"Invalid character in maze definition");
 						}
@@ -510,7 +530,7 @@ public class Maze implements Graph {
 		for (int row = 0; row < length; row++) {
 			for (int col = 0; col < width; col++) {
 				// Check if the current box is a departure box
-				if (maze[row][col].isDeparture()) {
+				if (maze[row][col] != null && maze[row][col].isDeparture()) {
 					return true;
 				}
 			}
@@ -530,7 +550,7 @@ public class Maze implements Graph {
 		for (int row = 0; row < length; row++) {
 			for (int col = 0; col < width; col++) {
 				// Check if the current box is an arrival box
-				if (maze[row][col].isArrival()) {
+				if (maze[row][col] != null && maze[row][col].isArrival()) {
 					return true;
 				}
 			}
