@@ -26,7 +26,7 @@ After loading the file, you can interact with the maze by clicking on the cells 
 
 To solve the maze, click the "Solve" button. The solution path will be displayed in yellow, and the shortest path will be displayed in yellow.
 
-![Maze Solver Demo](demo.gif)
+![Maze Solver Demo](maze_demo.gif)
 
 ## File Format
 
