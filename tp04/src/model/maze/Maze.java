@@ -262,7 +262,7 @@ public class Maze implements Graph {
 
 				while ((line = reader.readLine()) != null) {
 					lineNumber++;
-					if (line.length() != this.length) {
+					if (line.length() != this.width) {
 						// Replace with the old maze
 						setSize(oldSize[0], oldSize[1]);
 						maze = oldMaze;
@@ -299,7 +299,7 @@ public class Maze implements Graph {
 				this.fileName = fileName;
 				// reader.close();
 			} catch (MazeReadingException e) {
-				System.out.println(e.getMessage());
+				System.out.println(e.getMessageError());
 				System.out.println("Error reading file " + e.getFileName() + " at line " + e.getLineNumber() + ": "
 						+ e.getMessage());
 			} catch (IOException e) {
