@@ -26,6 +26,8 @@ After loading the file, you can interact with the maze by clicking on the cells 
 
 To solve the maze, click the "Solve" button. The solution path will be displayed in yellow, and the shortest path will be displayed in yellow.
 
+![Maze Solver Demo](demo.gif)
+
 ## File Format
 
 The maze file must have the extension .maze .The maze file should be a text file containing a rectangular grid of characters. Each character represents a cell in the maze, and the characters should be separated by spaces. The following characters are recognized:
